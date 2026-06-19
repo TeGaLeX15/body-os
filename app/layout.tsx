@@ -1,10 +1,10 @@
 import "./globals.css";
 import { BottomNavigation } from "@/shared/ui/BottomNavigation";
+import { Geist } from "next/font/google";
+import { cn } from "@/lib/utils";
 
-export const metadata = {
-  title: "Body OS",
-  description: "Personal fitness tracking system",
-};
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+
 
 export default function RootLayout({
   children,
@@ -12,13 +12,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="bg-black text-white min-h-screen flex flex-col">
-        {/* MAIN CONTENT */}
-        <main className="flex-1 p-4">{children}</main>
+    <html lang="ru" suppressHydrationWarning className={cn("font-sans", geist.variable)}>
+      <body className="min-h-screen bg-zinc-950 text-zinc-100">
+        <div className="mx-auto flex min-h-screen max-w-md flex-col">
+          <main className="flex-1 px-4 py-6">{children}</main>
 
-        {/* BOTTOM NAV */}
-        <BottomNavigation />
+          <BottomNavigation />
+        </div>
       </body>
     </html>
   );

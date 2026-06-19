@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { getWorkouts } from "@/shared/lib/storage";
 import { WorkoutEntry } from "../model/workout.types";
+import { Card } from "@/shared/ui/Card";
 
 export default function WorkoutList() {
   const [workouts] = useState<WorkoutEntry[]>(() => getWorkouts());
@@ -10,15 +11,15 @@ export default function WorkoutList() {
   return (
     <div className="mt-6 space-y-3">
       {workouts.map((w) => (
-        <div key={w.id} className="p-3 border border-white/10 rounded-lg">
+        <Card key={w.id}>
           <p className="text-white/60 text-xs">
             {new Date(w.date).toLocaleDateString()}
           </p>
 
-          <p>
+          <p className="mt-2 text-sm">
             🏋️ {w.pullups} / {w.dips} / {w.pushups} / {w.squats}
           </p>
-        </div>
+        </Card>
       ))}
     </div>
   );

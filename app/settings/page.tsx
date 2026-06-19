@@ -1,9 +1,11 @@
 export default function SettingsPage() {
   return (
-    <div>
+    <div className="space-y-4">
       <h1 className="text-xl font-bold">Settings</h1>
 
-      <div className="mt-6 text-white/50">Goals, weight, reset data.</div>
+      <div className="p-4 border border-white/10 rounded-xl">
+        <p className="text-white/60 text-sm mb-2">Theme</p>
+      </div>
     </div>
   );
 }

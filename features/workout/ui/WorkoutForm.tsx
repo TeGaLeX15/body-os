@@ -4,11 +4,17 @@ import { useState } from "react";
 import { getWorkouts, saveWorkouts } from "@/shared/lib/storage";
 import { WorkoutEntry } from "../model/workout.types";
 
+import { Button } from "@/shared/ui/Button";
+import { Input } from "@/shared/ui/Input";
+import { Card } from "@/shared/ui/Card";
+
 export default function WorkoutForm() {
   const [pullups, setPullups] = useState(0);
   const [dips, setDips] = useState(0);
   const [pushups, setPushups] = useState(0);
   const [squats, setSquats] = useState(0);
+
+  const [saved, setSaved] = useState(false);
 
   function handleSave() {
     const newWorkout: WorkoutEntry = {
@@ -25,49 +31,28 @@ export default function WorkoutForm() {
 
     saveWorkouts(updated);
 
-    alert("Workout saved!");
-
     setPullups(0);
     setDips(0);
     setPushups(0);
     setSquats(0);
+
+    setSaved(true);
+
+    setTimeout(() => {
+      setSaved(false);
+    }, 1200);
   }
 
   return (
-    <div className="space-y-3">
-      <Input label="Pullups" value={pullups} setValue={setPullups} />
-      <Input label="Dips" value={dips} setValue={setDips} />
-      <Input label="Pushups" value={pushups} setValue={setPushups} />
-      <Input label="Squats" value={squats} setValue={setSquats} />
+    <Card className="space-y-4">
+      <Input label="Pullups" value={pullups} onChange={setPullups} />
+      <Input label="Dips" value={dips} onChange={setDips} />
+      <Input label="Pushups" value={pushups} onChange={setPushups} />
+      <Input label="Squats" value={squats} onChange={setSquats} />
 
-      <button
-        onClick={handleSave}
-        className="w-full bg-white text-black py-2 rounded-lg font-bold"
-      >
-        Save workout
-      </button>
-    </div>
-  );
-}
-
-function Input({
-  label,
-  value,
-  setValue,
-}: {
-  label: string;
-  value: number;
-  setValue: (v: number) => void;
-}) {
-  return (
-    <div>
-      <p className="text-white/60 text-sm">{label}</p>
-      <input
-        type="number"
-        value={value}
-        onChange={(e) => setValue(Number(e.target.value))}
-        className="w-full p-2 bg-white/5 border border-white/10 rounded-lg"
-      />
-    </div>
+      <Button onClick={handleSave}>
+        {saved ? "Saved ✓" : "Save workout"}
+      </Button>
+    </Card>
   );
 }
