@@ -3,15 +3,62 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 
+import { Card } from "@/components/ui/card";
+import { HeroCard } from "@/features/home/ui/HeroCard";
+
 import { getWorkouts } from "@/shared/lib/storage";
-import { calculateStrengthIndex } from "@/features/workout/lib/strengthIndex";
+import { WorkoutEntry } from "@/features/workout/model/workout.types";
+
+import { calculateStreak } from "@/features/workout/lib/streak";
 import {
   calculateWeeklyVolume,
   calculatePR,
 } from "@/features/workout/lib/stats";
+import { calculateStrengthIndex } from "@/features/workout/lib/strengthIndex";
 
-import { Card } from "@/components/ui/card";
-import { WorkoutEntry } from "@/features/workout/model/workout.types";
+const fadeUp = {
+  hidden: { opacity: 0, y: 10 },
+  show: { opacity: 1, y: 0 },
+};
+
+function StatTile({
+  title,
+  value,
+  hint,
+  tone,
+}: {
+  title: string;
+  value: string | number;
+  hint: string;
+  tone: "violet" | "indigo" | "emerald" | "amber";
+}) {
+  const toneStyles: Record<typeof tone, { glow: string; accent: string }> = {
+    violet: { glow: "bg-violet-500/20", accent: "text-violet-300" },
+    indigo: { glow: "bg-indigo-500/20", accent: "text-indigo-300" },
+    emerald: { glow: "bg-emerald-500/20", accent: "text-emerald-300" },
+    amber: { glow: "bg-amber-500/20", accent: "text-amber-300" },
+  };
+
+  const t = toneStyles[tone];
+
+  return (
+    <Card className="relative overflow-hidden p-4">
+      <div className={`absolute -left-10 -top-10 h-24 w-24 rounded-full blur-2xl ${t.glow}`} />
+      <div className="relative flex items-start justify-between gap-3">
+        <div className="space-y-1">
+          <p className="text-xs text-muted-foreground">{title}</p>
+          <p className="text-2xl font-bold tracking-tight">
+            <span className={t.accent}>{value}</span>
+          </p>
+          <p className="text-[11px] text-white/40">{hint}</p>
+        </div>
+        <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
+          {tone.toUpperCase()}
+        </div>
+      </div>
+    </Card>
+  );
+}
 
 export default function Home() {
   const [workouts, setWorkouts] = useState<WorkoutEntry[]>([]);
@@ -21,85 +68,117 @@ export default function Home() {
     setWorkouts(getWorkouts());
   }, []);
 
-  const strengthIndex = useMemo(
+  const strength = useMemo(
     () => calculateStrengthIndex(workouts),
-    [workouts],
+    [workouts]
   );
 
+  const streak = useMemo(() => calculateStreak(workouts), [workouts]);
   const weekly = useMemo(() => calculateWeeklyVolume(workouts), [workouts]);
-
   const pr = useMemo(() => calculatePR(workouts), [workouts]);
 
   const lastWorkout = workouts[0];
 
+  const level = Math.max(1, Math.floor(strength / 50));
+  const xp = strength % 50;
+
+  console.log("strength:", strength);
+  console.log("xp:", xp);
+
   return (
     <div className="mx-auto max-w-md space-y-6 p-4">
+
       {/* HEADER */}
-      <div className="space-y-1">
-        <h1 className="text-2xl font-bold tracking-tight">Body OS</h1>
-        <p className="text-sm text-muted-foreground">Your progress system</p>
-      </div>
-
-      {/* HERO */}
       <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
+        variants={fadeUp}
+        initial="hidden"
+        animate="show"
         transition={{ duration: 0.25 }}
+        className="text-center space-y-1"
       >
-        <Card className="p-6 text-center space-y-2">
-          <p className="text-sm text-muted-foreground">Strength Index</p>
-
-          <p className="text-5xl font-bold tracking-tight">{strengthIndex}</p>
-
-          <p className="text-xs text-muted-foreground">
-            Consistency builds strength
-          </p>
-        </Card>
+        <h1 className="text-2xl font-bold tracking-tight">BODY OS</h1>
+        <p className="text-sm text-muted-foreground">
+          Train. Progress. Evolve.
+        </p>
       </motion.div>
 
-      {/* INSIGHTS */}
+      {/* HERO */}
+      <HeroCard
+        level={level}
+        xp={xp}
+        xpMax={50}
+      />
+
+      {/* STATS */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        variants={fadeUp}
+        initial="hidden"
+        animate="show"
         transition={{ delay: 0.1 }}
         className="grid grid-cols-2 gap-3"
       >
-        <Card className="p-4 space-y-1">
-          <p className="text-xs text-muted-foreground">Weekly Pullups</p>
-          <p className="text-xl font-semibold">{weekly.pullups}</p>
-        </Card>
+        <StatTile
+          title="Streak"
+          value={streak}
+          hint="🔥 keep going"
+          tone="violet"
+        />
 
-        <Card className="p-4 space-y-1">
-          <p className="text-xs text-muted-foreground">PR Pullups</p>
-          <p className="text-xl font-semibold">{pr.pullups}</p>
-        </Card>
+        <StatTile
+          title="Strength"
+          value={strength}
+          hint="index score"
+          tone="indigo"
+        />
+
+        <StatTile
+          title="Weekly"
+          value={weekly.pullups}
+          hint="pull-ups total"
+          tone="emerald"
+        />
+
+        <StatTile
+          title="PR"
+          value={pr.pullups}
+          hint="personal best"
+          tone="amber"
+        />
       </motion.div>
 
-      {/* LAST WORKOUT */}
+      {/* QUEST */}
       <motion.div
-        initial={{ opacity: 0, x: -10 }}
-        animate={{ opacity: 1, x: 0 }}
+        variants={fadeUp}
+        initial="hidden"
+        animate="show"
         transition={{ delay: 0.15 }}
       >
-        <Card className="p-4 space-y-3">
-          <p className="text-sm text-muted-foreground">Last workout</p>
+        <Card className="p-4 space-y-2">
+
+          <p className="text-sm text-muted-foreground">
+            Latest Quest
+          </p>
 
           {lastWorkout ? (
-            <div className="space-y-1">
+            <>
               <p className="text-sm font-medium">
                 🏋️ {lastWorkout.pullups} / {lastWorkout.dips} /{" "}
                 {lastWorkout.pushups} / {lastWorkout.squats}
               </p>
 
-              <p className="text-xs text-muted-foreground">
-                {new Date(lastWorkout.date).toLocaleDateString()}
+              <p className="text-xs text-violet-400">
+                +{(lastWorkout.pullups + lastWorkout.dips) * 5} XP earned
               </p>
-            </div>
+            </>
           ) : (
-            <p className="text-sm text-muted-foreground">No workouts yet</p>
+            <p className="text-sm text-muted-foreground">
+              No quests yet
+            </p>
           )}
+
         </Card>
       </motion.div>
+
     </div>
   );
 }
