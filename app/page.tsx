@@ -1,10 +1,13 @@
-"use client";
+ "use client";
 
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 
 import { Card } from "@/components/ui/card";
 import { HeroCard } from "@/features/home/ui/HeroCard";
+import { LatestQuestCard } from "@/features/home/ui/LatestQuestCard";
+import { Dumbbell, Move3D, Flame, BarChart3 } from "lucide-react";
+
 
 import { getWorkouts } from "@/shared/lib/storage";
 import { WorkoutEntry } from "@/features/workout/model/workout.types";
@@ -25,36 +28,41 @@ function StatTile({
   title,
   value,
   hint,
-  tone,
+  icon,
 }: {
   title: string;
   value: string | number;
   hint: string;
-  tone: "violet" | "indigo" | "emerald" | "amber";
+  icon?: React.ReactNode;
 }) {
-  const toneStyles: Record<typeof tone, { glow: string; accent: string }> = {
-    violet: { glow: "bg-violet-500/20", accent: "text-violet-300" },
-    indigo: { glow: "bg-indigo-500/20", accent: "text-indigo-300" },
-    emerald: { glow: "bg-emerald-500/20", accent: "text-emerald-300" },
-    amber: { glow: "bg-amber-500/20", accent: "text-amber-300" },
+  const glowClass = "bg-white/10";
+  const accentClass = "text-white";
+  const t = {
+    glow: "bg-white/10",
+    accent: "text-white",
   };
-
-  const t = toneStyles[tone];
 
   return (
     <Card className="relative overflow-hidden p-4">
-      <div className={`absolute -left-10 -top-10 h-24 w-24 rounded-full blur-2xl ${t.glow}`} />
-      <div className="relative flex items-start justify-between gap-3">
-        <div className="space-y-1">
-          <p className="text-xs text-muted-foreground">{title}</p>
-          <p className="text-2xl font-bold tracking-tight">
-            <span className={t.accent}>{value}</span>
-          </p>
-          <p className="text-[11px] text-white/40">{hint}</p>
+      <div
+        className={`absolute -left-10 -top-10 h-24 w-24 rounded-full blur-2xl ${t.glow}`}
+      />
+
+      <div className="relative flex flex-col items-center gap-2">
+        <div className="flex items-center gap-2">
+          <div
+            className={`flex h-9 w-9 items-center justify-center rounded-2xl border border-white/10 bg-white/5 ${t.accent} `}
+          >
+            {icon}
+          </div>
+          <p className="text-xs font-semibold text-muted-foreground">{title}</p>
         </div>
-        <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
-          {tone.toUpperCase()}
-        </div>
+
+        <p className="text-4xl font-extrabold tracking-tight">
+          <span className={t.accent}>{value}</span>
+        </p>
+
+        <p className="text-[12px] text-white/50">{hint}</p>
       </div>
     </Card>
   );
@@ -115,69 +123,39 @@ export default function Home() {
         initial="hidden"
         animate="show"
         transition={{ delay: 0.1 }}
-        className="grid grid-cols-2 gap-3"
+        className="grid grid-cols-2 gap-3 text-center [&>*]:transition-transform [&>*]:duration-200 [&>*]:hover:scale-[1.01]"
       >
         <StatTile
           title="Streak"
           value={streak}
           hint="🔥 keep going"
-          tone="violet"
+          icon={<Flame size={16} className="opacity-90" />}
         />
 
         <StatTile
           title="Strength"
           value={strength}
           hint="index score"
-          tone="indigo"
+          icon={<Move3D size={16} className="opacity-90" />}
         />
 
         <StatTile
           title="Weekly"
           value={weekly.pullups}
           hint="pull-ups total"
-          tone="emerald"
+          icon={<Dumbbell size={16} className="opacity-90" />}
         />
 
         <StatTile
           title="PR"
           value={pr.pullups}
           hint="personal best"
-          tone="amber"
+          icon={<BarChart3 size={16} className="opacity-90" />}
         />
       </motion.div>
 
       {/* QUEST */}
-      <motion.div
-        variants={fadeUp}
-        initial="hidden"
-        animate="show"
-        transition={{ delay: 0.15 }}
-      >
-        <Card className="p-4 space-y-2">
-
-          <p className="text-sm text-muted-foreground">
-            Latest Quest
-          </p>
-
-          {lastWorkout ? (
-            <>
-              <p className="text-sm font-medium">
-                🏋️ {lastWorkout.pullups} / {lastWorkout.dips} /{" "}
-                {lastWorkout.pushups} / {lastWorkout.squats}
-              </p>
-
-              <p className="text-xs text-violet-400">
-                +{(lastWorkout.pullups + lastWorkout.dips) * 5} XP earned
-              </p>
-            </>
-          ) : (
-            <p className="text-sm text-muted-foreground">
-              No quests yet
-            </p>
-          )}
-
-        </Card>
-      </motion.div>
+      <LatestQuestCard lastWorkout={lastWorkout} />
 
     </div>
   );

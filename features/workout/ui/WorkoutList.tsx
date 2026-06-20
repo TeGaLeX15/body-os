@@ -11,12 +11,12 @@ export default function WorkoutList() {
   return (
     <div className="mt-6 space-y-3">
       {workouts.map((w) => (
-        <Card key={w.id}>
-          <p className="text-white/60 text-xs">
+        <Card key={w.id} className="leading-6">
+          <p className="text-white/60 text-sm leading-6">
             {new Date(w.date).toLocaleDateString()}
           </p>
 
-          <p className="mt-2 text-sm">
+          <p className="mt-2 text-base leading-6">
             🏋️ {w.pullups} / {w.dips} / {w.pushups} / {w.squats}
           </p>
         </Card>

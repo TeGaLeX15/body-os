@@ -15,8 +15,14 @@ export function BottomNavigation() {
   const pathname = usePathname();
 
   return (
-    <nav className="sticky bottom-0 z-50 border-t border-white/10 bg-zinc-950/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-md items-center justify-around">
+    <nav className="sticky bottom-0 z-50 border-t border-white/10 bg-zinc-950/70 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-md items-center justify-around px-2">
+        {/* background glow */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-1/2 top-0 h-6 w-[70%] -translate-x-1/2 bg-violet-500/10 blur-2xl"
+        />
+
         {items.map((item) => {
           const isActive = pathname === item.href;
           const Icon = item.icon;
@@ -25,29 +31,44 @@ export function BottomNavigation() {
             <Link
               key={item.href}
               href={item.href}
-              className="flex min-w-16 flex-col items-center gap-1"
+              aria-label={item.label}
+              className="group relative flex flex-1 flex-col items-center justify-center py-2"
             >
-              {/* ICON WRAPPER (ВАЖНО ДЛЯ UX) */}
+              {/* tap target (big hit area) */}
               <div
-                className={`
-                  flex h-9 w-9 items-center justify-center rounded-xl transition-all
-                  ${
-                    isActive
-                      ? "bg-violet-500/15 text-violet-400"
-                      : "text-zinc-500"
-                  }
-                `}
+                className={
+                  "pointer-events-none absolute inset-x-2 top-1 bottom-1 rounded-2xl transition-all " +
+                  (isActive ? "bg-violet-500/10" : "bg-transparent")
+                }
+              />
+
+              <div
+                className={
+                  "relative z-10 flex h-11 w-11 items-center justify-center rounded-2xl transition-all duration-200 " +
+                  (isActive
+                    ? "bg-violet-500/15 text-violet-400 shadow-[0_0_18px_rgba(139,92,246,0.35)]"
+                    : "text-zinc-500 group-hover:bg-white/5 group-hover:text-violet-300")
+                }
               >
-                <Icon size={20} />
+                <Icon size={20} className="transition-transform duration-200 group-hover:scale-110" />
               </div>
 
               <span
-                className={`text-xs transition-colors ${
-                  isActive ? "text-violet-400" : "text-zinc-500"
-                }`}
+                className={
+                  "relative z-10 mt-1 text-[11px] transition-colors duration-200 " +
+                  (isActive ? "text-violet-400" : "text-zinc-500 group-hover:text-violet-300")
+                }
               >
                 {item.label}
               </span>
+
+              {/* subtle active pulse */}
+              {isActive && (
+                <div
+                  aria-hidden
+                  className="absolute -bottom-0 left-1/2 h-1.5 w-16 -translate-x-1/2 rounded-full bg-violet-400/30 blur-sm"
+                />
+              )}
             </Link>
           );
         })}

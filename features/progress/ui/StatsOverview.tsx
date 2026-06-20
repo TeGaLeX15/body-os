@@ -36,10 +36,10 @@ export default function StatsOverview() {
 
 function StatCard({ title, value }: { title: string; value: string | number }) {
   return (
-    <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-      <p className="text-sm text-white/50">{title}</p>
+    <div className="rounded-xl border border-white/10 bg-white/5 p-4 leading-6">
+      <p className="text-base leading-6 text-white/50">{title}</p>
 
-      <p className="mt-2 text-2xl font-bold">{value}</p>
+      <p className="mt-2 text-2xl leading-[1.15] font-bold">{value}</p>
     </div>
   );
 }

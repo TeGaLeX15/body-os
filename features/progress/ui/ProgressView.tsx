@@ -16,11 +16,14 @@ export default function ProgressView() {
 
         <div className="space-y-2">
           {data.map((d, i) => (
-            <div key={i} className="flex justify-between text-sm">
+            <div
+              key={i}
+              className="flex justify-between items-center text-[15px] leading-6"
+            >
               <span className="text-white/50">
                 {new Date(d.date).toLocaleDateString()}
               </span>
-              <span className="font-bold">{d.index}</span>
+              <span className="font-bold tabular-nums">{d.index}</span>
             </div>
           ))}
         </div>

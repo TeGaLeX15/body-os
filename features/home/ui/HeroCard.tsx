@@ -26,18 +26,18 @@ export function HeroCard({ level, xp, xpMax }: HeroCardProps) {
       transition={{ duration: 0.3 }}
       className="w-full"
     >
-      <Card className="relative overflow-hidden p-6 text-center space-y-4 bg-gradient-to-b from-zinc-900 to-black border-white/10">
+      <Card className="relative overflow-hidden p-6 text-center space-y-3 bg-gradient-to-b from-zinc-900 to-black border-white/10">
 
         {/* glow */}
         <div className="absolute inset-0 opacity-20 blur-2xl bg-violet-500/20 pointer-events-none" />
 
         {/* LEVEL */}
-        <p className="text-xs text-white/50 uppercase tracking-widest">
+        <p className="text-sm leading-6 text-white/50 uppercase tracking-widest">
           Your Level
         </p>
 
         <motion.p
-          className="text-6xl font-bold"
+          className="text-6xl leading-[1.05] font-bold"
           initial={{ scale: 0.9 }}
           animate={{ scale: 1 }}
         >
@@ -46,30 +46,33 @@ export function HeroCard({ level, xp, xpMax }: HeroCardProps) {
 
         {/* 💥 XP BAR FIX (ВАЖНО) */}
         <div className="relative h-3 w-full rounded-full bg-white/10 overflow-hidden">
-        
-        {/* background glow layer */}
-        <div className="absolute inset-0 bg-white/5" />
+          {/* background glow layer */}
+          <div className="absolute inset-0 bg-white/5" />
 
-        {/* fill */}
-        <motion.div
-          className="h-full rounded-full"
-          initial={{ width: 0 }}
-          animate={{ width: fillWidth }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          style={{ width: fillWidth, backgroundImage: 'linear-gradient(to right, #8b5cf6, #4ade80)' }}
-        />
-
+          {/* fill */}
+          <motion.div
+            className="h-full rounded-full"
+            initial={{ width: 0 }}
+            animate={{ width: fillWidth }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            style={{
+              width: fillWidth,
+              backgroundImage: "linear-gradient(to right, #8b5cf6, #4ade80)",
+            }}
+          />
         </div>
 
         {/* TEXT */}
-        <p className="text-xs text-white/40">
+        <p className="text-sm leading-6 text-white/40">
           {safeXp} / {safeMax} XP
         </p>
 
-        <p className="text-[11px] text-white/30">
+        <p className="text-xs leading-5 text-white/30">
           Train. Upgrade. Evolve.
         </p>
       </Card>
     </motion.div>
   );
 }
+ 
+ 
