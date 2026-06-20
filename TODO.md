@@ -1,11 +1,20 @@
 # TODO
 
-- [x] Привести `WorkoutLogsSheet` к compact-рендеру: максимум 2 строки высоты на тренировку.
-- [x] Упростить дату/время (без отдельной строки), сделать короче.
-- [x] Сжать блок упражнений до одной компактной строки.
-- [x] Упростить/убрать подпись `XP`, оставить только значение.
-- [x] Уменьшить `estimateSize` в виртуализации под новую высоту.
-- [x] Проверить, что sheet открывается/закрывается и строки не “раздуваются”.
+- [x] Создать repository слой (localStorage-пока) для progress workouts
+- [x] Создать features/progress/model/useProgressData.ts: возвращает { workouts, total } и загружает данные безопасно (useEffect)
 
 
+- [ ] Обновить app/progress/page.tsx: только orchestrator, передаёт workouts props вниз
+
+- [ ] Превратить UI-компоненты Progress в pure: убрать getWorkouts изнутри и заменить на props
+  - [ ] StatsOverview
+  - [ ] InsightCards
+  - [ ] MuscleBalance
+  - [ ] WeeklyBreakdown
+  - [ ] ProgressChart
+  - [ ] Heatmap
+- [ ] Убрать локальные типы WorkoutEntry из UI и использовать тип из features/workout/model/workout.types.ts
+- [ ] Проверить engine (insightEngine.ts) не трогает storage
+
+- [ ] Запустить lint/build и проверить отсутствие hydration warnings
 
