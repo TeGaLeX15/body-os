@@ -1,4 +1,4 @@
- "use client";
+"use client";
 
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
@@ -7,7 +7,6 @@ import { Card } from "@/components/ui/card";
 import { HeroCard } from "@/features/home/ui/HeroCard";
 import { LatestQuestCard } from "@/features/home/ui/LatestQuestCard";
 import { Dumbbell, Move3D, Flame, BarChart3 } from "lucide-react";
-
 
 import { getWorkouts } from "@/shared/lib/storage";
 import { WorkoutEntry } from "@/features/workout/model/workout.types";
@@ -18,6 +17,8 @@ import {
   calculatePR,
 } from "@/features/workout/lib/stats";
 import { calculateStrengthIndex } from "@/features/workout/lib/strengthIndex";
+import { calculateLevel } from "@/features/home/lib/level";
+import { calculateTotalXP } from "@/features/home/lib/xp";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 10 },
@@ -35,34 +36,22 @@ function StatTile({
   hint: string;
   icon?: React.ReactNode;
 }) {
-  const glowClass = "bg-white/10";
-  const accentClass = "text-white";
-  const t = {
-    glow: "bg-white/10",
-    accent: "text-white",
-  };
-
   return (
-    <Card className="relative overflow-hidden p-4">
-      <div
-        className={`absolute -left-10 -top-10 h-24 w-24 rounded-full blur-2xl ${t.glow}`}
-      />
+    <Card variant="soft" className="relative overflow-hidden p-4">
+      {/* soft glow */}
+      <div className="pointer-events-none absolute -left-10 -top-10 h-28 w-28 rounded-full bg-white/5 blur-2xl" />
 
-      <div className="relative flex flex-col items-center gap-2">
-        <div className="flex items-center gap-2">
-          <div
-            className={`flex h-9 w-9 items-center justify-center rounded-2xl border border-white/10 bg-white/5 ${t.accent} `}
-          >
-            {icon}
-          </div>
-          <p className="text-xs font-semibold text-muted-foreground">{title}</p>
+      <div className="relative flex flex-col gap-2">
+        <div className="flex items-center justify-between">
+          <p className="text-[12px] text-white/50">{title}</p>
+          <div className="text-white/40">{icon}</div>
         </div>
 
-        <p className="text-4xl font-extrabold tracking-tight">
-          <span className={t.accent}>{value}</span>
+        <p className="text-3xl font-bold tracking-tight text-white tabular-nums">
+          {value}
         </p>
 
-        <p className="text-[12px] text-white/50">{hint}</p>
+        <p className="text-[11px] text-white/30">{hint}</p>
       </div>
     </Card>
   );
@@ -76,10 +65,7 @@ export default function Home() {
     setWorkouts(getWorkouts());
   }, []);
 
-  const strength = useMemo(
-    () => calculateStrengthIndex(workouts),
-    [workouts]
-  );
+  const strength = useMemo(() => calculateStrengthIndex(workouts), [workouts]);
 
   const streak = useMemo(() => calculateStreak(workouts), [workouts]);
   const weekly = useMemo(() => calculateWeeklyVolume(workouts), [workouts]);
@@ -87,15 +73,15 @@ export default function Home() {
 
   const lastWorkout = workouts[0];
 
-  const level = Math.max(1, Math.floor(strength / 50));
-  const xp = strength % 50;
+  const totalXP = useMemo(() => calculateTotalXP(workouts), [workouts]);
 
-  console.log("strength:", strength);
-  console.log("xp:", xp);
+  const { level, currentXP, xpToNextLevel } = useMemo(
+    () => calculateLevel(totalXP),
+    [totalXP],
+  );
 
   return (
     <div className="mx-auto max-w-md space-y-6 p-4">
-
       {/* HEADER */}
       <motion.div
         variants={fadeUp}
@@ -111,11 +97,7 @@ export default function Home() {
       </motion.div>
 
       {/* HERO */}
-      <HeroCard
-        level={level}
-        xp={xp}
-        xpMax={50}
-      />
+      <HeroCard level={level} xp={currentXP} xpMax={xpToNextLevel} />
 
       {/* STATS */}
       <motion.div
@@ -156,7 +138,6 @@ export default function Home() {
 
       {/* QUEST */}
       <LatestQuestCard lastWorkout={lastWorkout} />
-
     </div>
   );
 }
