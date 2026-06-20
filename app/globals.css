@@ -21,13 +21,44 @@
   }
 }
 
-/* ---------------- LIGHT THEME ---------------- */
+/* ---------------- DARK THEME ---------------- */
 
 :root {
-  --background: oklch(1 0 0);
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.99 0 0);
+
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.99 0 0);
+
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+
+  --primary: oklch(0.75 0.18 280);
+  --primary-foreground: oklch(0.205 0 0);
+
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.82 0 0);
+
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.556 0 0);
+
+  --radius: 0.75rem;
+}
+
+/* ---------------- LIGHT THEME ---------------- */
+
+.light {
+  --background: oklch(0.99 0 0);
   --foreground: oklch(0.145 0 0);
 
-  --card: oklch(0.98 0 0);
+  --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
 
   --popover: oklch(1 0 0);
@@ -45,47 +76,9 @@
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
 
-  --destructive: oklch(0.577 0.245 27.325);
-
   --border: oklch(0.92 0 0);
   --input: oklch(0.92 0 0);
   --ring: oklch(0.708 0 0);
-
-  --radius: 0.75rem;
-}
-
-/* ---------------- DARK THEME ---------------- */
-
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.99 0 0); /* почти чистый белый */
-
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.99 0 0);
-
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-
-  --primary: oklch(0.75 0.18 280);
-  --primary-foreground: oklch(0.205 0 0);
-
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.82 0 0); /* ВАЖНО: светлее */
-
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-
-  --destructive: oklch(0.704 0.191 22.216);
-
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.556 0 0);
-
-  --text-dim: oklch(0.70 0 0);
-  --text-faint: oklch(0.55 0 0);
 }
 
 /* ---------------- THEME TOKENS MAPPING ---------------- */
@@ -130,21 +123,23 @@
 
 /* ---------------- ANIMATIONS ---------------- */
 
-@keyframes gradient-x {
+@keyframes auroraFlow {
   0% {
-    background-position: 0% 50%;
+    transform: translateX(-20%) translateY(-10%) scale(1);
+    opacity: 0.4;
   }
   50% {
-    background-position: 100% 50%;
+    transform: translateX(20%) translateY(10%) scale(1.1);
+    opacity: 0.6;
   }
   100% {
-    background-position: 0% 50%;
+    transform: translateX(-20%) translateY(-10%) scale(1);
+    opacity: 0.4;
   }
 }
 
-.animate-gradient-x {
-  background-size: 200% 200%;
-  animation: gradient-x 3s ease infinite;
+.animate-aurora {
+  animation: auroraFlow 10s ease-in-out infinite;
 }
 
 /* ---------------- OPTIONAL: nicer blur background base ---------------- */

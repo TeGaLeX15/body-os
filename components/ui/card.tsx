@@ -4,39 +4,65 @@ import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
-/* ---------------- CONTEXT ---------------- */
+/* ---------------- TYPES ---------------- */
 
-type CardVariant = "default" | "soft" | "glow" | "flat" | "stat";
+type CardVariant =
+  | "default"
+  | "soft"
+  | "glow"
+  | "flat"
+  | "stat"
+  | "success"
+  | "info"
+  | "warning";
+
+/* ---------------- CONTEXT ---------------- */
 
 const CardVariantContext = React.createContext<CardVariant>("default");
 
 /* ---------------- VARIANTS ---------------- */
 
 const cardVariants = cva(
-  "group/card flex flex-col rounded-xl border text-card-foreground transition-colors",
+  "group/card flex flex-col rounded-xl overflow-hidden border text-card-foreground transition-all",
   {
     variants: {
       variant: {
         default: "bg-card border-border",
+
         soft: "bg-white/5 border-white/10 backdrop-blur-xl",
-        glow: "bg-card border-white/10 shadow-[0_0_30px_rgba(139,92,246,0.08)]",
+
+        glow:
+          "bg-white/5 border-white/10 shadow-[0_0_35px_rgba(139,92,246,0.10)]",
+
         flat: "bg-transparent border-transparent",
+
         stat: "bg-white/5 border-white/10 backdrop-blur-sm",
+
+        success:
+          "bg-emerald-500/10 border-emerald-500/20 text-emerald-200",
+
+        info:
+          "bg-violet-500/10 border-violet-500/20 text-violet-200",
+
+        warning:
+          "bg-yellow-500/10 border-yellow-500/20 text-yellow-200",
       },
+
       size: {
         default: "p-4",
         sm: "p-3",
         lg: "p-6",
       },
     },
+
     defaultVariants: {
       variant: "default",
       size: "default",
     },
-  },
+  }
 );
 
-/* ---------------- CARD ROOT ---------------- */
+/* ---------------- CARD ---------------- */
 
 function Card({
   className,
@@ -57,58 +83,7 @@ function Card({
   );
 }
 
-/* ---------------- HEADER ---------------- */
-
-function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card-header"
-      className={cn(
-        "grid gap-1 px-(--card-spacing) pt-(--card-spacing)",
-        className,
-      )}
-      {...props}
-    />
-  );
-}
-
-/* ---------------- TITLE ---------------- */
-
-function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card-title"
-      className={cn("text-[18px] font-medium leading-tight", className)}
-      {...props}
-    />
-  );
-}
-
-/* ---------------- DESCRIPTION ---------------- */
-
-function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card-description"
-      className={cn("text-sm text-muted-foreground", className)}
-      {...props}
-    />
-  );
-}
-
-/* ---------------- CONTENT ---------------- */
-
-function CardContent({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card-content"
-      className={cn("px-(--card-spacing) py-2", className)}
-      {...props}
-    />
-  );
-}
-
-/* ---------------- FOOTER (theme-aware) ---------------- */
+/* ---------------- FOOTER ---------------- */
 
 function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
   const variant = React.useContext(CardVariantContext);
@@ -117,14 +92,18 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card-footer"
       className={cn(
-        "flex items-center rounded-b-xl border-t px-(--card-spacing) py-3",
+        "flex items-center border-t px-4 py-3",
 
         variant === "default" && "bg-muted/40 border-border",
         variant === "soft" && "bg-white/5 border-white/10",
         variant === "glow" && "bg-white/5 border-white/10",
-        variant === "flat" && "bg-transparent border-transparent",
+        variant === "stat" && "bg-white/5 border-white/10",
 
-        className,
+        variant === "success" && "bg-emerald-500/5 border-emerald-500/10",
+        variant === "info" && "bg-violet-500/5 border-violet-500/10",
+        variant === "warning" && "bg-yellow-500/5 border-yellow-500/10",
+
+        className
       )}
       {...props}
     />
@@ -133,11 +112,4 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
 
 /* ---------------- EXPORT ---------------- */
 
-export {
-  Card,
-  CardHeader,
-  CardFooter,
-  CardTitle,
-  CardDescription,
-  CardContent,
-};
+export { Card, CardFooter };

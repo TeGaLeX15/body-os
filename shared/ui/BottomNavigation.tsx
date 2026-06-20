@@ -16,14 +16,18 @@ export function BottomNavigation() {
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50">
-      <div className="mx-auto max-w-md border-t border-white/10 bg-zinc-950/80 backdrop-blur-xl">
-        <div className="relative flex items-center justify-around px-2 py-2">
-          {/* soft glow */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-x-0 top-0 h-10 bg-violet-500/10 blur-2xl"
-          />
+      {/* 🌌 FULL WIDTH BACKGROUND */}
+      <div className="absolute inset-0 bg-zinc-950/80 backdrop-blur-xl" />
 
+      {/* ✨ soft aurora glow */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-t from-violet-500/10 via-transparent to-transparent blur-2xl"
+      />
+
+      {/* 📦 CENTERED CONTENT */}
+      <div className="relative mx-auto max-w-md px-2 py-2">
+        <div className="flex items-center justify-around">
           {items.map((item) => {
             const isActive = pathname === item.href;
             const Icon = item.icon;
@@ -32,15 +36,15 @@ export function BottomNavigation() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="relative flex flex-1 flex-col items-center justify-center"
+                className="relative flex flex-1 flex-col items-center"
               >
-                {/* ICON */}
+                {/* ICON WRAPPER */}
                 <div
                   className={[
-                    "relative z-10 flex h-11 w-11 items-center justify-center rounded-2xl transition-all duration-200",
+                    "relative flex h-11 w-11 items-center justify-center rounded-2xl transition-all duration-300",
                     isActive
-                      ? "text-violet-300 bg-violet-500/10 shadow-[0_0_20px_rgba(139,92,246,0.25)]"
-                      : "text-white/40 hover:text-violet-300 hover:bg-violet-500/5",
+                      ? "text-emerald-300 bg-emerald-500/10 shadow-[0_0_25px_rgba(16,185,129,0.25)]"
+                      : "text-white/40 hover:text-white/70 hover:bg-white/5",
                   ].join(" ")}
                 >
                   <Icon size={20} />
@@ -49,18 +53,18 @@ export function BottomNavigation() {
                 {/* LABEL */}
                 <span
                   className={[
-                    "relative z-10 mt-1 text-[14px] transition-colors duration-200",
-                    isActive ? "text-violet-300" : "text-white/40",
+                    "mt-1 text-[12px] transition-colors duration-300",
+                    isActive ? "text-emerald-300" : "text-white/40",
                   ].join(" ")}
                 >
                   {item.label}
                 </span>
 
-                {/* ACTIVE DOT */}
+                {/* ACTIVE INDICATOR */}
                 {isActive && (
                   <div
                     aria-hidden
-                    className="absolute -bottom-0 left-1/2 h-1 w-10 -translate-x-1/2 rounded-full bg-violet-400/40 blur-sm"
+                    className="absolute -bottom-1 left-1/2 h-1 w-10 -translate-x-1/2 rounded-full bg-emerald-400/40 blur-sm"
                   />
                 )}
               </Link>

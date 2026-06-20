@@ -4,32 +4,18 @@ import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import type { WorkoutEntry } from "@/features/workout/model/workout.types";
 
-function InlineStat({
-  label,
-  value,
-}: {
-  label: string;
-  value: number;
-}) {
+function InlineStat({ label, value }: { label: string; value: number }) {
   return (
     <Card variant="soft" className="p-3">
       <div className="flex items-center justify-between gap-3">
-        <p className="text-xs text-white/70 truncate min-w-0">
-          {label}
-        </p>
+        <p className="text-xs text-foreground/70 truncate min-w-0">{label}</p>
 
-        <p className="text-base font-bold tabular-nums text-white">
-          {value}
-        </p>
+        <p className="text-base font-bold tabular-nums text-foreground">{value}</p>
       </div>
     </Card>
   );
 }
 
-function formatXP(xp: number) {
-  if (!Number.isFinite(xp) || xp <= 0) return 0;
-  return Math.round(xp);
-}
 
 export function LatestQuestCard({
   lastWorkout,
@@ -38,13 +24,6 @@ export function LatestQuestCard({
 }) {
   const hasWorkout = Boolean(lastWorkout);
 
-  const xpEarned =
-    hasWorkout && lastWorkout
-      ? (lastWorkout.pullups + lastWorkout.dips) * 5
-      : 0;
-
-  const xp = formatXP(xpEarned);
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -52,53 +31,63 @@ export function LatestQuestCard({
       viewport={{ once: true, amount: 0.25 }}
       transition={{ duration: 0.28, ease: "easeOut" }}
     >
-      <Card variant="soft" className="p-5 space-y-5 relative overflow-hidden">
-
+      <Card variant="soft" className="px-4 py-4 space-y-4 relative overflow-hidden">
         {/* glow */}
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute -left-16 -top-12 h-40 w-40 rounded-full bg-violet-500/20 blur-2xl" />
           <div className="absolute -right-12 top-24 h-32 w-32 rounded-full bg-emerald-400/10 blur-2xl" />
         </div>
 
-        <div className="relative space-y-5">
-
+        <div className="relative gap-4">
           {/* HEADER */}
           <div className="flex items-center justify-between">
-            <p className="text-sm text-white/80">
-              Latest quest
-            </p>
-
-            <p className="text-xl font-bold tabular-nums text-violet-400">
-              +{xp}
-            </p>
+            <p className="text-sm text-foreground/80">Latest activity</p>
           </div>
 
-          {/* EMPTY STATE */}
-          {!hasWorkout && (
-            <div className="space-y-3">
-              <p className="text-sm leading-6 text-white/70">
-                Complete a workout to generate your first quest.
-              </p>
-
-              <Card variant="soft" className="p-4">
-                <p className="text-xs text-white/60">
-                  Try this
-                </p>
-
-                <p className="mt-1 text-sm text-white">
-                  Log pullups and dips — you’ll start earning XP quests.
-                </p>
-              </Card>
-            </div>
+          {hasWorkout && lastWorkout && (
+            <p className="text-[12px] text-muted-foreground leading-4 truncate mt-0.5 mb-4">
+              {new Date(lastWorkout.date).toLocaleDateString(undefined, {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              })}{" "}
+              •{" "}
+              {new Date(lastWorkout.date).toLocaleTimeString(undefined, {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </p>
           )}
 
-          {/* STATS */}
-          {hasWorkout && lastWorkout && (
+          {/* EMPTY STATE */}
+          {!hasWorkout ? (
+            <div className="relative overflow-hidden rounded-xl px-5 py-6 text-center">
+              {/* glow */}
+              <div className="pointer-events-none absolute inset-0">
+                <div className="absolute -left-12 -top-10 h-32 w-32 rounded-full bg-violet-500/20 blur-2xl" />
+                <div className="absolute -right-10 bottom-0 h-32 w-32 rounded-full bg-emerald-400/10 blur-2xl" />
+              </div>
+
+              <div className="relative space-y-3">
+                <p className="text-lg font-semibold text-foreground">
+                  Start your first workout
+                </p>
+
+                <p className="text-sm text-muted-foreground leading-6">
+                  Log your training to track progress and build consistency.
+                </p>
+
+                <p className="text-xs text-muted-foreground/60">
+                  Your activity will appear here automatically
+                </p>
+              </div>
+            </div>
+          ) : (
             <div className="grid grid-cols-2 gap-2">
-              <InlineStat label="Pullups" value={lastWorkout.pullups} />
-              <InlineStat label="Dips" value={lastWorkout.dips} />
-              <InlineStat label="Pushups" value={lastWorkout.pushups} />
-              <InlineStat label="Squats" value={lastWorkout.squats} />
+              <InlineStat label="Pullups" value={lastWorkout!.pullups} />
+              <InlineStat label="Dips" value={lastWorkout!.dips} />
+              <InlineStat label="Pushups" value={lastWorkout!.pushups} />
+              <InlineStat label="Squats" value={lastWorkout!.squats} />
             </div>
           )}
         </div>

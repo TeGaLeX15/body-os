@@ -32,12 +32,12 @@ export function HeroCard({ level, xp, xpMax }: HeroCardProps) {
         <div className="pointer-events-none absolute inset-0 opacity-20 blur-2xl bg-violet-500/20" />
 
         {/* LEVEL */}
-        <p className="text-sm uppercase tracking-widest text-white/50">
+        <p className="text-sm uppercase tracking-widest text-foreground/50">
           Your Level
         </p>
 
         <motion.p
-          className="text-6xl font-bold text-white leading-[1.05]"
+          className="text-6xl font-bold text-foreground leading-[1.05]"
           initial={{ scale: 0.9 }}
           animate={{ scale: 1 }}
         >
@@ -45,8 +45,8 @@ export function HeroCard({ level, xp, xpMax }: HeroCardProps) {
         </motion.p>
 
         {/* XP BAR */}
-        <div className="relative h-3 w-full overflow-hidden rounded-full bg-white/10">
-          <div className="absolute inset-0 bg-white/5" />
+        <div className="relative h-3 w-full overflow-hidden rounded-full bg-foreground/10">
+          <div className="absolute inset-0 bg-foreground/5" />
 
           <motion.div
             className="h-full rounded-full"
@@ -61,11 +61,11 @@ export function HeroCard({ level, xp, xpMax }: HeroCardProps) {
         </div>
 
         {/* TEXT */}
-        <p className="text-sm text-white/40">
+        <p className="text-sm text-foreground/40">
           {safeXp} / {safeMax} XP
         </p>
 
-        <p className="text-xs text-white/30">
+        <p className="text-xs text-foreground/30">
           TRAIN | UPGRADE | EVOLVE
         </p>
       </Card>

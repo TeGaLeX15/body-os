@@ -42,6 +42,7 @@ function Stepper({
   setValue: React.Dispatch<React.SetStateAction<number>>;
 }) {
   const clamp = (v: number) => Math.max(0, v);
+  const canDecrement = value > 0;
 
   const inc = useHold(() => setValue((v) => clamp(v + 1)));
   const dec = useHold(() => setValue((v) => clamp(v - 1)));
@@ -53,56 +54,65 @@ function Stepper({
 
   return (
     <div className="space-y-2">
-      <p className="text-sm text-white/60">{label}</p>
+      {/* label */}
+      <p className="text-sm text-white/80">{label}</p>
 
-      <div className="flex items-stretch gap-2 rounded-xl border border-white/10 bg-white/5 p-1.5">
-        {/* minus */}
-        <Button
-          type="button"
-          variant="secondary"
-          size="icon"
-          onMouseDown={dec.start}
-          onMouseUp={dec.stop}
-          onMouseLeave={dec.stop}
-          onTouchStart={dec.start}
-          onTouchEnd={dec.stop}
-          className="h-10 w-10 rounded-lg"
-        >
-          <Minus size={18} />
-        </Button>
+      {/* row */}
+      <Card variant="soft" className="p-1.5">
+        <div className="flex items-stretch gap-2 w-full">
 
-        {/* input */}
-        <Input
-          value={value}
-          onChange={onChange}
-          inputMode="numeric"
-          className="
-            h-10
-            text-center
-            text-base
-            font-semibold
-            tabular-nums
-            bg-transparent
-            border-0
-            focus-visible:ring-0
-          "
-        />
+          {/* minus */}
+          <Button
+            type="button"
+            variant="control"
+            size="icon"
+            disabled={!canDecrement}
+            onMouseDown={canDecrement ? dec.start : undefined}
+            onMouseUp={dec.stop}
+            onMouseLeave={dec.stop}
+            onTouchStart={canDecrement ? dec.start : undefined}
+            onTouchEnd={dec.stop}
+            className="h-10 w-10 shrink-0 rounded-lg disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            <Minus size={18} />
+          </Button>
 
-        {/* plus */}
-        <Button
-          type="button"
-          variant="secondary"
-          size="icon"
-          onMouseDown={inc.start}
-          onMouseUp={inc.stop}
-          onMouseLeave={inc.stop}
-          onTouchStart={inc.start}
-          onTouchEnd={inc.stop}
-          className="h-10 w-10 rounded-lg"
-        >
-          <Plus size={18} />
-        </Button>
-      </div>
+          {/* input */}
+          <Input
+            value={value}
+            onChange={onChange}
+            inputMode="numeric"
+            className="
+              h-10
+              flex-1
+              min-w-0
+              text-center
+              text-base
+              font-semibold
+              tabular-nums
+              bg-transparent
+              border-0
+              text-white
+              focus-visible:ring-0
+            "
+          />
+
+          {/* plus */}
+          <Button
+            type="button"
+            variant="success"
+            size="icon"
+            onMouseDown={inc.start}
+            onMouseUp={inc.stop}
+            onMouseLeave={inc.stop}
+            onTouchStart={inc.start}
+            onTouchEnd={inc.stop}
+            className="h-10 w-10 shrink-0 rounded-lg"
+          >
+            <Plus size={18} />
+          </Button>
+        </div>
+      </Card>
     </div>
   );
 }
@@ -151,13 +161,11 @@ export default function WorkoutForm({ onSaved }: Props) {
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-    >
-      <Card className="space-y-4 p-4">
+    <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
+      <Card variant="soft" className="space-y-4 p-4">
+
         {/* header */}
-        <div className="flex items-center gap-2 text-sm text-white/60">
+        <div className="flex items-center gap-2 text-sm text-white/80">
           <Dumbbell size={16} />
           <span>Workout</span>
         </div>
@@ -170,7 +178,7 @@ export default function WorkoutForm({ onSaved }: Props) {
           <Stepper label="Squats" value={squats} setValue={setSquats} />
         </div>
 
-        {/* SAVE CTA */}
+        {/* save */}
         <div className="pt-2">
           <SaveWorkoutButton
             onClick={handleSave}

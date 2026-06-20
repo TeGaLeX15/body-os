@@ -43,15 +43,15 @@ function StatTile({
 
       <div className="relative flex flex-col gap-2">
         <div className="flex items-center justify-between">
-          <p className="text-[12px] text-white/50">{title}</p>
-          <div className="text-white/40">{icon}</div>
+          <p className="text-[12px] text-foreground">{title}</p>
+          <div className="text-foreground">{icon}</div>
         </div>
 
-        <p className="text-3xl font-bold tracking-tight text-white tabular-nums">
+        <p className="text-4xl font-bold tracking-tight text-foreground tabular-nums">
           {value}
         </p>
 
-        <p className="text-[11px] text-white/30">{hint}</p>
+        <p className="text-[11px] text-foreground/50">{hint}</p>
       </div>
     </Card>
   );
@@ -71,7 +71,11 @@ export default function Home() {
   const weekly = useMemo(() => calculateWeeklyVolume(workouts), [workouts]);
   const pr = useMemo(() => calculatePR(workouts), [workouts]);
 
-  const lastWorkout = workouts[0];
+  const lastWorkout = useMemo(() => {
+    return [...workouts].sort(
+      (a, b) => +new Date(b.date) - +new Date(a.date),
+    )[0];
+  }, [workouts]);
 
   const totalXP = useMemo(() => calculateTotalXP(workouts), [workouts]);
 
@@ -92,7 +96,7 @@ export default function Home() {
       >
         <h1 className="text-2xl font-bold tracking-tight">BODY OS</h1>
         <p className="text-sm text-muted-foreground">
-          Train. Progress. Evolve.
+          Train | Progress | Evolve
         </p>
       </motion.div>
 
