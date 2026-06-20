@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Plus, Minus, Dumbbell } from "lucide-react";
+import { Icon } from "@/shared/icons/Icon";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -36,10 +37,12 @@ function Stepper({
   label,
   value,
   setValue,
+  icon,
 }: {
   label: string;
   value: number;
   setValue: React.Dispatch<React.SetStateAction<number>>;
+  icon?: React.ReactNode;
 }) {
   const clamp = (v: number) => Math.max(0, v);
   const canDecrement = value > 0;
@@ -55,12 +58,14 @@ function Stepper({
   return (
     <div className="space-y-2">
       {/* label */}
-      <p className="text-sm text-white/80">{label}</p>
+      <div className="flex items-center gap-2 text-sm text-white/80">
+        {icon}
+        <p>{label}</p>
+      </div>
 
       {/* row */}
       <Card variant="soft" className="p-1.5">
         <div className="flex items-stretch gap-2 w-full">
-
           {/* minus */}
           <Button
             type="button"
@@ -172,10 +177,33 @@ export default function WorkoutForm({ onSaved }: Props) {
 
         {/* inputs */}
         <div className="space-y-4">
-          <Stepper label="Pullups" value={pullups} setValue={setPullups} />
-          <Stepper label="Dips" value={dips} setValue={setDips} />
-          <Stepper label="Pushups" value={pushups} setValue={setPushups} />
-          <Stepper label="Squats" value={squats} setValue={setSquats} />
+          <Stepper
+            label="Pullups"
+            value={pullups}
+            setValue={setPullups}
+            icon={<Icon name="pullUp" size={16} />}
+          />
+
+          <Stepper
+            label="Dips"
+            value={dips}
+            setValue={setDips}
+            icon={<Icon name="dips" size={16} />}
+          />
+
+          <Stepper
+            label="Pushups"
+            value={pushups}
+            setValue={setPushups}
+            icon={<Icon name="pushUp" size={16} />}
+          />
+
+          <Stepper
+            label="Squats"
+            value={squats}
+            setValue={setSquats}
+            icon={<Icon name="squat" size={16} />}
+          />
         </div>
 
         {/* save */}

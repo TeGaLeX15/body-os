@@ -3,19 +3,32 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import type { WorkoutEntry } from "@/features/workout/model/workout.types";
+import { Icon } from "@/shared/icons/Icon";
 
-function InlineStat({ label, value }: { label: string; value: number }) {
+function InlineStat({
+  label,
+  value,
+  icon,
+}: {
+  label: string;
+  value: number;
+  icon?: React.ReactNode;
+}) {
   return (
     <Card variant="soft" className="p-3">
       <div className="flex items-center justify-between gap-3">
-        <p className="text-xs text-foreground/70 truncate min-w-0">{label}</p>
+        <div className="flex items-center gap-2 min-w-0">
+          {icon}
+          <p className="text-xs text-foreground/70 truncate">{label}</p>
+        </div>
 
-        <p className="text-base font-bold tabular-nums text-foreground">{value}</p>
+        <p className="text-base font-bold tabular-nums text-foreground">
+          {value}
+        </p>
       </div>
     </Card>
   );
 }
-
 
 export function LatestQuestCard({
   lastWorkout,
@@ -31,7 +44,10 @@ export function LatestQuestCard({
       viewport={{ once: true, amount: 0.25 }}
       transition={{ duration: 0.28, ease: "easeOut" }}
     >
-      <Card variant="soft" className="px-4 py-4 space-y-4 relative overflow-hidden">
+      <Card
+        variant="soft"
+        className="px-4 py-4 space-y-4 relative overflow-hidden"
+      >
         {/* glow */}
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute -left-16 -top-12 h-40 w-40 rounded-full bg-violet-500/20 blur-2xl" />
@@ -84,10 +100,29 @@ export function LatestQuestCard({
             </div>
           ) : (
             <div className="grid grid-cols-2 gap-2">
-              <InlineStat label="Pullups" value={lastWorkout!.pullups} />
-              <InlineStat label="Dips" value={lastWorkout!.dips} />
-              <InlineStat label="Pushups" value={lastWorkout!.pushups} />
-              <InlineStat label="Squats" value={lastWorkout!.squats} />
+              <InlineStat
+                label="Pullups"
+                value={lastWorkout!.pullups}
+                icon={<Icon name="pullUp" size={18} />}
+              />
+
+              <InlineStat
+                label="Dips"
+                value={lastWorkout!.dips}
+                icon={<Icon name="dips" size={18} />}
+              />
+
+              <InlineStat
+                label="Pushups"
+                value={lastWorkout!.pushups}
+                icon={<Icon name="pushUp" size={18} />}
+              />
+
+              <InlineStat
+                label="Squats"
+                value={lastWorkout!.squats}
+                icon={<Icon name="squat" size={18} />}
+              />
             </div>
           )}
         </div>

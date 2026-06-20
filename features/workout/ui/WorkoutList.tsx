@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
+import { Icon } from "@/shared/icons/Icon";
 import type { WorkoutEntry } from "../model/workout.types";
 import { calculateWorkoutXP } from "@/features/home/lib/xp";
 
@@ -17,15 +18,25 @@ function formatXP(xp: number) {
 function InlineStat({
   label,
   value,
+  icon,
 }: {
   label: string;
   value: number;
+  icon?: React.ReactNode;
 }) {
   return (
     <Card variant="soft" className="p-3">
       <div className="flex items-center justify-between gap-3">
-        <p className="text-xs text-white/70 truncate min-w-0">{label}</p>
-        <p className="text-base font-bold tabular-nums text-white">{value}</p>
+        <div className="flex items-center gap-2 min-w-0">
+          {icon}
+          <p className="text-xs text-white/70 truncate min-w-0">
+            {label}
+          </p>
+        </div>
+
+        <p className="text-base font-bold tabular-nums text-white">
+          {value}
+        </p>
       </div>
     </Card>
   );
@@ -98,10 +109,29 @@ export default function WorkoutList({ workouts, totalCount }: Props) {
 
                 {/* STATS */}
                 <div className="grid grid-cols-2 gap-2">
-                  <InlineStat label="Pullups" value={workout.pullups} />
-                  <InlineStat label="Dips" value={workout.dips} />
-                  <InlineStat label="Pushups" value={workout.pushups} />
-                  <InlineStat label="Squats" value={workout.squats} />
+                  <InlineStat
+                    label="Pullups"
+                    value={workout.pullups}
+                    icon={<Icon name="pullUp" size={16} />}
+                  />
+
+                  <InlineStat
+                    label="Dips"
+                    value={workout.dips}
+                    icon={<Icon name="dips" size={16} />}
+                  />
+
+                  <InlineStat
+                    label="Pushups"
+                    value={workout.pushups}
+                    icon={<Icon name="pushUp" size={16} />}
+                  />
+
+                  <InlineStat
+                    label="Squats"
+                    value={workout.squats}
+                    icon={<Icon name="squat" size={16} />}
+                  />
                 </div>
               </div>
             </Card>

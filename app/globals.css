@@ -50,6 +50,7 @@
   --ring: oklch(0.556 0 0);
 
   --radius: 0.75rem;
+  --bottom-nav-height: 72px;
 }
 
 /* ---------------- LIGHT THEME ---------------- */

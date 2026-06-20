@@ -4,6 +4,7 @@ import { useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { X } from "lucide-react";
+import { Icon } from "@/shared/icons/Icon";
 
 import { Card } from "@/components/ui/card";
 
@@ -26,13 +27,13 @@ function formatDelta(delta: number) {
 }
 
 function StatChip({
-  label,
   value,
   prevValue,
+  icon,
 }: {
-  label: string;
   value: number;
   prevValue?: number;
+  icon?: React.ReactNode;
 }) {
   const delta = prevValue === undefined ? undefined : value - prevValue;
 
@@ -51,13 +52,9 @@ function StatChip({
 
   return (
     <div
-      className={`
-        inline-flex items-center gap-1
-        rounded-md px-1.5 py-1
-        ${bgClass}
-      `}
+      className={`inline-flex items-center gap-1.5 rounded-lg px-2 py-1 ${bgClass}`}
     >
-      <span className="text-[10px] text-muted-foreground">{label}</span>
+      {icon}
 
       <span className={`text-[11px] font-semibold tabular-nums ${textClass}`}>
         {value}
@@ -72,22 +69,28 @@ function StatChip({
   );
 }
 
-export default function WorkoutLogsSheet({ workouts, open, onClose }: Props) {
+export default function WorkoutLogsSheet({
+  workouts,
+  open,
+  onClose,
+}: Props) {
   const parentRef = useRef<HTMLDivElement | null>(null);
 
   const sorted = useMemo(
-    () => [...workouts].sort((a, b) => +new Date(b.date) - +new Date(a.date)),
+    () =>
+      [...workouts].sort(
+        (a, b) => +new Date(b.date) - +new Date(a.date),
+      ),
     [workouts],
   );
 
-  const ITEM_GAP = 8;
+  const ITEM_HEIGHT = 96;
 
-  // eslint-disable-next-line react-hooks/incompatible-library
   const rowVirtualizer = useVirtualizer({
     count: sorted.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 80 + ITEM_GAP,
-    overscan: 12,
+    estimateSize: () => ITEM_HEIGHT,
+    overscan: 10,
   });
 
   return (
@@ -107,7 +110,6 @@ export default function WorkoutLogsSheet({ workouts, open, onClose }: Props) {
                   <p className="text-base font-semibold text-foreground">
                     Workout Log
                   </p>
-
                   <p className="text-xs text-muted-foreground">
                     {sorted.length} sessions
                   </p>
@@ -115,12 +117,7 @@ export default function WorkoutLogsSheet({ workouts, open, onClose }: Props) {
 
                 <button
                   onClick={onClose}
-                  className="
-                    flex h-9 w-9 items-center justify-center
-                    rounded-full bg-white/5
-                    text-muted-foreground
-                    transition hover:bg-white/10
-                  "
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-muted-foreground transition hover:bg-white/10"
                   aria-label="Close workout log"
                 >
                   <X size={18} />
@@ -128,28 +125,31 @@ export default function WorkoutLogsSheet({ workouts, open, onClose }: Props) {
               </div>
             </div>
 
-            {/* LIST */}
+            {/* SCROLL AREA */}
             <div
               ref={parentRef}
-              className="flex-1 overflow-auto px-3 pt-3 pb-28"
+              className="
+                flex-1 overflow-auto px-3 pt-3
+                pb-[calc(var(--bottom-nav-height)+env(safe-area-inset-bottom)+32px)]
+              "
             >
               <div
                 style={{
-                  height: rowVirtualizer.getTotalSize(),
+                  height:
+                    rowVirtualizer.getTotalSize() + 120,
                   position: "relative",
                 }}
               >
                 {rowVirtualizer.getVirtualItems().map((virtualRow) => {
                   const workout = sorted[virtualRow.index];
-
                   if (!workout) return null;
 
                   const prev = sorted[virtualRow.index + 1];
                   const xp = calculateWorkoutXP(workout);
 
                   const date = new Date(workout.date);
-
-                  const workoutNumber = sorted.length - virtualRow.index;
+                  const workoutNumber =
+                    sorted.length - virtualRow.index;
 
                   return (
                     <div
@@ -159,15 +159,14 @@ export default function WorkoutLogsSheet({ workouts, open, onClose }: Props) {
                         top: 0,
                         left: 0,
                         width: "100%",
-                        transform: `translateY(${virtualRow.start + virtualRow.index * ITEM_GAP}px)`,
+                        transform: `translateY(${virtualRow.start}px)`,
                       }}
-                      className=""
                     >
                       <Card
                         variant="soft"
-                        className="rounded-2xl px-3 py-2.5"
+                        className="rounded-2xl px-3 py-3"
                       >
-                        {/* TOP */}
+                        {/* HEADER */}
                         <div className="flex items-center justify-between gap-3">
                           <div className="min-w-0 flex items-center gap-2">
                             <span className="text-sm font-semibold tabular-nums text-foreground">
@@ -178,10 +177,8 @@ export default function WorkoutLogsSheet({ workouts, open, onClose }: Props) {
                               {date.toLocaleDateString(undefined, {
                                 day: "2-digit",
                                 month: "short",
-                              })}
-
-                              {" • "}
-
+                              })}{" "}
+                              •{" "}
                               {date.toLocaleTimeString(undefined, {
                                 hour: "2-digit",
                                 minute: "2-digit",
@@ -197,27 +194,27 @@ export default function WorkoutLogsSheet({ workouts, open, onClose }: Props) {
                         {/* STATS */}
                         <div className="mt-2 flex flex-wrap gap-1.5">
                           <StatChip
-                            label="P"
                             value={workout.pullups}
                             prevValue={prev?.pullups}
+                            icon={<Icon name="pullUp" size={14} className="opacity-80" />}
                           />
 
                           <StatChip
-                            label="D"
                             value={workout.dips}
                             prevValue={prev?.dips}
+                            icon={<Icon name="dips" size={14} className="opacity-80" />}
                           />
 
                           <StatChip
-                            label="Pu"
                             value={workout.pushups}
                             prevValue={prev?.pushups}
+                            icon={<Icon name="pushUp" size={14} className="opacity-80" />}
                           />
 
                           <StatChip
-                            label="S"
                             value={workout.squats}
                             prevValue={prev?.squats}
+                            icon={<Icon name="squat" size={14} className="opacity-80" />}
                           />
                         </div>
                       </Card>

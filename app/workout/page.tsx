@@ -26,6 +26,18 @@ export default function WorkoutPage() {
     refresh();
   }, []);
 
+  useEffect(() => {
+    if (logOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [logOpen]);
+
   const sorted = useMemo(() => {
     return [...workouts].sort(
       (a, b) => +new Date(b.date) - +new Date(a.date)
