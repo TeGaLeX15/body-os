@@ -13,8 +13,17 @@ export function useScrollRestoration(pathname: string) {
       window.scrollTo(0, saved);
     }
 
+    let ticking = false;
+
     const save = () => {
-      scrollPositions.set(pathname, window.scrollY);
+      if (ticking) return;
+
+      ticking = true;
+
+      requestAnimationFrame(() => {
+        scrollPositions.set(pathname, window.scrollY);
+        ticking = false;
+      });
     };
 
     window.addEventListener("scroll", save, { passive: true });
