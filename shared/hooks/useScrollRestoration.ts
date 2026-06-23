@@ -1,3 +1,4 @@
+// shared/hooks/useScrollRestoration.ts
 "use client";
 
 import { useEffect } from "react";

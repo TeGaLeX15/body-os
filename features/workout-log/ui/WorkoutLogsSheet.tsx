@@ -4,7 +4,7 @@ import { useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { X } from "lucide-react";
-import { Icon } from "@/shared/icons/Icon";
+import { Icon } from "@/shared/ui/Icon";
 
 import { Card } from "@/components/ui/card";
 

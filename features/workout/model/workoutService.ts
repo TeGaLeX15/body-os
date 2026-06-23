@@ -1,9 +1,6 @@
-import type { WorkoutEntry } from "@/features/workout/model/workout.types";
-import {
-  getWorkoutsRepo,
-  onWorkoutsStorageChange,
-  saveWorkoutsRepo,
-} from "@/shared/repository/workoutRepository";
+// workoutService.ts
+import type { WorkoutEntry } from "../model/workout.types";
+import { workoutRepository } from "../data/workoutRepository";
 
 export type SaveWorkoutInput = Omit<WorkoutEntry, "id" | "date">;
 
@@ -19,14 +16,15 @@ export function buildNewWorkout(input: SaveWorkoutInput): WorkoutEntry {
 }
 
 export function saveWorkout(input: SaveWorkoutInput): WorkoutEntry[] {
-  const existing = getWorkoutsRepo();
+  const existing = workoutRepository.get();
   const nextWorkout = buildNewWorkout(input);
+
   const updated = [nextWorkout, ...existing];
-  saveWorkoutsRepo(updated);
+  workoutRepository.save(updated);
+
   return updated;
 }
 
-export function subscribeToWorkoutChanges(callback: () => void): () => void {
-  return onWorkoutsStorageChange(callback);
+export function subscribeToWorkoutChanges(callback: () => void) {
+  return workoutRepository.subscribe(callback);
 }
-

@@ -8,7 +8,7 @@ import { HeroCard } from "@/features/home/ui/HeroCard";
 import { LatestQuestCard } from "@/features/home/ui/LatestQuestCard";
 import { Dumbbell, Move3D, Flame, BarChart3 } from "lucide-react";
 
-import { getWorkouts } from "@/shared/lib/storage";
+import { getWorkouts } from "@/features/workout/data/storage";
 import { WorkoutEntry } from "@/features/workout/model/workout.types";
 
 import { calculateStreak } from "@/features/workout/lib/streak";

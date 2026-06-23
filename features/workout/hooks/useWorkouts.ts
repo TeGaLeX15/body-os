@@ -1,12 +1,9 @@
+// useWorkouts.ts
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import type { WorkoutEntry } from "@/features/workout/model/workout.types";
-import {
-  getWorkoutsRepo,
-  onWorkoutsStorageChange,
-  saveWorkoutsRepo,
-} from "@/shared/repository/workoutRepository";
+import type { WorkoutEntry } from "../model/workout.types";
+import { workoutRepository } from "../data/workoutRepository";
 
 export type UseWorkoutsResult = {
   workouts: WorkoutEntry[];
@@ -21,28 +18,25 @@ export function useWorkouts(): UseWorkoutsResult {
   const [loading, setLoading] = useState(true);
 
   const refresh = useCallback(() => {
-    const data = getWorkoutsRepo();
+    const data = workoutRepository.get();
     setWorkouts(data);
     setLoading(false);
   }, []);
 
   useEffect(() => {
-    const unsubscribe = onWorkoutsStorageChange(() => {
+    const unsubscribe = workoutRepository.subscribe(() => {
       refresh();
     });
 
-    // load on mount (defer to microtask to avoid sync setState warning)
     queueMicrotask(() => {
       refresh();
     });
 
-    return () => {
-      unsubscribe();
-    };
+    return () => unsubscribe();
   }, [refresh]);
 
   const save = useCallback((next: WorkoutEntry[]) => {
-    saveWorkoutsRepo(next);
+    workoutRepository.save(next);
     setWorkouts(next);
     setLoading(false);
   }, []);
@@ -58,4 +52,3 @@ export function useWorkouts(): UseWorkoutsResult {
     [refresh, save, workouts, loading],
   );
 }
-

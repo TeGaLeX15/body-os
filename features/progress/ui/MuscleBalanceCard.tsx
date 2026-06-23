@@ -1,6 +1,6 @@
 "use client";
 
-import { getWorkouts } from "@/shared/lib/storage";
+import { getWorkouts } from "@/features/workout/data/storage";
 import { buildMuscleBalance } from "../lib/buildMuscleBalance";
 import { motion } from "framer-motion";
 

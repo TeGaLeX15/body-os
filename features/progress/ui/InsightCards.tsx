@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import type { WorkoutEntry } from "@/features/workout/model/workout.types";
 
 import { buildInsights, getCoachMode } from "../lib/insightEngine";
-import { Icon } from "@/shared/icons/Icon";
+import { Icon } from "@/shared/ui/Icon";
 import type { Insight } from "../lib/insightEngine";
 
 /* ---------------- ICON ---------------- */

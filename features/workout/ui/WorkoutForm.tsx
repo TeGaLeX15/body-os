@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Plus, Minus, Dumbbell } from "lucide-react";
-import { Icon } from "@/shared/icons/Icon";
+import { Icon } from "@/shared/ui/Icon";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";

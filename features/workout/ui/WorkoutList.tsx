@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
-import { Icon } from "@/shared/icons/Icon";
+import { Icon } from "@/shared/ui/Icon";
 import type { WorkoutEntry } from "../model/workout.types";
 import { calculateWorkoutXP } from "@/features/home/lib/xp";
 

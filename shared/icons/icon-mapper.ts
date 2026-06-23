@@ -1,3 +1,4 @@
+// shared/icons/icon-mapper.ts
 export const iconMap = {
   pullUp: "/icons/pull-up.svg",
   dips: "/icons/dips.svg",

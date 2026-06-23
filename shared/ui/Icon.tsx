@@ -1,5 +1,6 @@
+// shared/ui/Icon.tsx
 import Image from "next/image";
-import { iconMap, type IconName } from "./icon-mapper";
+import { iconMap, type IconName } from "../icons/icon-mapper";
 
 type Props = {
   name: IconName;

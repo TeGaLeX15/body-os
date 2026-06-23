@@ -7,7 +7,7 @@ import WorkoutForm from "@/features/workout/ui/WorkoutForm";
 import WorkoutList from "@/features/workout/ui/WorkoutList";
 import WorkoutLogsSheet from "@/features/workout-log/ui/WorkoutLogsSheet";
 
-import { useWorkouts } from "@/shared/model/useWorkouts";
+import { useWorkouts } from "@/features/workout/hooks/useWorkouts";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 10 },

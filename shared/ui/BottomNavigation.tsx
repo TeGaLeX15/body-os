@@ -1,28 +1,21 @@
+// shared/ui/BottomNavigation.tsx
 "use client";
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
-import { House, Dumbbell, ChartColumn, Settings } from "lucide-react";
-
-const items = [
-  { href: "/", label: "Home", icon: House },
-  { href: "/workout", label: "Train", icon: Dumbbell },
-  { href: "/progress", label: "Stats", icon: ChartColumn },
-  { href: "/settings", label: "Config", icon: Settings },
-];
+import { routes } from "@/shared/config/routes";
 
 export function BottomNavigation() {
   const pathname = usePathname();
   const router = useRouter();
 
   const startX = useRef<number | null>(null);
-
   const indexRef = useRef(0);
 
   useEffect(() => {
-    indexRef.current = items.findIndex((i) =>
-      i.href === "/" ? pathname === "/" : pathname.startsWith(i.href),
+    indexRef.current = routes.findIndex((r) =>
+      r.href === "/" ? pathname === "/" : pathname.startsWith(r.href),
     );
   }, [pathname]);
 
@@ -42,10 +35,10 @@ export function BottomNavigation() {
       const index = indexRef.current;
 
       if (diff < 0) {
-        const next = items[index + 1];
+        const next = routes[index + 1];
         if (next) router.push(next.href);
       } else {
-        const prev = items[index - 1];
+        const prev = routes[index - 1];
         if (prev) router.push(prev.href);
       }
     };
@@ -65,7 +58,7 @@ export function BottomNavigation() {
       style={{ height: "var(--nav-height)" }}
     >
       <div className="mx-auto flex h-full max-w-md items-center justify-around">
-        {items.map(({ href, label, icon: Icon }) => {
+        {routes.map(({ href, label, icon: Icon }) => {
           const active =
             href === "/" ? pathname === "/" : pathname.startsWith(href);
 

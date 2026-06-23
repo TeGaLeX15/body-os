@@ -1,4 +1,4 @@
-import { getWorkouts, saveWorkouts, onStorageChange } from "@/shared/lib/storage";
+import { getWorkouts, saveWorkouts, onStorageChange } from "@/features/workout/data/storage";
 import type { WorkoutEntry } from "@/features/workout/model/workout.types";
 
 export function getWorkoutsRepo(): WorkoutEntry[] {

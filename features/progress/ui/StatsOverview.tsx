@@ -16,7 +16,7 @@ import {
   Activity,
   Dumbbell,
 } from "lucide-react";
-import { Icon } from "@/shared/icons/Icon";
+import { Icon } from "@/shared/ui/Icon";
 
 /* ---------------- TYPES ---------------- */
 

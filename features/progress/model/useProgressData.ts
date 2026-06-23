@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import type { WorkoutEntry } from "@/features/workout/model/workout.types";
-import { useWorkouts } from "@/shared/model/useWorkouts";
+import { useWorkouts } from "@/features/workout/hooks/useWorkouts";
 
 export type ProgressData = {
   workouts: WorkoutEntry[];

@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import type { WorkoutEntry } from "@/features/workout/model/workout.types";
-import { Icon } from "@/shared/icons/Icon";
+import { Icon } from "@/shared/ui/Icon";
 
 function InlineStat({
   label,

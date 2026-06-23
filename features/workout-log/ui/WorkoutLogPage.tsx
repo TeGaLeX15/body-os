@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 
-import { getWorkouts } from "@/shared/lib/storage";
+import { getWorkouts } from "@/features/workout/data/storage";
 import type { WorkoutEntry } from "@/features/workout/model/workout.types";
 import { WorkoutRow } from "./WorkoutRow";
 import { calculateWorkoutXP } from "@/features/home/lib/xp";
