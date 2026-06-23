@@ -9,11 +9,16 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-import { getWorkouts } from "@/shared/lib/storage";
+import type { WorkoutEntry } from "@/features/workout/model/workout.types";
+
 import { buildStrengthHistory } from "../lib/buildProgress";
 
-export default function ProgressChart() {
-  const workouts = getWorkouts();
+type ProgressChartProps = {
+  workouts: WorkoutEntry[];
+};
+
+export default function ProgressChart({ workouts }: ProgressChartProps) {
+
   const data = buildStrengthHistory(workouts);
 
   return (

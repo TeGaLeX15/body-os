@@ -7,8 +7,7 @@ import WorkoutForm from "@/features/workout/ui/WorkoutForm";
 import WorkoutList from "@/features/workout/ui/WorkoutList";
 import WorkoutLogsSheet from "@/features/workout-log/ui/WorkoutLogsSheet";
 
-import { getWorkouts } from "@/shared/lib/storage";
-import type { WorkoutEntry } from "@/features/workout/model/workout.types";
+import { useWorkouts } from "@/shared/model/useWorkouts";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 10 },
@@ -16,15 +15,8 @@ const fadeUp = {
 };
 
 export default function WorkoutPage() {
-  const [workouts, setWorkouts] = useState<WorkoutEntry[]>([]);
+  const { workouts, refresh } = useWorkouts();
   const [logOpen, setLogOpen] = useState(false);
-
-  const refresh = () => setWorkouts(getWorkouts());
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    refresh();
-  }, []);
 
   useEffect(() => {
     if (logOpen) {
@@ -45,7 +37,6 @@ export default function WorkoutPage() {
   }, [workouts]);
 
   const preview = sorted.slice(0, 5);
-
   const isEmpty = workouts.length === 0;
 
   return (

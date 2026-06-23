@@ -1,10 +1,15 @@
 "use client";
 
-import { getWorkouts } from "@/shared/lib/storage";
+import type { WorkoutEntry } from "@/features/workout/model/workout.types";
+
 import { buildWeeklyBreakdown } from "../lib/buildWeeklyBreakdown";
 
-export default function WeeklyBreakdown() {
-  const workouts = getWorkouts();
+type WeeklyBreakdownProps = {
+  workouts: WorkoutEntry[];
+};
+
+export default function WeeklyBreakdown({ workouts }: WeeklyBreakdownProps) {
+
   const data = buildWeeklyBreakdown(workouts);
 
   const max = Math.max(...data.map((d) => d.volume), 1);

@@ -9,9 +9,10 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 
-import { getWorkouts, saveWorkouts } from "@/shared/lib/storage";
 import type { WorkoutEntry } from "../model/workout.types";
 import { SaveWorkoutButton } from "./SaveWorkoutButton";
+import { saveWorkout } from "../model/workoutService";
+
 
 /* ---------------- HOLD ---------------- */
 function useHold(action: () => void, delay = 90) {
@@ -142,18 +143,13 @@ export default function WorkoutForm({ onSaved }: Props) {
     squats === 0;
 
   function handleSave() {
-    const newWorkout: WorkoutEntry = {
-      id: crypto.randomUUID(),
-      date: new Date().toISOString(),
+    const updated = saveWorkout({
       pullups,
       dips,
       pushups,
       squats,
-    };
+    });
 
-    const updated = [newWorkout, ...getWorkouts()];
-
-    saveWorkouts(updated);
     onSaved(updated);
 
     setPullups(0);

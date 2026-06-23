@@ -1,44 +1,25 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import type { WorkoutEntry } from "@/features/workout/model/workout.types";
-import { getWorkoutsRepo } from "@/features/progress/repository/progressRepository";
+import { useWorkouts } from "@/shared/model/useWorkouts";
 
 export type ProgressData = {
   workouts: WorkoutEntry[];
   total: number;
+  loading: boolean;
 };
 
 export function useProgressData(): ProgressData {
-  const [workouts, setWorkouts] = useState<WorkoutEntry[]>([]);
-
-
-
-  // kept for future extension (e.g. skeleton/disabled UI until local data is loaded)
-
-  useEffect(() => {
-
-    const data = getWorkoutsRepo();
-
-    // eslint-disable-next-line react/no-set-state
-    queueMicrotask(() => {
-      setWorkouts(data);
-    });
-  }, []);
-
-
-
-
-
-
-
+  const { workouts, total, loading } = useWorkouts();
 
   return useMemo(() => {
     return {
       workouts,
-      total: workouts.length,
+      total,
+      loading,
     };
-  }, [workouts]);
-
+  }, [workouts, total, loading]);
 }
+
 

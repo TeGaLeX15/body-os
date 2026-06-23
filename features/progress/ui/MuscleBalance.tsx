@@ -1,19 +1,19 @@
 "use client";
 
-import { getWorkouts } from "@/shared/lib/storage";
+import type { WorkoutEntry } from "@/features/workout/model/workout.types";
+
 
 /* ---------------- HELPERS ---------------- */
 
 function sum(workouts: WorkoutEntry[], key: keyof WorkoutEntry) {
-  return workouts.reduce((acc, w) => acc + w[key], 0);
+  return workouts.reduce((acc, w) => {
+    const v = Number(w[key]);
+    return acc + (Number.isFinite(v) ? v : 0);
+  }, 0);
 }
 
-type WorkoutEntry = {
-  pullups: number;
-  dips: number;
-  pushups: number;
-  squats: number;
-};
+
+
 
 type BarProps = {
   label: string;
@@ -57,8 +57,12 @@ function Bar({ label, value, total, color }: BarProps) {
 
 /* ---------------- MAIN ---------------- */
 
-export default function MuscleBalance() {
-  const workouts = getWorkouts();
+type MuscleBalanceProps = {
+  workouts: WorkoutEntry[];
+};
+
+export default function MuscleBalance({ workouts }: MuscleBalanceProps) {
+
 
   const pull = sum(workouts, "pullups");
   const push = sum(workouts, "pushups") + sum(workouts, "dips");

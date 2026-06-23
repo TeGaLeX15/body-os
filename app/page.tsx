@@ -109,7 +109,7 @@ export default function Home() {
         initial="hidden"
         animate="show"
         transition={{ delay: 0.1 }}
-        className="grid grid-cols-2 gap-3 text-center [&>*]:transition-transform [&>*]:duration-200 [&>*]:hover:scale-[1.01]"
+        className="grid grid-cols-2 gap-3 text-center *:transition-transform *:duration-200 *:hover:scale-[1.01]"
       >
         <StatTile
           title="Streak"

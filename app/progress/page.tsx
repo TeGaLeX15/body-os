@@ -38,7 +38,6 @@ function ProgressSummaryHero({ total }: { total: number }) {
 export default function ProgressPage() {
   const { workouts, total } = useProgressData();
 
-
   return (
     <AnimatePresence mode="wait">
       <motion.div
@@ -62,26 +61,27 @@ export default function ProgressPage() {
 
         {/* CORE */}
         {/* CORE */}
-        <StatsOverview />
+        <StatsOverview workouts={workouts} />
 
         {/* INSIGHTS */}
-        <InsightCards />
+        <InsightCards workouts={workouts} />
+
 
 
 
         {/* STRUCTURE */}
         <div className="grid grid-cols-2 gap-2 pt-1">
-          <MuscleBalance />
-          <WeeklyBreakdown />
+          <MuscleBalance workouts={workouts} />
+          <WeeklyBreakdown workouts={workouts} />
 
         </div>
 
 
         {/* TREND */}
-        <ProgressChart />
+        <ProgressChart workouts={workouts} />
 
         {/* HEATMAP */}
-        <Heatmap />
+        <Heatmap workouts={workouts} />
 
 
       </motion.div>

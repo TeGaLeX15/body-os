@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { getWorkouts } from "@/shared/lib/storage";
+import type { WorkoutEntry } from "@/features/workout/model/workout.types";
+
 import {
   getCurrentStreak,
   getIndexChange,
@@ -19,12 +20,6 @@ import { Icon } from "@/shared/icons/Icon";
 
 /* ---------------- TYPES ---------------- */
 
-type WorkoutEntry = {
-  pullups: number;
-  dips: number;
-  pushups: number;
-  squats: number;
-};
 
 /* ---------------- HELPERS ---------------- */
 
@@ -32,8 +27,12 @@ function sum<K extends keyof WorkoutEntry>(
   workouts: WorkoutEntry[],
   key: K,
 ): number {
-  return workouts.reduce((acc, w) => acc + (w[key] ?? 0), 0);
+  return workouts.reduce((acc, w) => {
+    const v = Number(w[key]);
+    return acc + (Number.isFinite(v) ? v : 0);
+  }, 0);
 }
+
 
 /* ---------------- STREAK ---------------- */
 
@@ -129,10 +128,13 @@ function MiniCard({
 
 /* ---------------- MAIN ---------------- */
 
-export default function StatsOverview() {
-  const workouts = getWorkouts();
+type StatsOverviewProps = {
+  workouts: WorkoutEntry[];
+};
 
+export default function StatsOverview({ workouts }: StatsOverviewProps) {
   const streak = getCurrentStreak(workouts);
+
   const trend = getIndexChange(workouts);
   const records = getPersonalRecords(workouts);
 

@@ -1,6 +1,7 @@
 "use client";
 
-import { getWorkouts } from "@/shared/lib/storage";
+import type { WorkoutEntry } from "@/features/workout/model/workout.types";
+
 
 function getKey(date: Date) {
   return date.toISOString().split("T")[0];
@@ -13,8 +14,12 @@ function intensity(v: number) {
   return "bg-emerald-500/70";
 }
 
-export default function Heatmap() {
-  const workouts = getWorkouts();
+type HeatmapProps = {
+  workouts: WorkoutEntry[];
+};
+
+export default function Heatmap({ workouts }: HeatmapProps) {
+
 
   const map = new Map<string, number>();
 

@@ -2,18 +2,19 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
+/* =========================
+   BASE CONFIG
+========================= */
 
-/* ---------------- BASE ---------------- */
+@custom-variant dark (&:is(.dark *));
 
 @layer base {
   html {
-    @apply font-sans transition-colors duration-300;
-    color-scheme: light dark;
+    @apply font-sans antialiased;
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground;
   }
 
   * {
@@ -21,7 +22,9 @@
   }
 }
 
-/* ---------------- DARK THEME ---------------- */
+/* =========================
+   DESIGN TOKENS (DARK DEFAULT)
+========================= */
 
 :root {
   --background: oklch(0.145 0 0);
@@ -50,10 +53,13 @@
   --ring: oklch(0.556 0 0);
 
   --radius: 0.75rem;
-  --bottom-nav-height: 72px;
+
+  --nav-height: 72px;
 }
 
-/* ---------------- LIGHT THEME ---------------- */
+/* =========================
+   LIGHT THEME
+========================= */
 
 .light {
   --background: oklch(0.99 0 0);
@@ -82,7 +88,9 @@
   --ring: oklch(0.708 0 0);
 }
 
-/* ---------------- THEME TOKENS MAPPING ---------------- */
+/* =========================
+   TAILWIND THEME MAP
+========================= */
 
 @theme inline {
   --color-background: var(--background);
@@ -90,9 +98,6 @@
 
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
-
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
 
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
@@ -103,54 +108,40 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
 
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-
-  --color-destructive: var(--destructive);
-
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-
-  --color-text-dim: var(--text-dim);
-  --color-text-faint: var(--text-faint);
+  --radius-md: var(--radius);
 }
 
-/* ---------------- ANIMATIONS ---------------- */
+/* =========================
+   ANIMATION
+========================= */
 
-@keyframes auroraFlow {
-  0% {
-    transform: translateX(-20%) translateY(-10%) scale(1);
+@keyframes aurora {
+  0%,
+  100% {
+    transform: translate(-20%, -10%) scale(1);
     opacity: 0.4;
   }
   50% {
-    transform: translateX(20%) translateY(10%) scale(1.1);
+    transform: translate(20%, 10%) scale(1.1);
     opacity: 0.6;
-  }
-  100% {
-    transform: translateX(-20%) translateY(-10%) scale(1);
-    opacity: 0.4;
   }
 }
 
 .animate-aurora {
-  animation: auroraFlow 10s ease-in-out infinite;
+  animation: aurora 10s ease-in-out infinite;
 }
 
-/* ---------------- OPTIONAL: nicer blur background base ---------------- */
+/* =========================
+   BACKGROUND
+========================= */
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(
+.bg-app {
+  background:
+    radial-gradient(
       circle at 20% 20%,
       oklch(0.6 0.2 280 / 0.08),
       transparent 40%
@@ -160,4 +151,23 @@ body::before {
       oklch(0.7 0.2 160 / 0.06),
       transparent 45%
     );
+}
+
+/* =========================
+   PAGE ENTER ANIMATION (light)
+========================= */
+
+@keyframes pageIn {
+  from {
+    opacity: 0.96;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-enter {
+  animation: pageIn 140ms ease-out;
 }

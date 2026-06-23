@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { getWorkouts } from "@/shared/lib/storage";
+import type { WorkoutEntry } from "@/features/workout/model/workout.types";
+
 import { buildInsights, getCoachMode } from "../lib/insightEngine";
 import { Icon } from "@/shared/icons/Icon";
 import type { Insight } from "../lib/insightEngine";
@@ -71,9 +72,13 @@ function Card({ insight }: { insight: Insight }) {
 
 /* ---------------- MAIN ---------------- */
 
-export default function InsightCards() {
-  const workouts = getWorkouts();
+type InsightCardsProps = {
+  workouts: WorkoutEntry[];
+};
+
+export default function InsightCards({ workouts }: InsightCardsProps) {
   const insights = buildInsights(workouts);
+
   const coach = getCoachMode(insights);
 
   if (!insights.length) return null;

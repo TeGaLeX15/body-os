@@ -1,10 +1,13 @@
 "use client";
 
-import { getWorkouts } from "@/shared/lib/storage";
+import type { WorkoutEntry } from "@/features/workout/model/workout.types";
 import { buildStrengthHistory } from "../lib/buildProgress";
 
-export default function ProgressView() {
-  const workouts = getWorkouts();
+type ProgressViewProps = {
+  workouts: WorkoutEntry[];
+};
+
+export default function ProgressView({ workouts }: ProgressViewProps) {
   const data = buildStrengthHistory(workouts);
 
   return (
