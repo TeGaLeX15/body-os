@@ -3,6 +3,7 @@ import "./globals.css";
 import { Geist } from "next/font/google";
 import { AppProviders } from "@/app/providers/AppProviders";
 import { AppShell } from "@/app/providers/AppShell";
+import { AppGate } from "@/app/providers/AppGate";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -18,7 +19,9 @@ export default function RootLayout({
     <html lang="ru" className={geist.variable}>
       <body className="min-h-dvh bg-background text-foreground font-sans overflow-x-hidden">
         <AppProviders>
-          <AppShell>{children}</AppShell>
+          <AppGate>
+            <AppShell>{children}</AppShell>
+          </AppGate>
         </AppProviders>
       </body>
     </html>
