@@ -6,6 +6,7 @@ import { calculateLevel } from "./workoutLevel";
 import { calculateStrengthIndex } from "./workoutStrength";
 import { calculateStreak } from "./workoutStreak";
 import { calculateWeeklyVolume, calculatePR } from "./workoutStats";
+import { calculateRank, WorkoutRank } from "./workoutRank";
 
 export type WorkoutAnalytics = {
   workouts: WorkoutEntry[];
@@ -15,6 +16,8 @@ export type WorkoutAnalytics = {
   level: number;
   currentXP: number;
   xpToNextLevel: number;
+
+  rank: WorkoutRank;
 
   strength: number;
   streak: number;
@@ -45,6 +48,7 @@ export function buildWorkoutAnalytics(
 
   const xp = calculateXP(workouts);
   const levelData = calculateLevel(xp);
+  const rank = calculateRank(levelData.level);
 
   return {
     workouts,
@@ -52,6 +56,8 @@ export function buildWorkoutAnalytics(
     xp,
 
     ...levelData,
+
+    rank,
 
     strength: calculateStrengthIndex(workouts),
     streak: calculateStreak(workouts),

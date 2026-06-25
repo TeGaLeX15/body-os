@@ -19,10 +19,7 @@ const fadeUp = {
   },
 };
 
-export function PageHeader({
-  title,
-  description,
-}: PageHeaderProps) {
+export function PageHeader({ title, description }: PageHeaderProps) {
   return (
     <motion.div
       variants={fadeUp}
@@ -30,14 +27,10 @@ export function PageHeader({
       animate="show"
       className="space-y-1 text-center"
     >
-      <h1 className="text-2xl font-bold tracking-tight">
-        {title}
-      </h1>
+      <h1 className="text-2xl font-bold tracking-tight">{title}</h1>
 
       {description && (
-        <p className="text-sm text-muted-foreground">
-          {description}
-        </p>
+        <p className="text-sm text-muted-foreground">{description}</p>
       )}
     </motion.div>
   );

@@ -2,7 +2,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-
 import type { WorkoutEntry } from "@/features/workout/model/workout.types";
 
 import { Card } from "@/components/ui/card";
@@ -25,28 +24,24 @@ export function LatestQuestCard({ lastWorkout }: Props) {
       viewport={{ once: true }}
       transition={{ duration: 0.28 }}
     >
-      <Card className="relative overflow-hidden p-4 space-y-4">
-        <div className="space-y-4">
-          {hasWorkout && lastWorkout ? (
-            <>
-              <div className="text-xs text-muted-foreground">
-                {(() => {
-                  const { date, time } = formatWorkoutDate(lastWorkout.date);
-                  return (
-                    <>
-                      {date} • {time}
-                    </>
-                  );
-                })()}
-              </div>
+      {hasWorkout && lastWorkout ? (
+        <Card className="p-4 space-y-4">
+          <div className="text-xs text-muted-foreground">
+            {(() => {
+              const { date, time } = formatWorkoutDate(lastWorkout.date);
+              return (
+                <>
+                  {date} • {time}
+                </>
+              );
+            })()}
+          </div>
 
-              <LatestQuestGrid workout={lastWorkout} />
-            </>
-          ) : (
-            <LatestQuestEmptyState />
-          )}
-        </div>
-      </Card>
+          <LatestQuestGrid workout={lastWorkout} />
+        </Card>
+      ) : (
+        <LatestQuestEmptyState />
+      )}
     </motion.div>
   );
 }

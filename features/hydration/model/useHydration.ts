@@ -2,11 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  getWaterToday,
-  addWater,
-  resetWater,
-} from "../data/hydrationStorage";
+import { getWaterToday, addWater, resetWater } from "../data/hydrationStorage";
 
 export function useHydration() {
   const [water, setWater] = useState(0);

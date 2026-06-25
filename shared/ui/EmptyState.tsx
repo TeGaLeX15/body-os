@@ -7,11 +7,7 @@ type EmptyStateProps = {
   action?: ReactNode;
 };
 
-export function EmptyState({
-  title,
-  description,
-  action,
-}: EmptyStateProps) {
+export function EmptyState({ title, description, action }: EmptyStateProps) {
   return (
     <div
       className="
@@ -24,13 +20,9 @@ export function EmptyState({
       "
     >
       <div className="space-y-3">
-        <p className="text-lg font-semibold">
-          {title}
-        </p>
+        <p className="text-lg font-semibold">{title}</p>
 
-        <p className="text-sm text-muted-foreground">
-          {description}
-        </p>
+        <p className="text-sm text-muted-foreground">{description}</p>
 
         {action}
       </div>

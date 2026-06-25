@@ -22,8 +22,7 @@ export function useDailyState(): DailyState | null {
 
     const recommendedWater = getWaterGoal(profile);
 
-    const waterGoal =
-      profile.waterGoalMl ?? recommendedWater;
+    const waterGoal = profile.waterGoalMl ?? recommendedWater;
 
     const waterConsumed = 0;
 

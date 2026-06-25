@@ -44,9 +44,7 @@ export function BottomNavigation() {
               <span
                 className={[
                   "mt-1 text-[12px]",
-                  active
-                    ? "text-primary"
-                    : "text-muted-foreground",
+                  active ? "text-primary" : "text-muted-foreground",
                 ].join(" ")}
               >
                 {route.label}

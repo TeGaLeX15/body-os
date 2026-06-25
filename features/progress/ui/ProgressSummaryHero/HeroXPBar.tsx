@@ -15,9 +15,7 @@ export default function HeroXPBar({
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between text-xs">
-        <span className="text-muted-foreground">
-          XP Progress
-        </span>
+        <span className="text-muted-foreground">XP Progress</span>
 
         <span className="font-medium">
           {currentXP} / {xpToNextLevel}
@@ -33,9 +31,7 @@ export default function HeroXPBar({
         />
       </div>
 
-      <p className="text-[11px] text-muted-foreground">
-        Total XP: {totalXP}
-      </p>
+      <p className="text-[11px] text-muted-foreground">Total XP: {totalXP}</p>
     </div>
   );
 }

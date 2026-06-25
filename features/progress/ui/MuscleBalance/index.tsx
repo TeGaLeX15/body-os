@@ -9,11 +9,8 @@ type Props = {
   analytics: WorkoutAnalytics;
 };
 
-export default function MuscleBalance({
-  analytics,
-}: Props) {
-  const data =
-    buildMovementBalance(analytics);
+export default function MuscleBalance({ analytics }: Props) {
+  const data = buildMovementBalance(analytics);
 
   return (
     <div className="rounded-xl border border-border bg-card p-4 space-y-4">
@@ -30,17 +27,11 @@ export default function MuscleBalance({
 
       {/* SCORE */}
       <div className="rounded-xl bg-background border border-border p-3">
-        <p className="text-[11px] text-muted-foreground">
-          Balance score
-        </p>
+        <p className="text-[11px] text-muted-foreground">Balance score</p>
 
-        <p className="text-2xl font-bold">
-          {data.balanceScore}
-        </p>
+        <p className="text-2xl font-bold">{data.balanceScore}</p>
 
-        <p className="text-[11px] text-muted-foreground">
-          out of 100
-        </p>
+        <p className="text-[11px] text-muted-foreground">out of 100</p>
       </div>
 
       {/* PUSH */}
@@ -105,17 +96,15 @@ export default function MuscleBalance({
 
       {/* INSIGHT */}
       <div className="rounded-xl border border-border bg-background p-3">
-        <p className="text-[11px] text-muted-foreground">
-          Coach note
-        </p>
+        <p className="text-[11px] text-muted-foreground">Coach note</p>
 
         <p className="text-sm font-medium mt-1">
           {data.dominant} is currently your dominant movement.
         </p>
 
         <p className="text-xs text-muted-foreground mt-1">
-          Increase {data.weakest.toLowerCase()} volume to
-          improve overall balance.
+          Increase {data.weakest.toLowerCase()} volume to improve overall
+          balance.
         </p>
       </div>
     </div>

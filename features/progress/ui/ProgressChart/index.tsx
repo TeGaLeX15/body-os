@@ -13,9 +13,7 @@ type Props = {
   analytics: WorkoutAnalytics;
 };
 
-export default function ProgressChart({
-  analytics,
-}: Props) {
+export default function ProgressChart({ analytics }: Props) {
   const trend = buildProgressTrend(analytics);
 
   return (
@@ -24,11 +22,7 @@ export default function ProgressChart({
 
       <TrendAreaChart data={trend.data} />
 
-      <ChartMetrics
-        min={trend.min}
-        avg={trend.avg}
-        max={trend.max}
-      />
+      <ChartMetrics min={trend.min} avg={trend.avg} max={trend.max} />
     </div>
   );
 }

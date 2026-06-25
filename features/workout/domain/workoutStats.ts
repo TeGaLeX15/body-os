@@ -9,7 +9,7 @@ export function calculatePR(workouts: WorkoutEntry[]) {
       pushups: Math.max(max.pushups, w.pushups),
       squats: Math.max(max.squats, w.squats),
     }),
-    { pullups: 0, dips: 0, pushups: 0, squats: 0 }
+    { pullups: 0, dips: 0, pushups: 0, squats: 0 },
   );
 }
 
@@ -19,7 +19,7 @@ export function calculateWeeklyVolume(workouts: WorkoutEntry[]) {
   weekAgo.setDate(now.getDate() - 7);
 
   return workouts
-    .filter(w => new Date(w.date) >= weekAgo)
+    .filter((w) => new Date(w.date) >= weekAgo)
     .reduce(
       (sum, w) => {
         sum.pullups += w.pullups;
@@ -28,6 +28,6 @@ export function calculateWeeklyVolume(workouts: WorkoutEntry[]) {
         sum.squats += w.squats;
         return sum;
       },
-      { pullups: 0, dips: 0, pushups: 0, squats: 0 }
+      { pullups: 0, dips: 0, pushups: 0, squats: 0 },
     );
 }

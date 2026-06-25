@@ -1,16 +1,17 @@
 // features/profile/domain/calculateBMR.ts
 import type { Profile } from "../model/profile.types";
 
-/**
- * Mifflin-St Jeor (упрощённо)
- */
-export function calculateBMR(profile: Profile) {
-  const { weight, height, age } = profile;
+export function calculateBMI(profile: Profile) {
+  const heightM = profile.height / 100;
 
-  return Math.round(
-    10 * weight +
-      6.25 * height -
-      5 * age +
-      5 // assume male baseline (потом можно пол добавить)
-  );
+  if (!heightM) return 0;
+
+  return +(profile.currentWeight / (heightM * heightM)).toFixed(1);
+}
+
+export function getBMICategory(bmi: number) {
+  if (bmi < 18.5) return "underweight";
+  if (bmi < 25) return "normal";
+  if (bmi < 30) return "overweight";
+  return "obese";
 }

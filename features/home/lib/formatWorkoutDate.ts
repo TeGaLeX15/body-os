@@ -1,5 +1,5 @@
 // features/home/lib/formatWorkoutDate.ts
-export function formatWorkoutDate(date: string) {
+export function formatWorkoutDate(date: number) {
   const d = new Date(date);
 
   return {

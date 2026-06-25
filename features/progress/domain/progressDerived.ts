@@ -25,3 +25,41 @@ export function getDominantMovement(a: WorkoutAnalytics) {
   if (push > legs) return "push";
   return "legs";
 }
+
+export function getMaxReps(analytics: WorkoutAnalytics) {
+  return analytics.workouts.reduce(
+    (acc, w) => {
+      return {
+        pullups: Math.max(acc.pullups, w.pullups),
+        dips: Math.max(acc.dips, w.dips),
+        pushups: Math.max(acc.pushups, w.pushups),
+        squats: Math.max(acc.squats, w.squats),
+      };
+    },
+    {
+      pullups: 0,
+      dips: 0,
+      pushups: 0,
+      squats: 0,
+    },
+  );
+}
+
+export function getTotalRepsByType(analytics: WorkoutAnalytics) {
+  return analytics.workouts.reduce(
+    (acc, w) => {
+      return {
+        pullups: acc.pullups + w.pullups,
+        dips: acc.dips + w.dips,
+        pushups: acc.pushups + w.pushups,
+        squats: acc.squats + w.squats,
+      };
+    },
+    {
+      pullups: 0,
+      dips: 0,
+      pushups: 0,
+      squats: 0,
+    },
+  );
+}

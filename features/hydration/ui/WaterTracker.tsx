@@ -2,12 +2,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Droplets,
-  GlassWater,
-  Plus,
-  Trophy,
-} from "lucide-react";
+import { Droplets, GlassWater, Plus, Trophy } from "lucide-react";
 
 import { useHydration } from "../model/useHydration";
 import { useDailyState } from "@/features/daily-state/model/useDailyState";
@@ -18,17 +13,11 @@ export function WaterTracker() {
 
   if (!state) return null;
 
-  const percent = Math.min(
-    100,
-    (water / state.waterGoal) * 100
-  );
+  const percent = Math.min(100, (water / state.waterGoal) * 100);
 
   const completed = percent >= 100;
 
-  const remaining = Math.max(
-    0,
-    state.waterGoal - water
-  );
+  const remaining = Math.max(0, state.waterGoal - water);
 
   return (
     <motion.div
@@ -77,30 +66,19 @@ export function WaterTracker() {
               bg-cyan-500/15
             "
           >
-            <Droplets
-              size={20}
-              className="text-cyan-400"
-            />
+            <Droplets size={20} className="text-cyan-400" />
           </div>
 
           <div>
-            <p className="text-xs text-muted-foreground">
-              Hydration
-            </p>
+            <p className="text-xs text-muted-foreground">Hydration</p>
 
             <h3
               className={`
                 font-semibold transition-colors
-                ${
-                  completed
-                    ? "text-cyan-300"
-                    : ""
-                }
+                ${completed ? "text-cyan-300" : ""}
               `}
             >
-              {completed
-                ? "Hydration Complete"
-                : "Water Intake"}
+              {completed ? "Hydration Complete" : "Water Intake"}
             </h3>
           </div>
         </div>
@@ -138,10 +116,7 @@ export function WaterTracker() {
           />
 
           <div className="absolute inset-0 flex items-center justify-center">
-            <GlassWater
-              size={16}
-              className="text-white/80"
-            />
+            <GlassWater size={16} className="text-white/80" />
           </div>
         </div>
       </div>
@@ -151,9 +126,7 @@ export function WaterTracker() {
         <div>
           <div className="text-3xl font-bold">
             {water}
-            <span className="ml-1 text-lg text-muted-foreground">
-              ml
-            </span>
+            <span className="ml-1 text-lg text-muted-foreground">ml</span>
           </div>
 
           {!completed && (
@@ -236,20 +209,11 @@ export function WaterTracker() {
 
       {/* Quick Actions */}
       <div className="mt-5 grid grid-cols-3 gap-2">
-        <WaterButton
-          label="250"
-          onClick={() => add(250)}
-        />
+        <WaterButton label="250" onClick={() => add(250)} />
 
-        <WaterButton
-          label="500"
-          onClick={() => add(500)}
-        />
+        <WaterButton label="500" onClick={() => add(500)} />
 
-        <WaterButton
-          label="1000"
-          onClick={() => add(1000)}
-        />
+        <WaterButton label="1000" onClick={() => add(1000)} />
       </div>
     </motion.div>
   );
@@ -260,10 +224,7 @@ type WaterButtonProps = {
   onClick: () => void;
 };
 
-function WaterButton({
-  label,
-  onClick,
-}: WaterButtonProps) {
+function WaterButton({ label, onClick }: WaterButtonProps) {
   return (
     <motion.button
       whileTap={{

@@ -1,38 +1,49 @@
 // features/profile/ui/ProfileSummary.tsx
 "use client";
 
+import { useWorkouts } from "@/features/workout/hooks/useWorkouts";
+import { getProfileMetrics } from "../domain/profile.metrics";
+
 import type { Profile } from "../model/profile.types";
-import { getProfileMetrics } from "../domain/profileEngine";
 
 type Props = {
   profile: Profile;
 };
 
 export function ProfileSummary({ profile }: Props) {
-  const metrics = getProfileMetrics(profile);
+  const { workouts } = useWorkouts();
+
+  const metrics = getProfileMetrics(profile, workouts);
 
   return (
-    <div className="space-y-3 rounded-xl border border-white/10 bg-white/5 p-4">
-      <div className="flex justify-between">
-        <span className="text-sm text-white/60">BMR</span>
-        <span className="font-semibold text-white">
-          {metrics.bmr} kcal
-        </span>
-      </div>
+    <div className="space-y-3 rounded-2xl border border-white/10 bg-white/5 p-4">
+      <Row label="BMR" value={`${metrics.bmr} kcal`} />
+      <Row label="Goal progress" value={`${metrics.goalProgress}%`} highlight />
+      <Row label="Water goal" value={`${metrics.waterGoalLiters} L`} />
+      <Row label="Body score" value={`${metrics.bodyScore}`} highlight />
+    </div>
+  );
+}
 
-      <div className="flex justify-between">
-        <span className="text-sm text-white/60">Goal progress</span>
-        <span className="font-semibold text-violet-400">
-          {metrics.goalProgress}%
-        </span>
-      </div>
-
-      <div className="flex justify-between">
-        <span className="text-sm text-white/60">Water goal</span>
-        <span className="font-semibold text-blue-300">
-          {metrics.waterGoalLiters} L
-        </span>
-      </div>
+function Row({
+  label,
+  value,
+  highlight,
+}: {
+  label: string;
+  value: string;
+  highlight?: boolean;
+}) {
+  return (
+    <div className="flex justify-between">
+      <span className="text-sm text-white/60">{label}</span>
+      <span
+        className={
+          highlight ? "text-violet-400 font-semibold" : "font-semibold"
+        }
+      >
+        {value}
+      </span>
     </div>
   );
 }

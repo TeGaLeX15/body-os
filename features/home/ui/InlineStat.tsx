@@ -14,14 +14,10 @@ export function InlineStat({ label, value, icon }: Props) {
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2 min-w-0">
           {icon}
-          <p className="text-xs text-foreground/70 truncate">
-            {label}
-          </p>
+          <p className="text-xs text-foreground/70 truncate">{label}</p>
         </div>
 
-        <p className="text-base font-bold tabular-nums">
-          {value}
-        </p>
+        <p className="text-base font-bold tabular-nums">{value}</p>
       </div>
     </Card>
   );

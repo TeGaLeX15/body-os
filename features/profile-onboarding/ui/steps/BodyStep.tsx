@@ -102,11 +102,7 @@ export function BodyStep({ data, onNext, onBack }: Props) {
           className={`
             flex-1 rounded-xl py-3 text-sm font-medium transition
             active:scale-[0.98]
-            ${
-              isValid
-                ? "bg-white text-black"
-                : "bg-white/10 text-white/30"
-            }
+            ${isValid ? "bg-white text-black" : "bg-white/10 text-white/30"}
           `}
         >
           Continue

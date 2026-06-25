@@ -15,20 +15,13 @@ function getKey(date: Date) {
   return date.toISOString().split("T")[0];
 }
 
-export function buildHeatmapData(
-  workouts: WorkoutEntry[],
-): HeatmapData {
+export function buildHeatmapData(workouts: WorkoutEntry[]): HeatmapData {
   const map = new Map<string, number>();
 
   for (const workout of workouts) {
-    const key = getKey(
-      new Date(workout.date),
-    );
+    const key = getKey(new Date(workout.date));
 
-    map.set(
-      key,
-      (map.get(key) ?? 0) + 1,
-    );
+    map.set(key, (map.get(key) ?? 0) + 1);
   }
 
   const days: HeatmapDay[] = [];
@@ -49,10 +42,7 @@ export function buildHeatmapData(
 
   const firstDate = new Date(days[0].key);
 
-  const offset =
-    firstDate.getDay() === 0
-      ? 6
-      : firstDate.getDay() - 1;
+  const offset = firstDate.getDay() === 0 ? 6 : firstDate.getDay() - 1;
 
   return {
     days,

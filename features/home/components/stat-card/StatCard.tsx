@@ -18,9 +18,7 @@ export function StatCard({ children, className }: Props) {
       {/* glow layer */}
       <div className="pointer-events-none absolute -left-10 -top-10 h-28 w-28 rounded-full bg-white/5 blur-2xl" />
 
-      <div className="relative flex flex-col gap-2">
-        {children}
-      </div>
+      <div className="relative flex flex-col gap-2">{children}</div>
     </Card>
   );
 }

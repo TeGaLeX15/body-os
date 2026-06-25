@@ -5,50 +5,21 @@ import { useEffect, useState } from "react";
 
 import type { Profile } from "./profile.types";
 
-import {
-  getProfile,
-  saveProfile,
-} from "../data/profileStorage";
+import { getProfile, saveProfile } from "../data/profileStorage";
+import { applyProfileUpdate } from "../engine/profile.reducer";
 
 export function useProfile() {
-  const [profile, setProfile] =
-    useState<Profile | null>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
 
   useEffect(() => {
-    const data = getProfile();
-
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setProfile(data);
+    setProfile(getProfile());
   }, []);
 
-  function updateProfile(
-    partial: Partial<Profile>
-  ) {
+  function updateProfile(partial: Partial<Profile>) {
     if (!profile) return;
 
-    const nextWeight =
-      partial.currentWeight ??
-      profile.currentWeight;
-
-    const weightChanged =
-      nextWeight !== profile.currentWeight;
-
-    const updated: Profile = {
-      ...profile,
-      ...partial,
-
-      weightHistory: weightChanged
-        ? [
-            ...profile.weightHistory,
-            {
-              weight: nextWeight,
-              date: Date.now(),
-            },
-          ]
-        : profile.weightHistory,
-
-      updatedAt: Date.now(),
-    };
+    const updated = applyProfileUpdate(profile, partial);
 
     setProfile(updated);
     saveProfile(updated);

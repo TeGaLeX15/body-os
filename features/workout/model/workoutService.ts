@@ -7,7 +7,8 @@ export type SaveWorkoutInput = Omit<WorkoutEntry, "id" | "date">;
 export function buildNewWorkout(input: SaveWorkoutInput): WorkoutEntry {
   return {
     id: crypto.randomUUID(),
-    date: new Date().toISOString(),
+    date: Date.now(),
+
     pullups: input.pullups,
     dips: input.dips,
     pushups: input.pushups,

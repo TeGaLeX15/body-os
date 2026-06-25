@@ -3,10 +3,7 @@
 
 import { useRef } from "react";
 
-import {
-  AnimatePresence,
-  motion,
-} from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { useVirtualizer } from "@tanstack/react-virtual";
 
@@ -14,10 +11,7 @@ import { X } from "lucide-react";
 
 import type { WorkoutEntry } from "@/features/workout/model/workout.types";
 
-import {
-  sortWorkouts,
-  getWorkoutNumber,
-} from "@/features/workout-log";
+import { sortWorkouts, getWorkoutNumber } from "@/features/workout-log";
 
 import { WorkoutCard } from "./WorkoutCard";
 
@@ -29,26 +23,18 @@ type Props = {
 
 const ITEM_HEIGHT = 96;
 
-export default function WorkoutLogsSheet({
-  workouts,
-  open,
-  onClose,
-}: Props) {
-  const parentRef =
-    useRef<HTMLDivElement>(null);
+export default function WorkoutLogsSheet({ workouts, open, onClose }: Props) {
+  const parentRef = useRef<HTMLDivElement>(null);
 
-  const sorted =
-    sortWorkouts(workouts);
+  const sorted = sortWorkouts(workouts);
 
-  const rowVirtualizer =
-    useVirtualizer({
-      count: sorted.length,
-      getScrollElement:
-        () => parentRef.current,
-      estimateSize: () =>
-        ITEM_HEIGHT,
-      overscan: 10,
-    });
+  // eslint-disable-next-line react-hooks/incompatible-library
+  const rowVirtualizer = useVirtualizer({
+    count: sorted.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => ITEM_HEIGHT,
+    overscan: 10,
+  });
 
   return (
     <AnimatePresence>
@@ -105,62 +91,40 @@ export default function WorkoutLogsSheet({
               <div
                 style={{
                   position: "relative",
-                  height:
-                    rowVirtualizer.getTotalSize(),
+                  height: rowVirtualizer.getTotalSize(),
                 }}
               >
-                {rowVirtualizer
-                  .getVirtualItems()
-                  .map(
-                    (
-                      virtualRow,
-                    ) => {
-                      const workout =
-                        sorted[
-                          virtualRow.index
-                        ];
+                {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+                  const workout = sorted[virtualRow.index];
 
-                      if (!workout) {
-                        return null;
-                      }
+                  if (!workout) {
+                    return null;
+                  }
 
-                      const previousWorkout =
-                        sorted[
-                          virtualRow.index +
-                            1
-                        ];
+                  const previousWorkout = sorted[virtualRow.index + 1];
 
-                      return (
-                        <div
-                          key={
-                            workout.id
-                          }
-                          style={{
-                            position:
-                              "absolute",
-                            top: 0,
-                            left: 0,
-                            width:
-                              "100%",
-                            transform: `translateY(${virtualRow.start}px)`,
-                          }}
-                        >
-                          <WorkoutCard
-                            workout={
-                              workout
-                            }
-                            previousWorkout={
-                              previousWorkout
-                            }
-                            workoutNumber={getWorkoutNumber(
-                              sorted.length,
-                              virtualRow.index,
-                            )}
-                          />
-                        </div>
-                      );
-                    },
-                  )}
+                  return (
+                    <div
+                      key={workout.id}
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        transform: `translateY(${virtualRow.start}px)`,
+                      }}
+                    >
+                      <WorkoutCard
+                        workout={workout}
+                        previousWorkout={previousWorkout}
+                        workoutNumber={getWorkoutNumber(
+                          sorted.length,
+                          virtualRow.index,
+                        )}
+                      />
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>

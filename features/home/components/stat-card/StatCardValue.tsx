@@ -5,8 +5,6 @@ type Props = {
 
 export function StatCardValue({ value }: Props) {
   return (
-    <p className="text-4xl font-bold tabular-nums text-foreground">
-      {value}
-    </p>
+    <p className="text-4xl font-bold tabular-nums text-foreground">{value}</p>
   );
 }

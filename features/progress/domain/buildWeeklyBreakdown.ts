@@ -8,9 +8,7 @@ export type WeeklyDay = {
   volume: number;
 };
 
-export function buildWeeklyBreakdown(
-  workouts: WorkoutEntry[],
-): WeeklyDay[] {
+export function buildWeeklyBreakdown(workouts: WorkoutEntry[]): WeeklyDay[] {
   const map: Record<string, number> = {
     Mon: 0,
     Tue: 0,
@@ -26,8 +24,7 @@ export function buildWeeklyBreakdown(
 
     const dayIndex = date.getDay();
 
-    const key =
-      days[dayIndex === 0 ? 6 : dayIndex - 1];
+    const key = days[dayIndex === 0 ? 6 : dayIndex - 1];
 
     const volume =
       (workout.pullups ?? 0) +

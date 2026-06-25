@@ -2019,3 +2019,238 @@ body-os
 └─ tsconfig.json
 
 ```
+```
+body-os
+├─ AGENTS.md
+├─ app
+│  ├─ favicon.ico
+│  ├─ globals.css
+│  ├─ layout.tsx
+│  ├─ onboarding
+│  │  └─ page.tsx
+│  ├─ page.tsx
+│  ├─ profile
+│  │  └─ page.tsx
+│  ├─ progress
+│  │  └─ page.tsx
+│  ├─ providers
+│  │  ├─ AppGate.tsx
+│  │  ├─ AppHeader.tsx
+│  │  ├─ AppProviders.tsx
+│  │  └─ AppShell.tsx
+│  ├─ settings
+│  │  └─ page.tsx
+│  └─ workout
+│     └─ page.tsx
+├─ CLAUDE.md
+├─ components
+│  └─ ui
+│     ├─ badge.tsx
+│     ├─ button.tsx
+│     ├─ card.tsx
+│     ├─ input.tsx
+│     ├─ separator.tsx
+│     └─ tabs.tsx
+├─ components.json
+├─ eslint.config.mjs
+├─ features
+│  ├─ daily-state
+│  │  ├─ lib
+│  │  │  ├─ goals.ts
+│  │  │  ├─ streak.ts
+│  │  │  ├─ water.ts
+│  │  │  └─ workout.ts
+│  │  └─ model
+│  │     ├─ dailyState.types.ts
+│  │     └─ useDailyState.ts
+│  ├─ home
+│  │  ├─ components
+│  │  │  ├─ stat-card
+│  │  │  │  ├─ index.ts
+│  │  │  │  ├─ StatCard.tsx
+│  │  │  │  ├─ StatCardHeader.tsx
+│  │  │  │  ├─ StatCardHint.tsx
+│  │  │  │  └─ StatCardValue.tsx
+│  │  │  └─ StatTile.tsx
+│  │  ├─ HomeView.tsx
+│  │  ├─ hooks
+│  │  │  └─ useHomeStats.ts
+│  │  ├─ lib
+│  │  │  ├─ formatWorkoutDate.ts
+│  │  │  └─ getLastWorkout.ts
+│  │  └─ ui
+│  │     ├─ BodySnapshotCard.tsx
+│  │     ├─ GoalJourneyCard.tsx
+│  │     ├─ HeroCard.tsx
+│  │     ├─ InlineStat.tsx
+│  │     ├─ LatestQuestCard.tsx
+│  │     ├─ LatestQuestEmptyState.tsx
+│  │     └─ LatestQuestGrid.tsx
+│  ├─ hydration
+│  │  ├─ data
+│  │  │  └─ hydrationStorage.ts
+│  │  ├─ model
+│  │  │  └─ useHydration.ts
+│  │  └─ ui
+│  │     └─ WaterTracker.tsx
+│  ├─ profile
+│  │  ├─ data
+│  │  │  └─ profileStorage.ts
+│  │  ├─ domain
+│  │  │  ├─ calculateBMR.ts
+│  │  │  ├─ calculateGoalProgress.ts
+│  │  │  └─ profile.metrics.ts
+│  │  ├─ engine
+│  │  │  └─ profile.reducer.ts
+│  │  ├─ model
+│  │  │  ├─ profile.types.ts
+│  │  │  └─ useProfile.ts
+│  │  └─ ui
+│  │     ├─ GoalCard.tsx
+│  │     ├─ ProfileForm.tsx
+│  │     └─ ProfileSummary.tsx
+│  ├─ profile-onboarding
+│  │  ├─ lib
+│  │  │  ├─ steps.ts
+│  │  │  └─ validators.ts
+│  │  ├─ model
+│  │  │  ├─ onboarding.types.ts
+│  │  │  └─ useOnboarding.ts
+│  │  └─ ui
+│  │     ├─ OnboardingFlow.tsx
+│  │     └─ steps
+│  │        ├─ ActivityStep.tsx
+│  │        ├─ BodyStep.tsx
+│  │        ├─ FinishStep.tsx
+│  │        ├─ GoalStep.tsx
+│  │        └─ TargetStep.tsx
+│  ├─ progress
+│  │  ├─ domain
+│  │  │  ├─ getBestTrainingDay.ts
+│  │  │  ├─ progressDerived.ts
+│  │  │  └─ progressSummary.ts
+│  │  ├─ lib
+│  │  │  └─ coach.ts
+│  │  ├─ model
+│  │  │  └─ useProgressData.ts
+│  │  ├─ ProgressView.tsx
+│  │  ├─ repository
+│  │  │  └─ progressRepository.ts
+│  │  └─ ui
+│  │     ├─ Heatmap
+│  │     │  ├─ HeatmapCell.tsx
+│  │     │  ├─ HeatmapGrid.tsx
+│  │     │  └─ index.tsx
+│  │     ├─ InsightCards
+│  │     │  ├─ CoachCard.tsx
+│  │     │  ├─ getInsightIcon.tsx
+│  │     │  ├─ index.tsx
+│  │     │  ├─ InsightItem.tsx
+│  │     │  └─ InsightList.tsx
+│  │     ├─ MuscleBalance
+│  │     │  ├─ Bar.tsx
+│  │     │  └─ index.tsx
+│  │     ├─ ProgressChart
+│  │     │  ├─ ChartHeader.tsx
+│  │     │  ├─ ChartMetrics.tsx
+│  │     │  ├─ index.tsx
+│  │     │  └─ TrendAreaChart.tsx
+│  │     ├─ ProgressSummaryHero
+│  │     │  ├─ HeroXPBar.tsx
+│  │     │  └─ index.tsx
+│  │     ├─ StatsOverview
+│  │     │  ├─ DominantCard.tsx
+│  │     │  ├─ index.tsx
+│  │     │  ├─ RepsCard.tsx
+│  │     │  ├─ StatCard.tsx
+│  │     │  ├─ StreakCard.tsx
+│  │     │  ├─ TrendCard.tsx
+│  │     │  └─ WorkCard.tsx
+│  │     └─ WeeklyBreakdown.tsx
+│  ├─ workout
+│  │  ├─ data
+│  │  │  ├─ storage.ts
+│  │  │  └─ workoutRepository.ts
+│  │  ├─ domain
+│  │  │  ├─ getWorkoutPreview.ts
+│  │  │  ├─ sortWorkouts.ts
+│  │  │  ├─ workoutAnalytics.ts
+│  │  │  ├─ workoutLevel.ts
+│  │  │  ├─ workoutProgress.ts
+│  │  │  ├─ workoutStats.ts
+│  │  │  ├─ workoutStreak.ts
+│  │  │  ├─ workoutStrength.ts
+│  │  │  └─ workoutXP.ts
+│  │  ├─ hooks
+│  │  │  └─ useWorkouts.ts
+│  │  ├─ index.ts
+│  │  ├─ model
+│  │  │  ├─ workout.types.ts
+│  │  │  └─ workoutService.ts
+│  │  ├─ ui
+│  │  │  ├─ EmptyWorkoutState.tsx
+│  │  │  ├─ OpenLogButton.tsx
+│  │  │  ├─ SaveWorkoutButton.tsx
+│  │  │  ├─ WorkoutForm.tsx
+│  │  │  └─ WorkoutList.tsx
+│  │  └─ WorkoutView.tsx
+│  └─ workout-log
+│     ├─ index.ts
+│     ├─ lib
+│     │  ├─ formatters.ts
+│     │  └─ workoutLog.ts
+│     ├─ model
+│     │  └─ useWorkoutLog.ts
+│     └─ ui
+│        ├─ StatChip.tsx
+│        ├─ WorkoutCard.tsx
+│        ├─ WorkoutLogPage.tsx
+│        ├─ WorkoutLogsSheet.tsx
+│        └─ WorkoutSkeleton.tsx
+├─ lib
+│  └─ utils.ts
+├─ next.config.ts
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.mjs
+├─ public
+│  ├─ file.svg
+│  ├─ globe.svg
+│  ├─ icons
+│  │  ├─ dips.svg
+│  │  ├─ pull-up.svg
+│  │  ├─ push-up.svg
+│  │  └─ squat.svg
+│  ├─ next.svg
+│  ├─ vercel.svg
+│  └─ window.svg
+├─ README.md
+├─ shared
+│  ├─ animations
+│  │  ├─ fadeUp.ts
+│  │  └─ pageTransition.ts
+│  ├─ config
+│  │  ├─ navigation.ts
+│  │  └─ routeIcons.ts
+│  ├─ hooks
+│  │  └─ useScrollRestoration.ts
+│  ├─ icons
+│  │  └─ icon-mapper.ts
+│  ├─ lib
+│  │  └─ navigation
+│  │     ├─ initSwipeNavigation.ts
+│  │     ├─ navigationEngine.ts
+│  │     └─ types.ts
+│  └─ ui
+│     ├─ BottomNavigation.tsx
+│     ├─ EmptyState.tsx
+│     ├─ Icon.tsx
+│     ├─ NumberField.tsx
+│     ├─ PageContainer.tsx
+│     ├─ PageHeader.tsx
+│     ├─ ProgressIndicator.tsx
+│     ├─ Section.tsx
+│     └─ SectionHeader.tsx
+└─ tsconfig.json
+
+```

@@ -11,7 +11,17 @@ import { AppHeader } from "@/app/providers/AppHeader";
 import { useWorkouts } from "@/features/workout/hooks/useWorkouts";
 import { buildWorkoutAnalytics } from "@/features/workout/domain/workoutAnalytics";
 
-const HIDE_NAV_ROUTES = ["/onboarding"];
+type LayoutRules = {
+  header?: boolean;
+  nav?: boolean;
+};
+
+const LAYOUT_RULES: Record<string, LayoutRules> = {
+  "/onboarding": {
+    header: false,
+    nav: false,
+  },
+};
 
 export function AppShell({ children }: { children: ReactNode }) {
   const router = useRouter();
@@ -27,18 +37,24 @@ export function AppShell({ children }: { children: ReactNode }) {
     return initSwipeNavigation(router, pathname);
   }, [router, pathname]);
 
-  const hideNav = HIDE_NAV_ROUTES.includes(pathname);
+  const rules = LAYOUT_RULES[pathname];
+
+  const showHeader = rules?.header !== false;
+  const showNav = rules?.nav !== false;
 
   return (
     <div className="flex min-h-dvh w-full flex-col">
-
+      {/* BACKGROUND */}
       <div className="fixed inset-0 -z-10 pointer-events-none bg-app" />
 
-      <AppHeader analytics={analytics} />
+      {/* HEADER */}
+      {showHeader && <AppHeader analytics={analytics} />}
 
+      {/* CONTENT */}
       <div className="mx-auto flex w-full max-w-md flex-1 flex-col">
-        <main className="flex-1">{children}</main>
-        {!hideNav && <BottomNavigation />}
+        <main className="flex-1 overflow-y-auto pb-24">{children}</main>
+
+        {showNav && <BottomNavigation />}
       </div>
     </div>
   );

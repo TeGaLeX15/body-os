@@ -6,12 +6,7 @@ type Props = {
   calories: number;
 };
 
-export function BodySnapshotCard({
-  weight,
-  bmi,
-  waterGoal,
-  calories,
-}: Props) {
+export function BodySnapshotCard({ weight, bmi, waterGoal, calories }: Props) {
   const items = [
     {
       label: "Weight",
@@ -47,9 +42,7 @@ export function BodySnapshotCard({
             {item.label}
           </p>
 
-          <p className="mt-2 text-xl font-semibold">
-            {item.value}
-          </p>
+          <p className="mt-2 text-xl font-semibold">{item.value}</p>
         </div>
       ))}
     </div>

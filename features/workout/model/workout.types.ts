@@ -1,10 +1,10 @@
 // features/workout/model/workout.types.ts
-export type WorkoutEntry = {
+export interface WorkoutEntry {
   id: string;
-  date: string;
+  date: number;
 
   pullups: number;
   dips: number;
   pushups: number;
   squats: number;
-};
+}

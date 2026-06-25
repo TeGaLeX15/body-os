@@ -7,10 +7,5 @@ import { WorkoutView } from "@/features/workout/WorkoutView";
 export default function WorkoutPage() {
   const { workouts, refresh } = useWorkouts();
 
-  return (
-    <WorkoutView
-      workouts={workouts}
-      refresh={refresh}
-    />
-  );
+  return <WorkoutView workouts={workouts} refresh={refresh} />;
 }

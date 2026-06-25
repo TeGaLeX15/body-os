@@ -1,37 +1,21 @@
 // features/progress/ui/Heatmap/HeatmapGrid.ts
 import HeatmapCell from "./HeatmapCell";
 
-import type {
-  HeatmapDay,
-} from "../../lib/buildHeatmapData";
+import type { HeatmapDay } from "../../lib/buildHeatmapData";
 
 type Props = {
   days: HeatmapDay[];
   offset: number;
 };
 
-const weekDays = [
-  "Mon",
-  "Tue",
-  "Wed",
-  "Thu",
-  "Fri",
-  "Sat",
-  "Sun",
-];
+const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
-export default function HeatmapGrid({
-  days,
-  offset,
-}: Props) {
+export default function HeatmapGrid({ days, offset }: Props) {
   return (
     <div className="space-y-3">
       <div className="grid grid-cols-7 gap-1 text-[10px] text-muted-foreground">
         {weekDays.map((day) => (
-          <div
-            key={day}
-            className="text-center"
-          >
+          <div key={day} className="text-center">
             {day}
           </div>
         ))}
@@ -41,18 +25,11 @@ export default function HeatmapGrid({
         {Array.from({
           length: offset,
         }).map((_, i) => (
-          <div
-            key={`empty-${i}`}
-            className="aspect-square"
-          />
+          <div key={`empty-${i}`} className="aspect-square" />
         ))}
 
         {days.map((day) => (
-          <HeatmapCell
-            key={day.key}
-            value={day.value}
-            date={day.key}
-          />
+          <HeatmapCell key={day.key} value={day.value} date={day.key} />
         ))}
       </div>
 

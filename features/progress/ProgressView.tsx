@@ -21,11 +21,7 @@ import Heatmap from "./ui/Heatmap";
 import { ProgressSummaryHero } from "./ui/ProgressSummaryHero";
 
 export function ProgressView() {
-  const {
-    workouts,
-    analytics,
-    loading,
-  } = useProgressData();
+  const { workouts, analytics, loading } = useProgressData();
 
   if (loading || !analytics) {
     return null;
@@ -33,10 +29,7 @@ export function ProgressView() {
 
   return (
     <PageContainer>
-      <motion.div
-        {...pageTransition}
-        className="space-y-8"
-      >
+      <motion.div {...pageTransition} className="space-y-8">
         {/* PAGE HEADER */}
         <Section>
           <PageHeader

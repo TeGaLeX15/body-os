@@ -11,8 +11,5 @@ export function calculateWorkoutXP(workout: WorkoutEntry) {
 }
 
 export function calculateXP(workouts: WorkoutEntry[]) {
-  return workouts.reduce(
-    (sum, w) => sum + calculateWorkoutXP(w),
-    0,
-  );
+  return workouts.reduce((sum, w) => sum + calculateWorkoutXP(w), 0);
 }

@@ -37,12 +37,9 @@ export function GoalStep({ value, onSelect }: Props) {
 
   return (
     <div className="w-full flex flex-col space-y-6">
-
       {/* HEADER */}
       <div className="text-center space-y-2">
-        <h1 className="text-xl font-semibold text-white">
-          What’s your goal?
-        </h1>
+        <h1 className="text-xl font-semibold text-white">What’s your goal?</h1>
 
         <p className="text-sm text-white/40">
           Choose your focus for personalized plan
@@ -71,17 +68,12 @@ export function GoalStep({ value, onSelect }: Props) {
                 }
               `}
             >
-
               {/* ICON */}
               <div
                 className={`
                   w-10 h-10 flex items-center justify-center
                   rounded-lg text-lg
-                  ${
-                    isActive
-                      ? "bg-black/10"
-                      : "bg-white/5"
-                  }
+                  ${isActive ? "bg-black/10" : "bg-white/5"}
                 `}
               >
                 {g.icon}
@@ -89,9 +81,7 @@ export function GoalStep({ value, onSelect }: Props) {
 
               {/* TEXT */}
               <div className="flex-1 text-left">
-                <div className="text-sm font-medium">
-                  {g.title}
-                </div>
+                <div className="text-sm font-medium">{g.title}</div>
 
                 <div
                   className={`
@@ -104,9 +94,7 @@ export function GoalStep({ value, onSelect }: Props) {
               </div>
 
               {/* CHECK */}
-              <div className="text-xs opacity-60">
-                {isActive ? "✓" : ""}
-              </div>
+              <div className="text-xs opacity-60">{isActive ? "✓" : ""}</div>
 
               {/* ARROW */}
               <div

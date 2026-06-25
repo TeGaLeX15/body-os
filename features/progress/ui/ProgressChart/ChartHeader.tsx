@@ -7,9 +7,7 @@ export default function ChartHeader({ delta }: Props) {
   return (
     <div className="mb-3 flex items-center justify-between">
       <div>
-        <p className="text-xs font-semibold text-white">
-          Strength Progress
-        </p>
+        <p className="text-xs font-semibold text-white">Strength Progress</p>
 
         <p className="text-[10px] text-white/40">
           centered view • full timeline

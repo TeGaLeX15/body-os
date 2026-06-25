@@ -4,9 +4,5 @@ type Props = {
 };
 
 export function StatCardHint({ hint }: Props) {
-  return (
-    <p className="text-[11px] text-foreground/50">
-      {hint}
-    </p>
-  );
+  return <p className="text-[11px] text-foreground/50">{hint}</p>;
 }

@@ -5,12 +5,8 @@ export function calculateStrengthIndex(workouts: WorkoutEntry[]) {
   return Math.round(
     workouts.reduce((acc, w) => {
       return (
-        acc +
-        w.pullups * 2 +
-        w.dips * 1.5 +
-        w.pushups * 0.5 +
-        w.squats * 0.2
+        acc + w.pullups * 2 + w.dips * 1.5 + w.pushups * 0.5 + w.squats * 0.2
       );
-    }, 0)
+    }, 0),
   );
 }

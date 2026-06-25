@@ -4,10 +4,7 @@ type OpenLogButtonProps = {
   onClick: () => void;
 };
 
-export function OpenLogButton({
-  count,
-  onClick,
-}: OpenLogButtonProps) {
+export function OpenLogButton({ count, onClick }: OpenLogButtonProps) {
   return (
     <button
       onClick={onClick}

@@ -20,18 +20,12 @@ export default function InsightItem({ insight }: Props) {
         {getInsightIcon(insight.id)}
 
         <div>
-          <p className="text-xs font-semibold">
-            {insight.title}
-          </p>
-          <p className="text-[10px] text-white/60">
-            {insight.value}
-          </p>
+          <p className="text-xs font-semibold">{insight.title}</p>
+          <p className="text-[10px] text-white/60">{insight.value}</p>
         </div>
       </div>
 
-      <div className="text-white font-bold">
-        {insight.value}
-      </div>
+      <div className="text-white font-bold">{insight.value}</div>
     </motion.div>
   );
 }

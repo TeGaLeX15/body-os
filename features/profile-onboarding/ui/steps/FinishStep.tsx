@@ -122,19 +122,11 @@ function Section({
   );
 }
 
-function Row({
-  label,
-  value,
-}: {
-  label: string;
-  value: string;
-}) {
+function Row({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center justify-between text-sm py-1">
       <span className="text-white/40">{label}</span>
-      <span className="text-white font-medium tracking-tight">
-        {value}
-      </span>
+      <span className="text-white font-medium tracking-tight">{value}</span>
     </div>
   );
 }

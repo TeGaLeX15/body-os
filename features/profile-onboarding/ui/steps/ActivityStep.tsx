@@ -73,9 +73,7 @@ export function ActivityStep({ value, onSelect, onBack }: Props) {
                 </div>
 
                 <div className="flex-1">
-                  <div className="text-base font-medium">
-                    {a.title}
-                  </div>
+                  <div className="text-base font-medium">{a.title}</div>
 
                   <div
                     className={`text-xs mt-1 ${
@@ -109,11 +107,7 @@ export function ActivityStep({ value, onSelect, onBack }: Props) {
           onClick={() => selected && onSelect(selected)}
           className={`
             flex-1 rounded-2xl py-4 text-sm font-semibold
-            ${
-              selected
-                ? "bg-white text-black"
-                : "bg-white/10 text-white/30"
-            }
+            ${selected ? "bg-white text-black" : "bg-white/10 text-white/30"}
           `}
         >
           Continue

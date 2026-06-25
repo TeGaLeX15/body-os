@@ -2,15 +2,34 @@
 import { Flame } from "lucide-react";
 
 export default function StreakCard({ value }: { value: number }) {
+  const active = value > 0;
+
   return (
-    <div className="rounded-xl border border-white/10 bg-white/5 p-3">
-      <div className="flex items-center gap-2 text-[11px] text-white/60">
-        <Flame className="text-orange-400" size={14} />
-        <span>Streak</span>
-      </div>
-      <div className="mt-1 text-2xl font-bold text-white">
+    <div className="relative flex flex-col items-center justify-center">
+      {active && (
+        <div className="absolute h-10 w-10 rounded-full bg-orange-400/20 blur-xl animate-pulse" />
+      )}
+
+      <Flame
+        size={16}
+        className={active ? "text-orange-400 animate-pulse" : "text-white/30"}
+      />
+
+      <div
+        className={
+          active
+            ? "text-2xl font-bold text-orange-300 leading-none"
+            : "text-2xl font-bold text-white/40 leading-none"
+        }
+      >
         {value}d
       </div>
+
+      <span className="text-[10px] text-white/40 mt-1">Streak</span>
+
+      {active && (
+        <div className="absolute -bottom-1 h-[2px] w-8 bg-gradient-to-r from-orange-500/0 via-orange-400/60 to-orange-500/0 animate-pulse" />
+      )}
     </div>
   );
 }

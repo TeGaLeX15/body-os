@@ -22,17 +22,11 @@ export function useWorkoutLog(expanded: boolean) {
     setLoading(false);
   }, []);
 
-  const sorted = useMemo(
-    () => sortWorkouts(workouts),
-    [workouts],
-  );
+  const sorted = useMemo(() => sortWorkouts(workouts), [workouts]);
 
   const total = sorted.length;
 
-  const totalXP = useMemo(
-    () => calculateTotalXP(sorted),
-    [sorted],
-  );
+  const totalXP = useMemo(() => calculateTotalXP(sorted), [sorted]);
 
   const visible = useMemo(
     () => getVisibleWorkouts(sorted, expanded),

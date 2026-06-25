@@ -10,22 +10,12 @@ type Props = {
   workouts: WorkoutEntry[];
 };
 
-export default function Heatmap({
-  workouts,
-}: Props) {
-  const heatmap =
-    buildHeatmapData(workouts);
+export default function Heatmap({ workouts }: Props) {
+  const heatmap = buildHeatmapData(workouts);
 
-  const activeDays =
-    heatmap.days.filter(
-      (d) => d.value > 0,
-    ).length;
+  const activeDays = heatmap.days.filter((d) => d.value > 0).length;
 
-  const totalSessions =
-    heatmap.days.reduce(
-      (acc, d) => acc + d.value,
-      0,
-    );
+  const totalSessions = heatmap.days.reduce((acc, d) => acc + d.value, 0);
 
   return (
     <div className="rounded-2xl border border-border bg-card p-4 space-y-4">
@@ -41,30 +31,19 @@ export default function Heatmap({
 
       <div className="grid grid-cols-2 gap-3">
         <div className="rounded-xl bg-muted/40 p-3">
-          <p className="text-[10px] text-muted-foreground">
-            Active Days
-          </p>
+          <p className="text-[10px] text-muted-foreground">Active Days</p>
 
-          <p className="text-lg font-bold">
-            {activeDays}
-          </p>
+          <p className="text-lg font-bold">{activeDays}</p>
         </div>
 
         <div className="rounded-xl bg-muted/40 p-3">
-          <p className="text-[10px] text-muted-foreground">
-            Sessions
-          </p>
+          <p className="text-[10px] text-muted-foreground">Sessions</p>
 
-          <p className="text-lg font-bold">
-            {totalSessions}
-          </p>
+          <p className="text-lg font-bold">{totalSessions}</p>
         </div>
       </div>
 
-      <HeatmapGrid
-        days={heatmap.days}
-        offset={heatmap.offset}
-      />
+      <HeatmapGrid days={heatmap.days} offset={heatmap.offset} />
     </div>
   );
 }

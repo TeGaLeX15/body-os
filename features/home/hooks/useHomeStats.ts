@@ -20,16 +20,13 @@ export function useHomeStats() {
 
   const workoutStats = useMemo(
     () => buildWorkoutAnalytics(workouts),
-    [workouts]
+    [workouts],
   );
 
-  const [profile, setProfile] =
-    useState<ProfileData | null>(null);
+  const [profile, setProfile] = useState<ProfileData | null>(null);
 
   useEffect(() => {
-    const raw = localStorage.getItem(
-      "body-os-profile"
-    );
+    const raw = localStorage.getItem("body-os-profile");
 
     if (!raw) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -44,17 +41,11 @@ export function useHomeStats() {
     }
   }, []);
 
-  const currentWeight = Number(
-    profile?.currentWeight ?? 0
-  );
+  const currentWeight = Number(profile?.currentWeight ?? 0);
 
-  const startWeight = Number(
-    profile?.startWeight ?? currentWeight
-  );
+  const startWeight = Number(profile?.startWeight ?? currentWeight);
 
-  const goalWeight = Number(
-    profile?.goalWeight ?? currentWeight
-  );
+  const goalWeight = Number(profile?.goalWeight ?? currentWeight);
 
   return {
     ...workoutStats,

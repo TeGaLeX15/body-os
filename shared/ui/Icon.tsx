@@ -9,22 +9,14 @@ type Props = {
   inverted?: boolean;
 };
 
-export function Icon({
-  name,
-  size = 24,
-  className,
-  inverted = true,
-}: Props) {
+export function Icon({ name, size = 24, className, inverted = true }: Props) {
   return (
     <Image
       src={iconMap[name]}
       alt={name}
       width={size}
       height={size}
-      className={[
-        inverted ? "invert" : "",
-        className ?? "",
-      ].join(" ")}
+      className={[inverted ? "invert" : "", className ?? ""].join(" ")}
     />
   );
 }

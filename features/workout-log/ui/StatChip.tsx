@@ -7,15 +7,8 @@ type Props = {
   icon?: React.ReactNode;
 };
 
-export function StatChip({
-  value,
-  prevValue,
-  icon,
-}: Props) {
-  const delta =
-    prevValue === undefined
-      ? undefined
-      : value - prevValue;
+export function StatChip({ value, prevValue, icon }: Props) {
+  const delta = prevValue === undefined ? undefined : value - prevValue;
 
   let textClass = "text-white/70";
   let bgClass = "bg-white/5";
@@ -36,16 +29,12 @@ export function StatChip({
     >
       {icon}
 
-      <span
-        className={`text-[11px] font-semibold tabular-nums ${textClass}`}
-      >
+      <span className={`text-[11px] font-semibold tabular-nums ${textClass}`}>
         {value}
       </span>
 
       {delta !== undefined && (
-        <span
-          className={`text-[10px] tabular-nums ${textClass}`}
-        >
+        <span className={`text-[10px] tabular-nums ${textClass}`}>
           {formatDelta(delta)}
         </span>
       )}

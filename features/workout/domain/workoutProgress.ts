@@ -2,11 +2,8 @@
 import type { WorkoutEntry } from "@/features/workout/model/workout.types";
 import { calculateStrengthIndex } from "./workoutStrength";
 
-/**
- * 📈 История силы (для графика прогресса)
- */
 export type StrengthHistoryItem = {
-  date: string;
+  date: number;
   index: number;
 };
 
@@ -25,12 +22,7 @@ export function buildStrengthHistory(
   }));
 }
 
-/**
- * 📊 Общий недельный тренд (рост/падение)
- */
-export function buildStrengthTrend(
-  history: StrengthHistoryItem[],
-): number {
+export function buildStrengthTrend(history: StrengthHistoryItem[]): number {
   if (history.length < 2) return 0;
 
   const last = history.at(-1)!.index;
@@ -39,9 +31,6 @@ export function buildStrengthTrend(
   return last - prev;
 }
 
-/**
- * 📉 Сглаженный тренд (для красивых графиков)
- */
 export function buildSmoothedStrength(history: StrengthHistoryItem[]) {
   return history.map((h, i, arr) => {
     const prev = arr[i - 1]?.index ?? h.index;
@@ -54,10 +43,7 @@ export function buildSmoothedStrength(history: StrengthHistoryItem[]) {
   });
 }
 
-/**
- * 📅 Группировка по неделям (для будущих графиков)
- */
-function getWeekKey(date: string) {
+function getWeekKey(date: number) {
   const d = new Date(date);
   const firstDay = new Date(d.getFullYear(), 0, 1);
   const days = Math.floor(
@@ -68,16 +54,13 @@ function getWeekKey(date: string) {
   return `${d.getFullYear()}-W${week}`;
 }
 
-export function buildWeeklyStrengthProgress(
-  workouts: WorkoutEntry[],
-) {
+export function buildWeeklyStrengthProgress(workouts: WorkoutEntry[]) {
   const weeks: Record<string, number> = {};
 
   for (const w of workouts) {
     const week = getWeekKey(w.date);
 
-    weeks[week] =
-      (weeks[week] || 0) + calculateStrengthIndex([w]);
+    weeks[week] = (weeks[week] || 0) + calculateStrengthIndex([w]);
   }
 
   return Object.entries(weeks).map(([week, value]) => ({

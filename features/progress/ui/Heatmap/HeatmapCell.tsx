@@ -20,10 +20,7 @@ function intensity(value: number) {
   return "bg-emerald-500";
 }
 
-export default function HeatmapCell({
-  value,
-  date,
-}: Props) {
+export default function HeatmapCell({ value, date }: Props) {
   const day = new Date(date).getDate();
 
   return (

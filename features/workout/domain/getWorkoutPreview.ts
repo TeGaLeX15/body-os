@@ -4,11 +4,6 @@ import { sortWorkouts } from "./sortWorkouts";
 
 const PREVIEW_LIMIT = 5;
 
-export function getWorkoutPreview(
-  workouts: WorkoutEntry[],
-): WorkoutEntry[] {
-  return sortWorkouts(workouts).slice(
-    0,
-    PREVIEW_LIMIT,
-  );
+export function getWorkoutPreview(workouts: WorkoutEntry[]): WorkoutEntry[] {
+  return sortWorkouts(workouts).slice(0, PREVIEW_LIMIT);
 }

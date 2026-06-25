@@ -14,12 +14,7 @@ import { pageTransition } from "@/shared/animations/pageTransition";
 
 import type { WorkoutEntry } from "@/features/workout/model/workout.types";
 
-import {
-  Dumbbell,
-  Move3D,
-  Flame,
-  BarChart3,
-} from "lucide-react";
+import { Dumbbell, Move3D, Flame, BarChart3 } from "lucide-react";
 import { SectionHeader } from "@/shared/ui/SectionHeader";
 import { WaterTracker } from "@/features/hydration/ui/WaterTracker";
 
@@ -132,9 +127,7 @@ export function HomeView({
           />
 
           <div className="mt-3">
-            <LatestQuestCard
-              lastWorkout={lastWorkout}
-            />
+            <LatestQuestCard lastWorkout={lastWorkout} />
           </div>
         </Section>
       </motion.div>

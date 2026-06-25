@@ -14,9 +14,7 @@ export function NumberField({ label, value, unit, onChange }: Props) {
       <div className="flex items-center justify-between">
         <span className="text-xs text-white/50">{label}</span>
 
-        {unit && (
-          <span className="text-[10px] text-white/30">{unit}</span>
-        )}
+        {unit && <span className="text-[10px] text-white/30">{unit}</span>}
       </div>
 
       <div className="flex items-center rounded-xl border border-white/10 bg-white/5 px-4 py-3">

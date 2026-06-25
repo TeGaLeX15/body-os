@@ -1,3 +1,4 @@
+// features/workout/ui/WorkoutList.tsx
 "use client";
 
 import { motion } from "framer-motion";
@@ -29,14 +30,10 @@ function InlineStat({
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2 min-w-0">
           {icon}
-          <p className="text-xs text-white/70 truncate min-w-0">
-            {label}
-          </p>
+          <p className="text-xs text-white/70 truncate min-w-0">{label}</p>
         </div>
 
-        <p className="text-base font-bold tabular-nums text-white">
-          {value}
-        </p>
+        <p className="text-base font-bold tabular-nums text-white">{value}</p>
       </div>
     </Card>
   );

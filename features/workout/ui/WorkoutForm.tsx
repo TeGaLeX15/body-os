@@ -1,3 +1,4 @@
+// features/workout/ui/WorkoutForm.tsx
 "use client";
 
 import { useRef, useState } from "react";
@@ -12,7 +13,6 @@ import { Input } from "@/components/ui/input";
 import type { WorkoutEntry } from "../model/workout.types";
 import { SaveWorkoutButton } from "./SaveWorkoutButton";
 import { saveWorkout } from "../model/workoutService";
-
 
 /* ---------------- HOLD ---------------- */
 function useHold(action: () => void, delay = 90) {
@@ -136,11 +136,7 @@ export default function WorkoutForm({ onSaved }: Props) {
 
   const [saved, setSaved] = useState(false);
 
-  const isEmpty =
-    pullups === 0 &&
-    dips === 0 &&
-    pushups === 0 &&
-    squats === 0;
+  const isEmpty = pullups === 0 && dips === 0 && pushups === 0 && squats === 0;
 
   function handleSave() {
     const updated = saveWorkout({
@@ -164,7 +160,6 @@ export default function WorkoutForm({ onSaved }: Props) {
   return (
     <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
       <Card variant="soft" className="space-y-4 p-4">
-
         {/* header */}
         <div className="flex items-center gap-2 text-sm text-white/80">
           <Dumbbell size={16} />

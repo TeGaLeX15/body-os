@@ -32,7 +32,6 @@ export function AppHeader({ analytics }: Props) {
     >
       {/* CONTENT */}
       <div className="mx-auto flex h-14 w-full max-w-md items-center justify-between px-4">
-
         {/* LEFT */}
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1 rounded-full bg-white/5 px-2 py-1">
@@ -57,7 +56,6 @@ export function AppHeader({ analytics }: Props) {
             <User size={16} />
           </div>
         </Link>
-
       </div>
     </motion.header>
   );

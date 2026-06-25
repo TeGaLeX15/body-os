@@ -30,19 +30,13 @@ type Props = {
 export function WorkoutView({ workouts, refresh }: Props) {
   const [logOpen, setLogOpen] = useState(false);
 
-  const preview = useMemo(
-    () => getWorkoutPreview(workouts),
-    [workouts],
-  );
+  const preview = useMemo(() => getWorkoutPreview(workouts), [workouts]);
 
   const isEmpty = workouts.length === 0;
 
   return (
     <PageContainer>
-      <motion.div
-        {...pageTransition}
-        className="space-y-8"
-      >
+      <motion.div {...pageTransition} className="space-y-8">
         {/* PAGE HEADER */}
         <Section>
           <PageHeader
@@ -75,10 +69,7 @@ export function WorkoutView({ workouts, refresh }: Props) {
           <div className="mt-3">
             {!isEmpty ? (
               <>
-                <WorkoutList
-                  workouts={preview}
-                  totalCount={workouts.length}
-                />
+                <WorkoutList workouts={preview} totalCount={workouts.length} />
 
                 {workouts.length > 5 && (
                   <div className="mt-3">

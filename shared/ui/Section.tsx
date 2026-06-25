@@ -6,13 +6,8 @@ type SectionProps = {
   className?: string;
 };
 
-export function Section({
-  children,
-  className = "",
-}: SectionProps) {
+export function Section({ children, className = "" }: SectionProps) {
   return (
-    <section className={`mb-6 last:mb-0 ${className}`}>
-      {children}
-    </section>
+    <section className={`mb-6 last:mb-0 ${className}`}>{children}</section>
   );
 }

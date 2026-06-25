@@ -9,20 +9,17 @@ type Props = {
     waterGoalMl: number | null;
     activity: ActivityLevel | null;
   };
-  onNext: (v: {
-    goalWeight: number;
-    waterGoalMl: number;
-  }) => void;
+  onNext: (v: { goalWeight: number; waterGoalMl: number }) => void;
   onBack: () => void;
 };
 
 export function TargetStep({ data, onNext, onBack }: Props) {
   const [goalWeight, setGoalWeight] = useState<number | "">(
-    data.goalWeight ?? 65
+    data.goalWeight ?? 65,
   );
 
   const [waterGoalMl, setWaterGoalMl] = useState<number | "">(
-    data.waterGoalMl ?? 0
+    data.waterGoalMl ?? 0,
   );
 
   const activity = data.activity ?? "low";
@@ -31,12 +28,7 @@ export function TargetStep({ data, onNext, onBack }: Props) {
     const weight = Number(goalWeight || 65);
     const base = weight * 30;
 
-    const bonus =
-      activity === "high"
-        ? 500
-        : activity === "medium"
-          ? 250
-          : 0;
+    const bonus = activity === "high" ? 500 : activity === "medium" ? 250 : 0;
 
     return Math.round(base + bonus);
   }, [goalWeight, activity]);
@@ -55,9 +47,7 @@ export function TargetStep({ data, onNext, onBack }: Props) {
   return (
     <div className="w-full space-y-6 text-center">
       <div className="space-y-2">
-        <h1 className="text-2xl font-semibold tracking-tight">
-          Your targets
-        </h1>
+        <h1 className="text-2xl font-semibold tracking-tight">Your targets</h1>
 
         <p className="text-sm text-white/40">
           Set your goals for weight and hydration
@@ -81,9 +71,7 @@ export function TargetStep({ data, onNext, onBack }: Props) {
 
         <div className="text-xs text-white/40 pt-1">
           Recommended hydration:{" "}
-          <span className="text-cyan-300">
-            {recommendedWater} ml
-          </span>
+          <span className="text-cyan-300">{recommendedWater} ml</span>
         </div>
       </div>
 

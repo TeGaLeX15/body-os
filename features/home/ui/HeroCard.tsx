@@ -29,9 +29,7 @@ export function HeroCard({ level, xp, xpMax }: HeroCardProps) {
           Your Level
         </p>
 
-        <motion.p className="text-6xl font-bold">
-          {level}
-        </motion.p>
+        <motion.p className="text-6xl font-bold">{level}</motion.p>
 
         <div className="h-3 w-full rounded-full bg-foreground/10 overflow-hidden">
           <motion.div
@@ -40,8 +38,7 @@ export function HeroCard({ level, xp, xpMax }: HeroCardProps) {
             animate={{ width: `${percent}%` }}
             transition={{ duration: 0.8 }}
             style={{
-              backgroundImage:
-                "linear-gradient(to right, #8b5cf6, #4ade80)",
+              backgroundImage: "linear-gradient(to right, #8b5cf6, #4ade80)",
             }}
           />
         </div>
