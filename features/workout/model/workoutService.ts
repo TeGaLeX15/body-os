@@ -1,4 +1,4 @@
-// workoutService.ts
+// features/workout/model/workoutService.ts
 import type { WorkoutEntry } from "../model/workout.types";
 import { workoutRepository } from "../data/workoutRepository";
 

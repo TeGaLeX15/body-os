@@ -34,3 +34,1032 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+```
+body-os
+├─ AGENTS.md
+├─ app
+│  ├─ favicon.ico
+│  ├─ globals.css
+│  ├─ layout.tsx
+│  ├─ page.tsx
+│  ├─ progress
+│  │  └─ page.tsx
+│  ├─ providers
+│  │  ├─ AppProviders.tsx
+│  │  └─ AppShell.tsx
+│  ├─ settings
+│  │  └─ page.tsx
+│  └─ workout
+│     └─ page.tsx
+├─ CLAUDE.md
+├─ components
+│  └─ ui
+│     ├─ badge.tsx
+│     ├─ button.tsx
+│     ├─ card.tsx
+│     ├─ input.tsx
+│     ├─ separator.tsx
+│     └─ tabs.tsx
+├─ components.json
+├─ eslint.config.mjs
+├─ features
+│  ├─ home
+│  │  ├─ components
+│  │  │  ├─ stat-card
+│  │  │  │  ├─ index.ts
+│  │  │  │  ├─ StatCard.tsx
+│  │  │  │  ├─ StatCardHeader.tsx
+│  │  │  │  ├─ StatCardHint.tsx
+│  │  │  │  └─ StatCardValue.tsx
+│  │  │  └─ StatTile.tsx
+│  │  ├─ hooks
+│  │  │  └─ useHomeStats.ts
+│  │  ├─ lib
+│  │  │  ├─ formatWorkoutDate.ts
+│  │  │  ├─ getLastWorkout.ts
+│  │  │  ├─ level.ts
+│  │  │  └─ xp.ts
+│  │  ├─ ui
+│  │  │  ├─ HeroCard.tsx
+│  │  │  ├─ InlineStat.tsx
+│  │  │  ├─ LatestQuestCard.tsx
+│  │  │  ├─ LatestQuestEmptyState.tsx
+│  │  │  └─ LatestQuestGrid.tsx
+│  │  └─ view
+│  │     └─ HomeView.tsx
+│  ├─ progress
+│  │  ├─ lib
+│  │  │  ├─ analytics.ts
+│  │  │  ├─ groupInsights.ts
+│  │  │  ├─ heatmap.ts
+│  │  │  ├─ insightEngine.ts
+│  │  │  └─ stats.ts
+│  │  ├─ model
+│  │  │  └─ useProgressData.ts
+│  │  ├─ repository
+│  │  │  └─ progressRepository.ts
+│  │  └─ ui
+│  │     ├─ Heatmap.tsx
+│  │     ├─ InsightCards.tsx
+│  │     ├─ MuscleBalance.tsx
+│  │     ├─ MuscleBalanceCard.tsx
+│  │     ├─ ProgressChart.tsx
+│  │     ├─ ProgressSummaryHero.tsx
+│  │     ├─ ProgressView.tsx
+│  │     ├─ StatCard.tsx
+│  │     ├─ StatsOverview.tsx
+│  │     └─ WeeklyBreakdown.tsx
+│  ├─ workout
+│  │  ├─ data
+│  │  │  ├─ storage.ts
+│  │  │  └─ workoutRepository.ts
+│  │  ├─ domain
+│  │  │  ├─ getWorkoutPreview.ts
+│  │  │  └─ sortWorkouts.ts
+│  │  ├─ hooks
+│  │  │  └─ useWorkouts.ts
+│  │  ├─ lib
+│  │  │  ├─ stats.ts
+│  │  │  ├─ streak.ts
+│  │  │  └─ strengthIndex.ts
+│  │  ├─ model
+│  │  │  ├─ workout.types.ts
+│  │  │  └─ workoutService.ts
+│  │  └─ ui
+│  │     ├─ EmptyWorkoutState.tsx
+│  │     ├─ OpenLogButton.tsx
+│  │     ├─ SaveWorkoutButton.tsx
+│  │     ├─ WorkoutForm.tsx
+│  │     └─ WorkoutList.tsx
+│  └─ workout-log
+│     ├─ lib
+│     │  └─ selectors.ts
+│     └─ ui
+│        ├─ WorkoutFilters.tsx
+│        ├─ WorkoutLogHeader.tsx
+│        ├─ WorkoutLogPage.tsx
+│        ├─ WorkoutLogsSheet.tsx
+│        └─ WorkoutRow.tsx
+├─ lib
+│  └─ utils.ts
+├─ next.config.ts
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.mjs
+├─ public
+│  ├─ file.svg
+│  ├─ globe.svg
+│  ├─ icons
+│  │  ├─ dips.svg
+│  │  ├─ pull-up.svg
+│  │  ├─ push-up.svg
+│  │  └─ squat.svg
+│  ├─ next.svg
+│  ├─ vercel.svg
+│  └─ window.svg
+├─ README.md
+├─ shared
+│  ├─ animations
+│  │  ├─ fadeUp.ts
+│  │  └─ pageTransition.ts
+│  ├─ config
+│  │  ├─ navigation.ts
+│  │  └─ routeIcons.ts
+│  ├─ hooks
+│  │  └─ useScrollRestoration.ts
+│  ├─ icons
+│  │  └─ icon-mapper.ts
+│  ├─ lib
+│  │  └─ navigation
+│  │     ├─ initSwipeNavigation.ts
+│  │     ├─ navigationEngine.ts
+│  │     └─ types.ts
+│  └─ ui
+│     ├─ BottomNavigation.tsx
+│     ├─ EmptyState.tsx
+│     ├─ Icon.tsx
+│     ├─ PageContainer.tsx
+│     ├─ PageHeader.tsx
+│     └─ Section.tsx
+└─ tsconfig.json
+
+```
+```
+body-os
+├─ AGENTS.md
+├─ app
+│  ├─ favicon.ico
+│  ├─ globals.css
+│  ├─ layout.tsx
+│  ├─ page.tsx
+│  ├─ progress
+│  │  └─ page.tsx
+│  ├─ providers
+│  │  ├─ AppProviders.tsx
+│  │  └─ AppShell.tsx
+│  ├─ settings
+│  │  └─ page.tsx
+│  └─ workout
+│     └─ page.tsx
+├─ CLAUDE.md
+├─ components
+│  └─ ui
+│     ├─ badge.tsx
+│     ├─ button.tsx
+│     ├─ card.tsx
+│     ├─ input.tsx
+│     ├─ separator.tsx
+│     └─ tabs.tsx
+├─ components.json
+├─ eslint.config.mjs
+├─ features
+│  ├─ home
+│  │  ├─ components
+│  │  │  ├─ stat-card
+│  │  │  │  ├─ index.ts
+│  │  │  │  ├─ StatCard.tsx
+│  │  │  │  ├─ StatCardHeader.tsx
+│  │  │  │  ├─ StatCardHint.tsx
+│  │  │  │  └─ StatCardValue.tsx
+│  │  │  └─ StatTile.tsx
+│  │  ├─ HomeView.tsx
+│  │  ├─ hooks
+│  │  │  └─ useHomeStats.ts
+│  │  ├─ lib
+│  │  │  ├─ formatWorkoutDate.ts
+│  │  │  ├─ getLastWorkout.ts
+│  │  │  ├─ level.ts
+│  │  │  └─ xp.ts
+│  │  ├─ ui
+│  │  │  ├─ HeroCard.tsx
+│  │  │  ├─ InlineStat.tsx
+│  │  │  ├─ LatestQuestCard.tsx
+│  │  │  ├─ LatestQuestEmptyState.tsx
+│  │  │  └─ LatestQuestGrid.tsx
+│  │  └─ view
+│  ├─ progress
+│  │  ├─ lib
+│  │  │  ├─ analytics.ts
+│  │  │  ├─ groupInsights.ts
+│  │  │  ├─ heatmap.ts
+│  │  │  ├─ insightEngine.ts
+│  │  │  └─ stats.ts
+│  │  ├─ model
+│  │  │  └─ useProgressData.ts
+│  │  ├─ ProgressView.tsx
+│  │  ├─ repository
+│  │  │  └─ progressRepository.ts
+│  │  └─ ui
+│  │     ├─ Heatmap.tsx
+│  │     ├─ InsightCards.tsx
+│  │     ├─ MuscleBalance.tsx
+│  │     ├─ MuscleBalanceCard.tsx
+│  │     ├─ ProgressChart.tsx
+│  │     ├─ ProgressSummaryHero.tsx
+│  │     ├─ ProgressView.tsx
+│  │     ├─ StatCard.tsx
+│  │     ├─ StatsOverview.tsx
+│  │     └─ WeeklyBreakdown.tsx
+│  ├─ workout
+│  │  ├─ data
+│  │  │  ├─ storage.ts
+│  │  │  └─ workoutRepository.ts
+│  │  ├─ domain
+│  │  │  ├─ getWorkoutPreview.ts
+│  │  │  └─ sortWorkouts.ts
+│  │  ├─ hooks
+│  │  │  └─ useWorkouts.ts
+│  │  ├─ lib
+│  │  │  ├─ stats.ts
+│  │  │  ├─ streak.ts
+│  │  │  └─ strengthIndex.ts
+│  │  ├─ model
+│  │  │  ├─ workout.types.ts
+│  │  │  └─ workoutService.ts
+│  │  ├─ ui
+│  │  │  ├─ EmptyWorkoutState.tsx
+│  │  │  ├─ OpenLogButton.tsx
+│  │  │  ├─ SaveWorkoutButton.tsx
+│  │  │  ├─ WorkoutForm.tsx
+│  │  │  └─ WorkoutList.tsx
+│  │  └─ WorkoutView.tsx
+│  └─ workout-log
+│     ├─ lib
+│     │  └─ selectors.ts
+│     └─ ui
+│        ├─ WorkoutFilters.tsx
+│        ├─ WorkoutLogHeader.tsx
+│        ├─ WorkoutLogPage.tsx
+│        ├─ WorkoutLogsSheet.tsx
+│        └─ WorkoutRow.tsx
+├─ lib
+│  └─ utils.ts
+├─ next.config.ts
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.mjs
+├─ public
+│  ├─ file.svg
+│  ├─ globe.svg
+│  ├─ icons
+│  │  ├─ dips.svg
+│  │  ├─ pull-up.svg
+│  │  ├─ push-up.svg
+│  │  └─ squat.svg
+│  ├─ next.svg
+│  ├─ vercel.svg
+│  └─ window.svg
+├─ README.md
+├─ shared
+│  ├─ animations
+│  │  ├─ fadeUp.ts
+│  │  └─ pageTransition.ts
+│  ├─ config
+│  │  ├─ navigation.ts
+│  │  └─ routeIcons.ts
+│  ├─ hooks
+│  │  └─ useScrollRestoration.ts
+│  ├─ icons
+│  │  └─ icon-mapper.ts
+│  ├─ lib
+│  │  └─ navigation
+│  │     ├─ initSwipeNavigation.ts
+│  │     ├─ navigationEngine.ts
+│  │     └─ types.ts
+│  └─ ui
+│     ├─ BottomNavigation.tsx
+│     ├─ EmptyState.tsx
+│     ├─ Icon.tsx
+│     ├─ PageContainer.tsx
+│     ├─ PageHeader.tsx
+│     └─ Section.tsx
+└─ tsconfig.json
+
+```
+```
+body-os
+├─ AGENTS.md
+├─ app
+│  ├─ favicon.ico
+│  ├─ globals.css
+│  ├─ layout.tsx
+│  ├─ page.tsx
+│  ├─ progress
+│  │  └─ page.tsx
+│  ├─ providers
+│  │  ├─ AppProviders.tsx
+│  │  └─ AppShell.tsx
+│  ├─ settings
+│  │  └─ page.tsx
+│  └─ workout
+│     └─ page.tsx
+├─ CLAUDE.md
+├─ components
+│  └─ ui
+│     ├─ badge.tsx
+│     ├─ button.tsx
+│     ├─ card.tsx
+│     ├─ input.tsx
+│     ├─ separator.tsx
+│     └─ tabs.tsx
+├─ components.json
+├─ eslint.config.mjs
+├─ features
+│  ├─ home
+│  │  ├─ components
+│  │  │  ├─ stat-card
+│  │  │  │  ├─ index.ts
+│  │  │  │  ├─ StatCard.tsx
+│  │  │  │  ├─ StatCardHeader.tsx
+│  │  │  │  ├─ StatCardHint.tsx
+│  │  │  │  └─ StatCardValue.tsx
+│  │  │  └─ StatTile.tsx
+│  │  ├─ HomeView.tsx
+│  │  ├─ hooks
+│  │  │  └─ useHomeStats.ts
+│  │  ├─ lib
+│  │  │  ├─ formatWorkoutDate.ts
+│  │  │  ├─ getLastWorkout.ts
+│  │  │  ├─ level.ts
+│  │  │  └─ xp.ts
+│  │  ├─ ui
+│  │  │  ├─ HeroCard.tsx
+│  │  │  ├─ InlineStat.tsx
+│  │  │  ├─ LatestQuestCard.tsx
+│  │  │  ├─ LatestQuestEmptyState.tsx
+│  │  │  └─ LatestQuestGrid.tsx
+│  │  └─ view
+│  ├─ progress
+│  │  ├─ lib
+│  │  │  ├─ analytics.ts
+│  │  │  ├─ groupInsights.ts
+│  │  │  ├─ heatmap.ts
+│  │  │  ├─ insightEngine.ts
+│  │  │  └─ stats.ts
+│  │  ├─ model
+│  │  │  └─ useProgressData.ts
+│  │  ├─ ProgressView.tsx
+│  │  ├─ repository
+│  │  │  └─ progressRepository.ts
+│  │  └─ ui
+│  │     ├─ Heatmap.tsx
+│  │     ├─ InsightCards.tsx
+│  │     ├─ MuscleBalance.tsx
+│  │     ├─ MuscleBalanceCard.tsx
+│  │     ├─ ProgressChart.tsx
+│  │     ├─ ProgressSummaryHero.tsx
+│  │     ├─ ProgressView.tsx
+│  │     ├─ StatCard.tsx
+│  │     ├─ StatsOverview.tsx
+│  │     └─ WeeklyBreakdown.tsx
+│  ├─ workout
+│  │  ├─ data
+│  │  │  ├─ storage.ts
+│  │  │  └─ workoutRepository.ts
+│  │  ├─ domain
+│  │  │  ├─ getWorkoutPreview.ts
+│  │  │  └─ sortWorkouts.ts
+│  │  ├─ hooks
+│  │  │  └─ useWorkouts.ts
+│  │  ├─ lib
+│  │  │  ├─ stats.ts
+│  │  │  ├─ streak.ts
+│  │  │  └─ strengthIndex.ts
+│  │  ├─ model
+│  │  │  ├─ workout.types.ts
+│  │  │  └─ workoutService.ts
+│  │  ├─ ui
+│  │  │  ├─ EmptyWorkoutState.tsx
+│  │  │  ├─ OpenLogButton.tsx
+│  │  │  ├─ SaveWorkoutButton.tsx
+│  │  │  ├─ WorkoutForm.tsx
+│  │  │  └─ WorkoutList.tsx
+│  │  └─ WorkoutView.tsx
+│  └─ workout-log
+│     ├─ lib
+│     │  └─ selectors.ts
+│     └─ ui
+│        ├─ WorkoutFilters.tsx
+│        ├─ WorkoutLogHeader.tsx
+│        ├─ WorkoutLogPage.tsx
+│        ├─ WorkoutLogsSheet.tsx
+│        └─ WorkoutRow.tsx
+├─ lib
+│  └─ utils.ts
+├─ next.config.ts
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.mjs
+├─ public
+│  ├─ file.svg
+│  ├─ globe.svg
+│  ├─ icons
+│  │  ├─ dips.svg
+│  │  ├─ pull-up.svg
+│  │  ├─ push-up.svg
+│  │  └─ squat.svg
+│  ├─ next.svg
+│  ├─ vercel.svg
+│  └─ window.svg
+├─ README.md
+├─ shared
+│  ├─ animations
+│  │  ├─ fadeUp.ts
+│  │  └─ pageTransition.ts
+│  ├─ config
+│  │  ├─ navigation.ts
+│  │  └─ routeIcons.ts
+│  ├─ hooks
+│  │  └─ useScrollRestoration.ts
+│  ├─ icons
+│  │  └─ icon-mapper.ts
+│  ├─ lib
+│  │  └─ navigation
+│  │     ├─ initSwipeNavigation.ts
+│  │     ├─ navigationEngine.ts
+│  │     └─ types.ts
+│  └─ ui
+│     ├─ BottomNavigation.tsx
+│     ├─ EmptyState.tsx
+│     ├─ Icon.tsx
+│     ├─ PageContainer.tsx
+│     ├─ PageHeader.tsx
+│     └─ Section.tsx
+└─ tsconfig.json
+
+```
+```
+body-os
+├─ AGENTS.md
+├─ app
+│  ├─ favicon.ico
+│  ├─ globals.css
+│  ├─ layout.tsx
+│  ├─ page.tsx
+│  ├─ progress
+│  │  └─ page.tsx
+│  ├─ providers
+│  │  ├─ AppProviders.tsx
+│  │  └─ AppShell.tsx
+│  ├─ settings
+│  │  └─ page.tsx
+│  └─ workout
+│     └─ page.tsx
+├─ CLAUDE.md
+├─ components
+│  └─ ui
+│     ├─ badge.tsx
+│     ├─ button.tsx
+│     ├─ card.tsx
+│     ├─ input.tsx
+│     ├─ separator.tsx
+│     └─ tabs.tsx
+├─ components.json
+├─ eslint.config.mjs
+├─ features
+│  ├─ home
+│  │  ├─ components
+│  │  │  ├─ stat-card
+│  │  │  │  ├─ index.ts
+│  │  │  │  ├─ StatCard.tsx
+│  │  │  │  ├─ StatCardHeader.tsx
+│  │  │  │  ├─ StatCardHint.tsx
+│  │  │  │  └─ StatCardValue.tsx
+│  │  │  └─ StatTile.tsx
+│  │  ├─ HomeView.tsx
+│  │  ├─ hooks
+│  │  │  └─ useHomeStats.ts
+│  │  ├─ lib
+│  │  │  ├─ formatWorkoutDate.ts
+│  │  │  └─ getLastWorkout.ts
+│  │  └─ ui
+│  │     ├─ HeroCard.tsx
+│  │     ├─ InlineStat.tsx
+│  │     ├─ LatestQuestCard.tsx
+│  │     ├─ LatestQuestEmptyState.tsx
+│  │     └─ LatestQuestGrid.tsx
+│  ├─ progress
+│  │  ├─ lib
+│  │  │  ├─ analytics.ts
+│  │  │  ├─ groupInsights.ts
+│  │  │  ├─ heatmap.ts
+│  │  │  ├─ insightEngine.ts
+│  │  │  └─ stats.ts
+│  │  ├─ model
+│  │  │  └─ useProgressData.ts
+│  │  ├─ ProgressView.tsx
+│  │  ├─ repository
+│  │  │  └─ progressRepository.ts
+│  │  └─ ui
+│  │     ├─ Heatmap.tsx
+│  │     ├─ InsightCards.tsx
+│  │     ├─ MuscleBalance.tsx
+│  │     ├─ MuscleBalanceCard.tsx
+│  │     ├─ ProgressChart.tsx
+│  │     ├─ ProgressSummaryHero.tsx
+│  │     ├─ ProgressView.tsx
+│  │     ├─ StatCard.tsx
+│  │     ├─ StatsOverview.tsx
+│  │     └─ WeeklyBreakdown.tsx
+│  ├─ workout
+│  │  ├─ data
+│  │  │  ├─ storage.ts
+│  │  │  └─ workoutRepository.ts
+│  │  ├─ domain
+│  │  │  ├─ getWorkoutPreview.ts
+│  │  │  ├─ sortWorkouts.ts
+│  │  │  ├─ workoutAnalytics.ts
+│  │  │  ├─ workoutLevel.ts
+│  │  │  ├─ workoutStats.ts
+│  │  │  ├─ workoutStreak.ts
+│  │  │  ├─ workoutStrength.ts
+│  │  │  └─ workoutXP.ts
+│  │  ├─ hooks
+│  │  │  └─ useWorkouts.ts
+│  │  ├─ model
+│  │  │  ├─ workout.types.ts
+│  │  │  └─ workoutService.ts
+│  │  ├─ ui
+│  │  │  ├─ EmptyWorkoutState.tsx
+│  │  │  ├─ OpenLogButton.tsx
+│  │  │  ├─ SaveWorkoutButton.tsx
+│  │  │  ├─ WorkoutForm.tsx
+│  │  │  └─ WorkoutList.tsx
+│  │  └─ WorkoutView.tsx
+│  └─ workout-log
+│     └─ ui
+│        ├─ WorkoutLogPage.tsx
+│        ├─ WorkoutLogsSheet.tsx
+│        └─ WorkoutRow.tsx
+├─ lib
+│  └─ utils.ts
+├─ next.config.ts
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.mjs
+├─ public
+│  ├─ file.svg
+│  ├─ globe.svg
+│  ├─ icons
+│  │  ├─ dips.svg
+│  │  ├─ pull-up.svg
+│  │  ├─ push-up.svg
+│  │  └─ squat.svg
+│  ├─ next.svg
+│  ├─ vercel.svg
+│  └─ window.svg
+├─ README.md
+├─ shared
+│  ├─ animations
+│  │  ├─ fadeUp.ts
+│  │  └─ pageTransition.ts
+│  ├─ config
+│  │  ├─ navigation.ts
+│  │  └─ routeIcons.ts
+│  ├─ hooks
+│  │  └─ useScrollRestoration.ts
+│  ├─ icons
+│  │  └─ icon-mapper.ts
+│  ├─ lib
+│  │  └─ navigation
+│  │     ├─ initSwipeNavigation.ts
+│  │     ├─ navigationEngine.ts
+│  │     └─ types.ts
+│  └─ ui
+│     ├─ BottomNavigation.tsx
+│     ├─ EmptyState.tsx
+│     ├─ Icon.tsx
+│     ├─ PageContainer.tsx
+│     ├─ PageHeader.tsx
+│     └─ Section.tsx
+└─ tsconfig.json
+
+```
+```
+body-os
+├─ AGENTS.md
+├─ app
+│  ├─ favicon.ico
+│  ├─ globals.css
+│  ├─ layout.tsx
+│  ├─ page.tsx
+│  ├─ progress
+│  │  └─ page.tsx
+│  ├─ providers
+│  │  ├─ AppProviders.tsx
+│  │  └─ AppShell.tsx
+│  ├─ settings
+│  │  └─ page.tsx
+│  └─ workout
+│     └─ page.tsx
+├─ CLAUDE.md
+├─ components
+│  └─ ui
+│     ├─ badge.tsx
+│     ├─ button.tsx
+│     ├─ card.tsx
+│     ├─ input.tsx
+│     ├─ separator.tsx
+│     └─ tabs.tsx
+├─ components.json
+├─ eslint.config.mjs
+├─ features
+│  ├─ home
+│  │  ├─ components
+│  │  │  ├─ stat-card
+│  │  │  │  ├─ index.ts
+│  │  │  │  ├─ StatCard.tsx
+│  │  │  │  ├─ StatCardHeader.tsx
+│  │  │  │  ├─ StatCardHint.tsx
+│  │  │  │  └─ StatCardValue.tsx
+│  │  │  └─ StatTile.tsx
+│  │  ├─ HomeView.tsx
+│  │  ├─ hooks
+│  │  │  └─ useHomeStats.ts
+│  │  ├─ lib
+│  │  │  ├─ formatWorkoutDate.ts
+│  │  │  └─ getLastWorkout.ts
+│  │  └─ ui
+│  │     ├─ HeroCard.tsx
+│  │     ├─ InlineStat.tsx
+│  │     ├─ LatestQuestCard.tsx
+│  │     ├─ LatestQuestEmptyState.tsx
+│  │     └─ LatestQuestGrid.tsx
+│  ├─ progress
+│  │  ├─ lib
+│  │  │  └─ coach.ts
+│  │  ├─ model
+│  │  │  └─ useProgressData.ts
+│  │  ├─ ProgressView.tsx
+│  │  ├─ repository
+│  │  │  └─ progressRepository.ts
+│  │  └─ ui
+│  │     ├─ Heatmap.tsx
+│  │     ├─ InsightCards.tsx
+│  │     ├─ MuscleBalance.tsx
+│  │     ├─ MuscleBalanceCard.tsx
+│  │     ├─ ProgressChart.tsx
+│  │     ├─ ProgressSummaryHero.tsx
+│  │     ├─ ProgressView.tsx
+│  │     ├─ StatCard.tsx
+│  │     ├─ StatsOverview.tsx
+│  │     └─ WeeklyBreakdown.tsx
+│  ├─ workout
+│  │  ├─ data
+│  │  │  ├─ storage.ts
+│  │  │  └─ workoutRepository.ts
+│  │  ├─ domain
+│  │  │  ├─ getWorkoutPreview.ts
+│  │  │  ├─ sortWorkouts.ts
+│  │  │  ├─ workoutAnalytics.ts
+│  │  │  ├─ workoutLevel.ts
+│  │  │  ├─ workoutStats.ts
+│  │  │  ├─ workoutStreak.ts
+│  │  │  ├─ workoutStrength.ts
+│  │  │  └─ workoutXP.ts
+│  │  ├─ hooks
+│  │  │  └─ useWorkouts.ts
+│  │  ├─ model
+│  │  │  ├─ workout.types.ts
+│  │  │  └─ workoutService.ts
+│  │  ├─ ui
+│  │  │  ├─ EmptyWorkoutState.tsx
+│  │  │  ├─ OpenLogButton.tsx
+│  │  │  ├─ SaveWorkoutButton.tsx
+│  │  │  ├─ WorkoutForm.tsx
+│  │  │  └─ WorkoutList.tsx
+│  │  └─ WorkoutView.tsx
+│  └─ workout-log
+│     └─ ui
+│        ├─ WorkoutLogPage.tsx
+│        ├─ WorkoutLogsSheet.tsx
+│        └─ WorkoutRow.tsx
+├─ lib
+│  └─ utils.ts
+├─ next.config.ts
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.mjs
+├─ public
+│  ├─ file.svg
+│  ├─ globe.svg
+│  ├─ icons
+│  │  ├─ dips.svg
+│  │  ├─ pull-up.svg
+│  │  ├─ push-up.svg
+│  │  └─ squat.svg
+│  ├─ next.svg
+│  ├─ vercel.svg
+│  └─ window.svg
+├─ README.md
+├─ shared
+│  ├─ animations
+│  │  ├─ fadeUp.ts
+│  │  └─ pageTransition.ts
+│  ├─ config
+│  │  ├─ navigation.ts
+│  │  └─ routeIcons.ts
+│  ├─ hooks
+│  │  └─ useScrollRestoration.ts
+│  ├─ icons
+│  │  └─ icon-mapper.ts
+│  ├─ lib
+│  │  └─ navigation
+│  │     ├─ initSwipeNavigation.ts
+│  │     ├─ navigationEngine.ts
+│  │     └─ types.ts
+│  └─ ui
+│     ├─ BottomNavigation.tsx
+│     ├─ EmptyState.tsx
+│     ├─ Icon.tsx
+│     ├─ PageContainer.tsx
+│     ├─ PageHeader.tsx
+│     └─ Section.tsx
+└─ tsconfig.json
+
+```
+```
+body-os
+├─ AGENTS.md
+├─ app
+│  ├─ favicon.ico
+│  ├─ globals.css
+│  ├─ layout.tsx
+│  ├─ page.tsx
+│  ├─ progress
+│  │  └─ page.tsx
+│  ├─ providers
+│  │  ├─ AppProviders.tsx
+│  │  └─ AppShell.tsx
+│  ├─ settings
+│  │  └─ page.tsx
+│  └─ workout
+│     └─ page.tsx
+├─ CLAUDE.md
+├─ components
+│  └─ ui
+│     ├─ badge.tsx
+│     ├─ button.tsx
+│     ├─ card.tsx
+│     ├─ input.tsx
+│     ├─ separator.tsx
+│     └─ tabs.tsx
+├─ components.json
+├─ eslint.config.mjs
+├─ features
+│  ├─ home
+│  │  ├─ components
+│  │  │  ├─ stat-card
+│  │  │  │  ├─ index.ts
+│  │  │  │  ├─ StatCard.tsx
+│  │  │  │  ├─ StatCardHeader.tsx
+│  │  │  │  ├─ StatCardHint.tsx
+│  │  │  │  └─ StatCardValue.tsx
+│  │  │  └─ StatTile.tsx
+│  │  ├─ HomeView.tsx
+│  │  ├─ hooks
+│  │  │  └─ useHomeStats.ts
+│  │  ├─ lib
+│  │  │  ├─ formatWorkoutDate.ts
+│  │  │  └─ getLastWorkout.ts
+│  │  └─ ui
+│  │     ├─ HeroCard.tsx
+│  │     ├─ InlineStat.tsx
+│  │     ├─ LatestQuestCard.tsx
+│  │     ├─ LatestQuestEmptyState.tsx
+│  │     └─ LatestQuestGrid.tsx
+│  ├─ progress
+│  │  ├─ lib
+│  │  │  └─ coach.ts
+│  │  ├─ model
+│  │  │  └─ useProgressData.ts
+│  │  ├─ ProgressView.tsx
+│  │  ├─ repository
+│  │  │  └─ progressRepository.ts
+│  │  └─ ui
+│  │     ├─ Heatmap.tsx
+│  │     ├─ InsightCards.tsx
+│  │     ├─ MuscleBalance.tsx
+│  │     ├─ MuscleBalanceCard.tsx
+│  │     ├─ ProgressChart.tsx
+│  │     ├─ ProgressSummaryHero.tsx
+│  │     ├─ ProgressView.tsx
+│  │     ├─ StatsOverview.tsx
+│  │     └─ WeeklyBreakdown.tsx
+│  ├─ workout
+│  │  ├─ data
+│  │  │  ├─ storage.ts
+│  │  │  └─ workoutRepository.ts
+│  │  ├─ domain
+│  │  │  ├─ getWorkoutPreview.ts
+│  │  │  ├─ sortWorkouts.ts
+│  │  │  ├─ workoutAnalytics.ts
+│  │  │  ├─ workoutLevel.ts
+│  │  │  ├─ workoutStats.ts
+│  │  │  ├─ workoutStreak.ts
+│  │  │  ├─ workoutStrength.ts
+│  │  │  └─ workoutXP.ts
+│  │  ├─ hooks
+│  │  │  └─ useWorkouts.ts
+│  │  ├─ model
+│  │  │  ├─ workout.types.ts
+│  │  │  └─ workoutService.ts
+│  │  ├─ ui
+│  │  │  ├─ EmptyWorkoutState.tsx
+│  │  │  ├─ OpenLogButton.tsx
+│  │  │  ├─ SaveWorkoutButton.tsx
+│  │  │  ├─ WorkoutForm.tsx
+│  │  │  └─ WorkoutList.tsx
+│  │  └─ WorkoutView.tsx
+│  └─ workout-log
+│     └─ ui
+│        ├─ WorkoutLogPage.tsx
+│        ├─ WorkoutLogsSheet.tsx
+│        └─ WorkoutRow.tsx
+├─ lib
+│  └─ utils.ts
+├─ next.config.ts
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.mjs
+├─ public
+│  ├─ file.svg
+│  ├─ globe.svg
+│  ├─ icons
+│  │  ├─ dips.svg
+│  │  ├─ pull-up.svg
+│  │  ├─ push-up.svg
+│  │  └─ squat.svg
+│  ├─ next.svg
+│  ├─ vercel.svg
+│  └─ window.svg
+├─ README.md
+├─ shared
+│  ├─ animations
+│  │  ├─ fadeUp.ts
+│  │  └─ pageTransition.ts
+│  ├─ config
+│  │  ├─ navigation.ts
+│  │  └─ routeIcons.ts
+│  ├─ hooks
+│  │  └─ useScrollRestoration.ts
+│  ├─ icons
+│  │  └─ icon-mapper.ts
+│  ├─ lib
+│  │  └─ navigation
+│  │     ├─ initSwipeNavigation.ts
+│  │     ├─ navigationEngine.ts
+│  │     └─ types.ts
+│  └─ ui
+│     ├─ BottomNavigation.tsx
+│     ├─ EmptyState.tsx
+│     ├─ Icon.tsx
+│     ├─ PageContainer.tsx
+│     ├─ PageHeader.tsx
+│     └─ Section.tsx
+└─ tsconfig.json
+
+```
+```
+body-os
+├─ AGENTS.md
+├─ app
+│  ├─ favicon.ico
+│  ├─ globals.css
+│  ├─ layout.tsx
+│  ├─ page.tsx
+│  ├─ progress
+│  │  └─ page.tsx
+│  ├─ providers
+│  │  ├─ AppProviders.tsx
+│  │  └─ AppShell.tsx
+│  ├─ settings
+│  │  └─ page.tsx
+│  └─ workout
+│     └─ page.tsx
+├─ CLAUDE.md
+├─ components
+│  └─ ui
+│     ├─ badge.tsx
+│     ├─ button.tsx
+│     ├─ card.tsx
+│     ├─ input.tsx
+│     ├─ separator.tsx
+│     └─ tabs.tsx
+├─ components.json
+├─ eslint.config.mjs
+├─ features
+│  ├─ home
+│  │  ├─ components
+│  │  │  ├─ stat-card
+│  │  │  │  ├─ index.ts
+│  │  │  │  ├─ StatCard.tsx
+│  │  │  │  ├─ StatCardHeader.tsx
+│  │  │  │  ├─ StatCardHint.tsx
+│  │  │  │  └─ StatCardValue.tsx
+│  │  │  └─ StatTile.tsx
+│  │  ├─ HomeView.tsx
+│  │  ├─ hooks
+│  │  │  └─ useHomeStats.ts
+│  │  ├─ lib
+│  │  │  ├─ formatWorkoutDate.ts
+│  │  │  └─ getLastWorkout.ts
+│  │  └─ ui
+│  │     ├─ HeroCard.tsx
+│  │     ├─ InlineStat.tsx
+│  │     ├─ LatestQuestCard.tsx
+│  │     ├─ LatestQuestEmptyState.tsx
+│  │     └─ LatestQuestGrid.tsx
+│  ├─ progress
+│  │  ├─ lib
+│  │  │  └─ coach.ts
+│  │  ├─ model
+│  │  │  └─ useProgressData.ts
+│  │  ├─ ProgressView.tsx
+│  │  ├─ repository
+│  │  │  └─ progressRepository.ts
+│  │  └─ ui
+│  │     ├─ Heatmap.tsx
+│  │     ├─ InsightCards.tsx
+│  │     ├─ MuscleBalance.tsx
+│  │     ├─ ProgressChart.tsx
+│  │     ├─ ProgressSummaryHero.tsx
+│  │     ├─ ProgressView.tsx
+│  │     ├─ StatsOverview.tsx
+│  │     └─ WeeklyBreakdown.tsx
+│  ├─ workout
+│  │  ├─ data
+│  │  │  ├─ storage.ts
+│  │  │  └─ workoutRepository.ts
+│  │  ├─ domain
+│  │  │  ├─ getWorkoutPreview.ts
+│  │  │  ├─ sortWorkouts.ts
+│  │  │  ├─ workoutAnalytics.ts
+│  │  │  ├─ workoutLevel.ts
+│  │  │  ├─ workoutProgress.ts
+│  │  │  ├─ workoutStats.ts
+│  │  │  ├─ workoutStreak.ts
+│  │  │  ├─ workoutStrength.ts
+│  │  │  └─ workoutXP.ts
+│  │  ├─ hooks
+│  │  │  └─ useWorkouts.ts
+│  │  ├─ model
+│  │  │  ├─ workout.types.ts
+│  │  │  └─ workoutService.ts
+│  │  ├─ ui
+│  │  │  ├─ EmptyWorkoutState.tsx
+│  │  │  ├─ OpenLogButton.tsx
+│  │  │  ├─ SaveWorkoutButton.tsx
+│  │  │  ├─ WorkoutForm.tsx
+│  │  │  └─ WorkoutList.tsx
+│  │  └─ WorkoutView.tsx
+│  └─ workout-log
+│     └─ ui
+│        ├─ WorkoutLogPage.tsx
+│        ├─ WorkoutLogsSheet.tsx
+│        └─ WorkoutRow.tsx
+├─ lib
+│  └─ utils.ts
+├─ next.config.ts
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.mjs
+├─ public
+│  ├─ file.svg
+│  ├─ globe.svg
+│  ├─ icons
+│  │  ├─ dips.svg
+│  │  ├─ pull-up.svg
+│  │  ├─ push-up.svg
+│  │  └─ squat.svg
+│  ├─ next.svg
+│  ├─ vercel.svg
+│  └─ window.svg
+├─ README.md
+├─ shared
+│  ├─ animations
+│  │  ├─ fadeUp.ts
+│  │  └─ pageTransition.ts
+│  ├─ config
+│  │  ├─ navigation.ts
+│  │  └─ routeIcons.ts
+│  ├─ hooks
+│  │  └─ useScrollRestoration.ts
+│  ├─ icons
+│  │  └─ icon-mapper.ts
+│  ├─ lib
+│  │  └─ navigation
+│  │     ├─ initSwipeNavigation.ts
+│  │     ├─ navigationEngine.ts
+│  │     └─ types.ts
+│  └─ ui
+│     ├─ BottomNavigation.tsx
+│     ├─ EmptyState.tsx
+│     ├─ Icon.tsx
+│     ├─ PageContainer.tsx
+│     ├─ PageHeader.tsx
+│     └─ Section.tsx
+└─ tsconfig.json
+
+```

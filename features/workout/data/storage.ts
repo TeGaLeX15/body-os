@@ -1,3 +1,4 @@
+// features/workout/data/storage.ts
 import { WorkoutEntry } from "@/features/workout/model/workout.types";
 
 const KEY = "body_os_workouts";

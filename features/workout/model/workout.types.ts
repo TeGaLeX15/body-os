@@ -1,3 +1,4 @@
+// features/workout/model/workout.types.ts
 export type WorkoutEntry = {
   id: string;
   date: string;

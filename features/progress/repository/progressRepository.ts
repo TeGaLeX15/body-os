@@ -1,4 +1,10 @@
-import { getWorkouts, saveWorkouts, onStorageChange } from "@/features/workout/data/storage";
+// features/progress/repository/progressRepository.ts
+import {
+  getWorkouts,
+  saveWorkouts,
+  onStorageChange,
+} from "@/features/workout/data/storage";
+
 import type { WorkoutEntry } from "@/features/workout/model/workout.types";
 
 export function getWorkoutsRepo(): WorkoutEntry[] {
@@ -12,6 +18,3 @@ export function saveWorkoutsRepo(workouts: WorkoutEntry[]) {
 export function onWorkoutsStorageChange(callback: () => void) {
   return onStorageChange(callback);
 }
-
-
-

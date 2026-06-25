@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { getWorkouts } from "@/features/workout/data/storage";
 import type { WorkoutEntry } from "@/features/workout/model/workout.types";
 import { WorkoutRow } from "./WorkoutRow";
-import { calculateWorkoutXP } from "@/features/home/lib/xp";
+import { calculateWorkoutXP } from "@/features/workout/domain/workoutXP";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 10 },

@@ -1,7 +1,7 @@
 "use client";
 
 import { memo } from "react";
-import { calculateWorkoutXP } from "@/features/home/lib/xp";
+import { calculateWorkoutXP } from "@/features/workout/domain/workoutXP";
 import type { WorkoutEntry } from "@/features/workout/model/workout.types";
 
 type Props = {

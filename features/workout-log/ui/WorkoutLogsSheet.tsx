@@ -9,7 +9,7 @@ import { Icon } from "@/shared/ui/Icon";
 import { Card } from "@/components/ui/card";
 
 import type { WorkoutEntry } from "@/features/workout/model/workout.types";
-import { calculateWorkoutXP } from "@/features/home/lib/xp";
+import { calculateWorkoutXP } from "@/features/workout/domain/workoutXP";
 
 type Props = {
   workouts: WorkoutEntry[];

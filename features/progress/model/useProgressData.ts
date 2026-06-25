@@ -1,25 +1,19 @@
-"use client";
-
+// features/progress/model/useProgressData.ts
 import { useMemo } from "react";
-import type { WorkoutEntry } from "@/features/workout/model/workout.types";
 import { useWorkouts } from "@/features/workout/hooks/useWorkouts";
+import { buildWorkoutAnalytics } from "@/features/workout/domain/workoutAnalytics";
 
-export type ProgressData = {
-  workouts: WorkoutEntry[];
-  total: number;
-  loading: boolean;
-};
+export function useProgressData() {
+  const { workouts = [], total, loading } = useWorkouts();
 
-export function useProgressData(): ProgressData {
-  const { workouts, total, loading } = useWorkouts();
+  const analytics = useMemo(() => {
+    return buildWorkoutAnalytics(workouts);
+  }, [workouts]);
 
-  return useMemo(() => {
-    return {
-      workouts,
-      total,
-      loading,
-    };
-  }, [workouts, total, loading]);
+  return {
+    workouts,
+    total,
+    loading,
+    analytics,
+  };
 }
-
-
