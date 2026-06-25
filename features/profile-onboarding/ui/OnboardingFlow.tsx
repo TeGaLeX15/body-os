@@ -69,7 +69,10 @@ export function OnboardingFlow() {
             case "target":
                 return (
                     <TargetStep
-                        data={data.target}
+                        data={{
+                            ...data.target,
+                            activity: data.activity,
+                        }}
                         onNext={(target) => {
                             updateTarget(target);
                             next();

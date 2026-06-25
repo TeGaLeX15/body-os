@@ -3,12 +3,11 @@
 
 import { motion } from "framer-motion";
 
-import { HeroCard } from "@/features/home/ui/HeroCard";
 import { LatestQuestCard } from "@/features/home/ui/LatestQuestCard";
 import { StatTile } from "@/features/home/components/StatTile";
+import { GoalJourneyCard } from "@/features/home/ui/GoalJourneyCard";
 
 import { PageContainer } from "@/shared/ui/PageContainer";
-import { PageHeader } from "@/shared/ui/PageHeader";
 import { Section } from "@/shared/ui/Section";
 
 import { pageTransition } from "@/shared/animations/pageTransition";
@@ -22,6 +21,7 @@ import {
   BarChart3,
 } from "lucide-react";
 import { SectionHeader } from "@/shared/ui/SectionHeader";
+import { WaterTracker } from "@/features/hydration/ui/WaterTracker";
 
 type Props = {
   streak: number;
@@ -37,9 +37,9 @@ type Props = {
 
   lastWorkout: WorkoutEntry | null;
 
-  level: number;
-  currentXP: number;
-  xpToNextLevel: number;
+  currentWeight: number;
+  startWeight: number;
+  goalWeight: number;
 };
 
 export function HomeView({
@@ -48,33 +48,39 @@ export function HomeView({
   weekly,
   pr,
   lastWorkout,
-  level,
-  currentXP,
-  xpToNextLevel,
+
+  currentWeight,
+  startWeight,
+  goalWeight,
 }: Props) {
   return (
     <PageContainer>
       <motion.div {...pageTransition}>
         <Section>
-          <PageHeader
-            title="BODY OS"
-            description="Train • Progress • Evolve"
+          <SectionHeader
+            icon="🎯"
+            title="Goal Journey"
+            description="Track progress toward your target."
           />
+
+          <div className="mt-3">
+            <GoalJourneyCard
+              currentWeight={currentWeight}
+              startWeight={startWeight}
+              goalWeight={goalWeight}
+            />
+          </div>
         </Section>
 
         <Section>
           <SectionHeader
-            icon="👤"
-            title="Athlete"
-            description="Your current level and progression."
+            icon="💧"
+            title="Hydration"
+            description="Track your daily water intake."
           />
 
           <div className="mt-3">
-            <HeroCard
-              level={level}
-              xp={currentXP}
-              xpMax={xpToNextLevel}
-            />
+            <WaterTracker />
           </div>
         </Section>
 

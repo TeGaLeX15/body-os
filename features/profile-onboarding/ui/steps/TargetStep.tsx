@@ -1,11 +1,13 @@
 // features/profile-onboarding/ui/steps/TargetStep.tsx
 import { useMemo, useState } from "react";
+import type { ActivityLevel } from "@/features/profile/model/profile.types";
 import { NumberField } from "@/shared/ui/NumberField";
 
 type Props = {
   data: {
     goalWeight: number | null;
     waterGoalMl: number | null;
+    activity: ActivityLevel | null;
   };
   onNext: (v: {
     goalWeight: number;
@@ -20,8 +22,24 @@ export function TargetStep({ data, onNext, onBack }: Props) {
   );
 
   const [waterGoalMl, setWaterGoalMl] = useState<number | "">(
-    data.waterGoalMl ?? 2500
+    data.waterGoalMl ?? 0
   );
+
+  const activity = data.activity ?? "low";
+
+  const recommendedWater = useMemo(() => {
+    const weight = Number(goalWeight || 65);
+    const base = weight * 30;
+
+    const bonus =
+      activity === "high"
+        ? 500
+        : activity === "medium"
+          ? 250
+          : 0;
+
+    return Math.round(base + bonus);
+  }, [goalWeight, activity]);
 
   const isValid = useMemo(() => {
     if (goalWeight === "" || waterGoalMl === "") return false;
@@ -36,7 +54,6 @@ export function TargetStep({ data, onNext, onBack }: Props) {
 
   return (
     <div className="w-full space-y-6 text-center">
-      {/* HEADER */}
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight">
           Your targets
@@ -47,7 +64,6 @@ export function TargetStep({ data, onNext, onBack }: Props) {
         </p>
       </div>
 
-      {/* INPUTS */}
       <div className="space-y-3 pt-2">
         <NumberField
           label="Goal weight"
@@ -62,13 +78,19 @@ export function TargetStep({ data, onNext, onBack }: Props) {
           value={waterGoalMl}
           onChange={setWaterGoalMl}
         />
+
+        <div className="text-xs text-white/40 pt-1">
+          Recommended hydration:{" "}
+          <span className="text-cyan-300">
+            {recommendedWater} ml
+          </span>
+        </div>
       </div>
 
-      {/* ACTIONS */}
       <div className="flex gap-3 pt-4">
         <button
           onClick={onBack}
-          className="flex-1 rounded-xl border border-white/10 bg-white/5 py-3 text-sm text-white/70 active:scale-[0.98]"
+          className="flex-1 rounded-xl border border-white/10 bg-white/5 py-3 text-sm text-white/70"
         >
           Back
         </button>
@@ -84,13 +106,8 @@ export function TargetStep({ data, onNext, onBack }: Props) {
             });
           }}
           className={`
-            flex-1 rounded-xl py-3 text-sm font-medium transition
-            active:scale-[0.98]
-            ${
-              isValid
-                ? "bg-white text-black"
-                : "bg-white/10 text-white/30"
-            }
+            flex-1 rounded-xl py-3 text-sm font-medium
+            ${isValid ? "bg-white text-black" : "bg-white/10 text-white/30"}
           `}
         >
           Continue

@@ -25,7 +25,7 @@ export default function ProfilePage() {
       {/* 🎯 GOAL */}
       <GoalCard
         label="Weight goal"
-        value={profile.weight}
+        value={profile.currentWeight}
         max={profile.goalWeight}
       />
 

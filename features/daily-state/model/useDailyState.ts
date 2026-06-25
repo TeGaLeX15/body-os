@@ -20,8 +20,12 @@ export function useDailyState(): DailyState | null {
   return useMemo(() => {
     if (!profile) return null;
 
-    const waterGoal = getWaterGoal(profile);
-    const waterConsumed = 0; // пока без water module
+    const recommendedWater = getWaterGoal(profile);
+
+    const waterGoal =
+      profile.waterGoalMl ?? recommendedWater;
+
+    const waterConsumed = 0;
 
     const workoutLoad = getWorkoutLoad(workouts);
     const fatigue = estimateFatigue(workoutLoad);
@@ -33,13 +37,11 @@ export function useDailyState(): DailyState | null {
 
     return {
       waterGoal,
-      waterConsumed,
 
+      waterConsumed,
       workoutLoad,
       fatigue,
-
       streak,
-
       weightDelta,
       goalType,
     };

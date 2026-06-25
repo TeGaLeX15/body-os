@@ -1,7 +1,7 @@
 // features/profile/ui/ProfileForm.tsx
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Profile } from "../model/profile.types";
 
 type Props = {
@@ -11,6 +11,11 @@ type Props = {
 
 export function ProfileForm({ profile, onSave }: Props) {
   const [form, setForm] = useState(profile);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setForm(profile);
+  }, [profile]);
 
   function update<K extends keyof Profile>(key: K, value: Profile[K]) {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -27,9 +32,11 @@ export function ProfileForm({ profile, onSave }: Props) {
 
       <input
         className="w-full rounded-lg bg-white/5 p-2"
-        value={form.weight}
-        onChange={(e) => update("weight", +e.target.value)}
-        placeholder="Weight"
+        value={form.currentWeight}
+        onChange={(e) =>
+          update("currentWeight", +e.target.value)
+        }
+        placeholder="Current weight"
       />
 
       <input

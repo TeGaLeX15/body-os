@@ -44,16 +44,30 @@ export function useOnboarding() {
   function finish() {
     if (!data.goal || !data.activity) return;
 
+    const now = Date.now();
+
     const profile: Profile = {
       goal: data.goal,
       activity: data.activity,
-      height: data.body.height,
-      weight: data.body.weight,
-      age: data.body.age,
-      goalWeight: data.target.goalWeight,
-      waterGoalMl: data.target.waterGoalMl,
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
+
+      height: Number(data.body.height),
+      age: Number(data.body.age),
+
+      startWeight: Number(data.body.weight),
+      currentWeight: Number(data.body.weight),
+
+      goalWeight: Number(data.target.goalWeight),
+      waterGoalMl: Number(data.target.waterGoalMl),
+
+      weightHistory: [
+        {
+          weight: Number(data.body.weight),
+          date: now,
+        },
+      ],
+
+      createdAt: now,
+      updatedAt: now,
     };
 
     saveProfile(profile);

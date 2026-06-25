@@ -2,7 +2,8 @@
 import type { Profile } from "@/features/profile/model/profile.types";
 
 export function getGoalType(profile: Profile) {
-  const delta = profile.weight - profile.goalWeight;
+  const delta =
+    profile.currentWeight - profile.goalWeight;
 
   if (delta > 0) return "cut";
   if (delta < 0) return "bulk";
@@ -10,5 +11,8 @@ export function getGoalType(profile: Profile) {
 }
 
 export function getWeightDelta(profile: Profile) {
-  return profile.weight - profile.goalWeight;
+  return (
+    profile.currentWeight -
+    profile.goalWeight
+  );
 }
