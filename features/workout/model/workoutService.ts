@@ -16,14 +16,12 @@ export function buildNewWorkout(input: SaveWorkoutInput): WorkoutEntry {
   };
 }
 
-export function saveWorkout(input: SaveWorkoutInput): WorkoutEntry[] {
-  const existing = workoutRepository.get();
-  const nextWorkout = buildNewWorkout(input);
+export function saveWorkout(
+  input: SaveWorkoutInput,
+): WorkoutEntry[] {
+  const workout = buildNewWorkout(input);
 
-  const updated = [nextWorkout, ...existing];
-  workoutRepository.save(updated);
-
-  return updated;
+  return workoutRepository.add(workout);
 }
 
 export function subscribeToWorkoutChanges(callback: () => void) {

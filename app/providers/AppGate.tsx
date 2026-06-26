@@ -3,14 +3,14 @@
 
 import { useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { getProfile } from "@/features/profile/data/profileStorage";
+import { profileRepository } from "@/features/profile/data/profileRepository";
 
 export function AppGate({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
-    const profile = getProfile();
+    const profile = profileRepository.get();
 
     const isOnboarding = pathname === "/onboarding";
 

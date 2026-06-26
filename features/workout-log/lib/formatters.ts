@@ -32,3 +32,19 @@ export function formatWorkoutDateTime(date: DateInput) {
     minute: "2-digit",
   })}`;
 }
+
+export function formatChartDate(date: DateInput) {
+  return new Date(date).toLocaleDateString(undefined, {
+    day: "2-digit",
+    month: "short",
+  });
+}
+
+export function formatChartDateTime(date: DateInput) {
+  return new Date(date).toLocaleString(undefined, {
+    day: "2-digit",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}

@@ -1,18 +1,15 @@
 // features/home/hooks/useHomeStats.ts
-"use client";
-
 import { useEffect, useMemo, useState } from "react";
 
 import { useWorkouts } from "@/features/workout/hooks/useWorkouts";
 import { buildWorkoutAnalytics } from "@/features/workout/domain/workoutAnalytics";
 
+import { profileRepository } from "@/features/profile/data/profileRepository";
+
 type ProfileData = {
   startWeight?: number;
   currentWeight?: number;
   goalWeight?: number;
-  height?: number;
-  waterGoalMl?: number;
-  age?: number;
 };
 
 export function useHomeStats() {
@@ -23,29 +20,24 @@ export function useHomeStats() {
     [workouts],
   );
 
-  const [profile, setProfile] = useState<ProfileData | null>(null);
+  const [profile, setProfile] = useState<ProfileData>({});
 
   useEffect(() => {
-    const raw = localStorage.getItem("body-os-profile");
+    const data = profileRepository.get();
 
-    if (!raw) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setProfile({});
-      return;
-    }
-
-    try {
-      setProfile(JSON.parse(raw));
-    } catch {
-      setProfile({});
-    }
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setProfile(data ?? {});
   }, []);
 
-  const currentWeight = Number(profile?.currentWeight ?? 0);
+  const currentWeight = Number(profile.currentWeight ?? 0);
 
-  const startWeight = Number(profile?.startWeight ?? currentWeight);
+  const startWeight = Number(
+    profile.startWeight ?? currentWeight,
+  );
 
-  const goalWeight = Number(profile?.goalWeight ?? currentWeight);
+  const goalWeight = Number(
+    profile.goalWeight ?? currentWeight,
+  );
 
   return {
     ...workoutStats,

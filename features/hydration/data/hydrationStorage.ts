@@ -1,20 +1,22 @@
 // features/hydration/data/hydrationStorage.ts
+import { load, save } from "@/shared/storage/localStorage";
+
 const KEY = "body_os_water_today";
 
-export function getWaterToday(): number {
-  if (typeof window === "undefined") return 0;
-
-  const raw = localStorage.getItem(KEY);
-  return raw ? Number(raw) : 0;
+export function getWaterToday() {
+  return load<number>(KEY, 0);
 }
 
 export function addWater(amount: number) {
-  if (typeof window === "undefined") return;
-
   const current = getWaterToday();
-  localStorage.setItem(KEY, String(current + amount));
+
+  save(KEY, current + amount);
+}
+
+export function saveWater(amount: number): void {
+  save(KEY, amount);
 }
 
 export function resetWater() {
-  localStorage.setItem(KEY, "0");
+  save(KEY, 0);
 }

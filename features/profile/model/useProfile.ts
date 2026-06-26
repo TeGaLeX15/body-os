@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import type { Profile } from "./profile.types";
 
-import { getProfile, saveProfile } from "../data/profileStorage";
+import { profileRepository } from "../data/profileRepository";
 import { applyProfileUpdate } from "../engine/profile.reducer";
 
 export function useProfile() {
@@ -13,7 +13,7 @@ export function useProfile() {
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setProfile(getProfile());
+    setProfile(profileRepository.get());
   }, []);
 
   function updateProfile(partial: Partial<Profile>) {
@@ -22,7 +22,7 @@ export function useProfile() {
     const updated = applyProfileUpdate(profile, partial);
 
     setProfile(updated);
-    saveProfile(updated);
+    profileRepository.save(updated);
   }
 
   return {

@@ -2,23 +2,26 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getWaterToday, addWater, resetWater } from "../data/hydrationStorage";
+
+import { hydrationRepository } from "../data/hydrationRepository";
 
 export function useHydration() {
   const [water, setWater] = useState(0);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setWater(getWaterToday());
+    setWater(hydrationRepository.get());
   }, []);
 
   function add(amount: number) {
-    addWater(amount);
-    setWater(getWaterToday());
+    const next = hydrationRepository.add(amount);
+
+    setWater(next);
   }
 
   function reset() {
-    resetWater();
+    hydrationRepository.reset();
+
     setWater(0);
   }
 

@@ -1,25 +1,17 @@
 // features/profile/data/profileStorage.ts
+import { load, save, remove } from "@/shared/storage/localStorage";
 import type { Profile } from "../model/profile.types";
 
 const KEY = "body-os-profile";
 
 export function getProfile(): Profile | null {
-  if (typeof window === "undefined") return null;
-
-  const raw = localStorage.getItem(KEY);
-  if (!raw) return null;
-
-  try {
-    return JSON.parse(raw) as Profile;
-  } catch {
-    return null;
-  }
+  return load<Profile | null>(KEY, null);
 }
 
 export function saveProfile(profile: Profile) {
-  localStorage.setItem(KEY, JSON.stringify(profile));
+  save(KEY, profile);
 }
 
 export function clearProfile() {
-  localStorage.removeItem(KEY);
+  remove(KEY);
 }

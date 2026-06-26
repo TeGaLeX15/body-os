@@ -10,6 +10,11 @@ import {
   CartesianGrid,
 } from "recharts";
 
+import {
+  formatChartDate,
+  formatChartDateTime,
+} from "@/features/workout-log/lib/formatters";
+
 type TrendPoint = {
   date: number;
   index: number;
@@ -48,9 +53,11 @@ export default function TrendAreaChart({ data }: Props) {
               fill: "#666",
             }}
             tickMargin={8}
+            tickFormatter={(value) => formatChartDate(value)}
           />
 
           <Tooltip
+            labelFormatter={(label) => formatChartDateTime(label)}
             contentStyle={{
               backgroundColor: "#0f0f0f",
               border: "1px solid rgba(255,255,255,0.08)",

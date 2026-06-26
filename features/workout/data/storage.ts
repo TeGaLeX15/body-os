@@ -1,19 +1,21 @@
 // features/workout/data/storage.ts
-import { WorkoutEntry } from "@/features/workout/model/workout.types";
+import type { WorkoutEntry } from "@/features/workout/model/workout.types";
+import { load, save } from "@/shared/storage/localStorage";
 
 const KEY = "body_os_workouts";
 
 export function getWorkouts(): WorkoutEntry[] {
-  if (typeof window === "undefined") return [];
-  const data = localStorage.getItem(KEY);
-  return data ? JSON.parse(data) : [];
+  return load<WorkoutEntry[]>(KEY, []);
 }
 
 export function saveWorkouts(workouts: WorkoutEntry[]) {
-  localStorage.setItem(KEY, JSON.stringify(workouts));
+  save(KEY, workouts);
 }
 
 export function onStorageChange(callback: () => void) {
   window.addEventListener("storage", callback);
-  return () => window.removeEventListener("storage", callback);
+
+  return () => {
+    window.removeEventListener("storage", callback);
+  };
 }
