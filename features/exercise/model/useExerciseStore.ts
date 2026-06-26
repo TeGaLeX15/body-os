@@ -5,30 +5,39 @@ import { useEffect, useState } from "react";
 
 import { exerciseRepository } from "../data/exerciseRepository";
 
-import type {
-  ExerciseState,
-  ExerciseType,
-} from "./exercise.types";
+import type { ExerciseState, ExerciseType } from "./exercise.types";
 
-type Store = Partial<
-  Record<ExerciseType, ExerciseState>
->;
+type Store = Partial<Record<ExerciseType, ExerciseState>>;
 
 export function useExerciseStore() {
   const [state, setState] = useState<Store>({});
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setState(exerciseRepository.get());
+    async function load() {
+      const store = await exerciseRepository.getStore();
+
+      setState(store);
+    }
+
+    void load();
   }, []);
 
-  function update(
-    type: ExerciseType,
-    patch: Partial<ExerciseState>,
-  ) {
-    const next = exerciseRepository.update(type, patch);
+  async function update(type: ExerciseType, patch: Partial<ExerciseState>) {
+    const current = state[type];
 
-    setState(next);
+    const nextState: ExerciseState = {
+      ...(current ?? {
+        type,
+        max: null,
+        lastTestedAt: null,
+        week: null,
+      }),
+      ...patch,
+    };
+
+    const nextStore = await exerciseRepository.save(type, nextState);
+
+    setState(nextStore);
   }
 
   return {

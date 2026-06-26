@@ -1,14 +1,9 @@
 // features/exercise/data/exerciseStorage.ts
 import { load, save, remove } from "@/shared/storage/localStorage";
 
-import type {
-  ExerciseState,
-  ExerciseType,
-} from "../model/exercise.types";
+import type { ExerciseState, ExerciseType } from "../model/exercise.types";
 
-export type ExerciseStore = Partial<
-  Record<ExerciseType, ExerciseState>
->;
+export type ExerciseStore = Partial<Record<ExerciseType, ExerciseState>>;
 
 const KEY = "exercise_store";
 

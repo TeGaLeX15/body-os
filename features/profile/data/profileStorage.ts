@@ -5,13 +5,13 @@ import type { Profile } from "../model/profile.types";
 const KEY = "body-os-profile";
 
 export function getProfile(): Profile | null {
-  return load<Profile | null>(KEY, null);
+  return load(KEY, null);
 }
 
-export function saveProfile(profile: Profile) {
+export function saveProfile(profile: Profile): void {
   save(KEY, profile);
 }
 
-export function clearProfile() {
+export function clearProfile(): void {
   remove(KEY);
 }

@@ -12,17 +12,31 @@ export function useProfile() {
   const [profile, setProfile] = useState<Profile | null>(null);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setProfile(profileRepository.get());
+    let mounted = true;
+
+    async function load() {
+      const data = await profileRepository.get();
+
+      if (mounted) {
+        setProfile(data);
+      }
+    }
+
+    void load();
+
+    return () => {
+      mounted = false;
+    };
   }, []);
 
-  function updateProfile(partial: Partial<Profile>) {
+  async function updateProfile(partial: Partial<Profile>) {
     if (!profile) return;
 
     const updated = applyProfileUpdate(profile, partial);
 
     setProfile(updated);
-    profileRepository.save(updated);
+
+    await profileRepository.save(updated);
   }
 
   return {

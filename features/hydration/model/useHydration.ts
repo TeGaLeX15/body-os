@@ -9,19 +9,21 @@ export function useHydration() {
   const [water, setWater] = useState(0);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setWater(hydrationRepository.get());
+    async function load() {
+      const current = await hydrationRepository.get();
+      setWater(current);
+    }
+
+    void load();
   }, []);
 
-  function add(amount: number) {
-    const next = hydrationRepository.add(amount);
-
-    setWater(next);
+  async function add(amount: number) {
+    const updated = await hydrationRepository.add(amount);
+    setWater(updated);
   }
 
-  function reset() {
-    hydrationRepository.reset();
-
+  async function reset() {
+    await hydrationRepository.reset();
     setWater(0);
   }
 

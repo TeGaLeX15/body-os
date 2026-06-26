@@ -1,56 +1,37 @@
 // features/exercise/data/exerciseRepository.ts
-import type {
-  ExerciseState,
-  ExerciseType,
-} from "../model/exercise.types";
+import { exerciseApi } from "../api/exerciseApi";
 
-import {
-  getExerciseStore,
-  saveExerciseStore,
-  clearExerciseStore,
-  type ExerciseStore,
-} from "./exerciseStorage";
+import type { ExerciseState, ExerciseType } from "../model/exercise.types";
+
+import type { ExerciseStore } from "./exerciseStorage";
 
 export const exerciseRepository = {
-  get(): ExerciseStore {
-    return getExerciseStore();
+  getStore(): Promise<ExerciseStore> {
+    return exerciseApi.getStore();
   },
 
-  save(store: ExerciseStore): void {
-    saveExerciseStore(store);
+  saveStore(store: ExerciseStore): Promise<void> {
+    return exerciseApi.saveStore(store);
   },
 
-  clear(): void {
-    clearExerciseStore();
+  async get(type: ExerciseType): Promise<ExerciseState | undefined> {
+    return exerciseApi.get(type);
   },
 
-  getExercise(
-    type: ExerciseType,
-  ): ExerciseState | undefined {
-    return this.get()[type];
-  },
+  async save(type: ExerciseType, state: ExerciseState): Promise<ExerciseStore> {
+    const store = await exerciseApi.getStore();
 
-  update(
-    type: ExerciseType,
-    patch: Partial<ExerciseState>,
-  ): ExerciseStore {
-    const current = this.get();
-
-    const next: ExerciseStore = {
-      ...current,
-      [type]: {
-        ...(current[type] ?? {
-          type,
-          max: null,
-          lastTestedAt: null,
-          week: null,
-        }),
-        ...patch,
-      },
+    const next = {
+      ...store,
+      [type]: state,
     };
 
-    this.save(next);
+    await exerciseApi.saveStore(next);
 
     return next;
+  },
+
+  clear(): Promise<void> {
+    return exerciseApi.clear();
   },
 };

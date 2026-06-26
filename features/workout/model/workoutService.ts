@@ -1,10 +1,13 @@
 // features/workout/model/workoutService.ts
-import type { WorkoutEntry } from "../model/workout.types";
+import type { WorkoutEntry } from "./workout.types";
+
 import { workoutRepository } from "../data/workoutRepository";
 
 export type SaveWorkoutInput = Omit<WorkoutEntry, "id" | "date">;
 
-export function buildNewWorkout(input: SaveWorkoutInput): WorkoutEntry {
+export function buildNewWorkout(
+  input: SaveWorkoutInput,
+): WorkoutEntry {
   return {
     id: crypto.randomUUID(),
     date: Date.now(),
@@ -16,14 +19,16 @@ export function buildNewWorkout(input: SaveWorkoutInput): WorkoutEntry {
   };
 }
 
-export function saveWorkout(
+export async function saveWorkout(
   input: SaveWorkoutInput,
-): WorkoutEntry[] {
+): Promise<WorkoutEntry[]> {
   const workout = buildNewWorkout(input);
 
   return workoutRepository.add(workout);
 }
 
-export function subscribeToWorkoutChanges(callback: () => void) {
+export function subscribeToWorkoutChanges(
+  callback: () => void,
+) {
   return workoutRepository.subscribe(callback);
 }

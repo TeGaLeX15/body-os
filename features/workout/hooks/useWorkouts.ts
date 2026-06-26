@@ -2,44 +2,53 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+
 import type { WorkoutEntry } from "../model/workout.types";
+
 import { workoutRepository } from "../data/workoutRepository";
 
 export type UseWorkoutsResult = {
   workouts: WorkoutEntry[];
   total: number;
   loading: boolean;
-  refresh: () => void;
-  save: (workouts: WorkoutEntry[]) => void;
+
+  refresh: () => Promise<void>;
+  save: (workouts: WorkoutEntry[]) => Promise<void>;
 };
 
 export function useWorkouts(): UseWorkoutsResult {
   const [workouts, setWorkouts] = useState<WorkoutEntry[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const refresh = useCallback(() => {
-    const data = workoutRepository.get();
+  const refresh = useCallback(async () => {
+    const data = await workoutRepository.get();
+
     setWorkouts(data);
     setLoading(false);
   }, []);
 
   useEffect(() => {
     const unsubscribe = workoutRepository.subscribe(() => {
-      refresh();
+      void refresh();
     });
 
-    queueMicrotask(() => {
-      refresh();
-    });
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    void refresh();
 
-    return () => unsubscribe();
+    return () => {
+      unsubscribe();
+    };
   }, [refresh]);
 
-  const save = useCallback((next: WorkoutEntry[]) => {
-    workoutRepository.save(next);
-    setWorkouts(next);
-    setLoading(false);
-  }, []);
+  const save = useCallback(
+    async (next: WorkoutEntry[]) => {
+      await workoutRepository.save(next);
+
+      setWorkouts(next);
+      setLoading(false);
+    },
+    [],
+  );
 
   return useMemo(
     () => ({
@@ -49,6 +58,6 @@ export function useWorkouts(): UseWorkoutsResult {
       refresh,
       save,
     }),
-    [refresh, save, workouts, loading],
+    [workouts, loading, refresh, save],
   );
 }

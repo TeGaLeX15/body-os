@@ -1,22 +1,18 @@
 // features/profile/data/profileRepository.ts
 import type { Profile } from "../model/profile.types";
 
-import {
-  getProfile,
-  saveProfile,
-  clearProfile,
-} from "./profileStorage";
+import { profileApi } from "../api/profileApi";
 
 export const profileRepository = {
-  get(): Profile | null {
-    return getProfile();
+  get(): Promise<Profile | null> {
+    return profileApi.get();
   },
 
-  save(profile: Profile): void {
-    saveProfile(profile);
+  save(profile: Profile): Promise<void> {
+    return profileApi.save(profile);
   },
 
-  clear(): void {
-    clearProfile();
+  clear(): Promise<void> {
+    return profileApi.clear();
   },
 };

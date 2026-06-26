@@ -1,48 +1,32 @@
 // features/workout/data/workoutRepository.ts
 import type { WorkoutEntry } from "../model/workout.types";
 
-import * as storage from "./storage";
+import { workoutApi } from "../api/workoutApi";
 
 export const workoutRepository = {
-  get(): WorkoutEntry[] {
-    return storage.getWorkouts();
+  get(): Promise<WorkoutEntry[]> {
+    return workoutApi.get();
   },
 
-  save(workouts: WorkoutEntry[]): void {
-    storage.saveWorkouts(workouts);
+  save(workouts: WorkoutEntry[]): Promise<void> {
+    return workoutApi.save(workouts);
   },
 
-  add(workout: WorkoutEntry): WorkoutEntry[] {
-    const current = storage.getWorkouts();
+  async add(workout: WorkoutEntry): Promise<WorkoutEntry[]> {
+    const current = await workoutApi.get();
 
     const next = [workout, ...current];
 
-    storage.saveWorkouts(next);
+    await workoutApi.save(next);
 
     return next;
   },
 
-  update(workout: WorkoutEntry): WorkoutEntry[] {
-    const next = this.get().map((w) => (w.id === workout.id ? workout : w));
-
-    this.save(next);
-
-    return next;
-  },
-
-  remove(id: string): WorkoutEntry[] {
-    const next = this.get().filter((w) => w.id !== id);
-
-    this.save(next);
-
-    return next;
-  },
-
-  clear(): void {
-    this.save([]);
+  async clear(): Promise<void> {
+    await workoutApi.save([]);
   },
 
   subscribe(callback: () => void) {
-    return storage.onStorageChange(callback);
+    return workoutApi.subscribe(callback);
   },
 };

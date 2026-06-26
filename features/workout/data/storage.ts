@@ -8,7 +8,7 @@ export function getWorkouts(): WorkoutEntry[] {
   return load<WorkoutEntry[]>(KEY, []);
 }
 
-export function saveWorkouts(workouts: WorkoutEntry[]) {
+export function saveWorkouts(workouts: WorkoutEntry[]): void {
   save(KEY, workouts);
 }
 
